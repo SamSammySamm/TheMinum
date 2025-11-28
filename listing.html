@@ -1,57 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Categories | The Minums</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Our Menu | The Minums</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="listing.css">
+
+    <style>
+        /* Category Grid Styling */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu-header {
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+
+        .menu-header h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
 
-<header class="main-header">
-    <div class="logo">
-        <a href="index.html"><h1>The Minums 🥤</h1></a>
-    </div>
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="listing.html" class="active">Our Menu</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Locations</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <section class="menu-header">
-        <div class="section-spacing">
-            <h2>Menu Categories</h2>
-            <p>Select a drink or food category to explore all available flavours.</p>
+    <!-- ========== HEADER (unchanged) ========== -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>The Minums <span>🥤</span></h1>
+            </a>
         </div>
-    </section>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html" class="active">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Locations</a></li>
+            </ul>
+        </nav>
 
-    <section class="product-listing section-spacing">
-        <div class="category-grid">
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            </a>
+            <a href="admin.html" class="admin-link">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+
+    <!-- ========== CATEGORY SECTION ========== -->
+    <main>
+        <section class="menu-header">
+            <h2>Menu Categories</h2>
+            <p>Select a category to explore all available drinks and flavours.</p>
+        </section>
+
+        <section class="category-grid">
 
             <a class="category-card" href="matcha.html">
-                <img src="images/matcha.jpg" alt="Matcha Series">
+                <img src="images/matcha.jpg" alt="Matcha">
                 <h3>Matcha Series</h3>
             </a>
 
             <a class="category-card" href="cocoa.html">
-                <img src="images/cocoa.jpg" alt="Cocoa Series">
+                <img src="images/cocoa.jpg" alt="Cocoa">
                 <h3>Cocoa Series</h3>
             </a>
 
             <a class="category-card" href="milktea.html">
-                <img src="images/milktea.jpg" alt="Milk Tea Series">
+                <img src="images/milktea.jpg" alt="Milk Tea">
                 <h3>Milk Tea Series</h3>
             </a>
 
             <a class="category-card" href="thai.html">
-                <img src="images/thai-tea.jpg" alt="Thai Tea">
+                <img src="images/thai.jpg" alt="Thai Tea">
                 <h3>Thai Tea Series</h3>
             </a>
 
@@ -66,7 +132,7 @@
             </a>
 
             <a class="category-card" href="softdrinks.html">
-                <img src="images/softdrinks.jpg" alt="Soft Drinks">
+                <img src="images/softdrink.jpg" alt="Soft Drinks">
                 <h3>Soft Drinks</h3>
             </a>
 
@@ -76,18 +142,57 @@
             </a>
 
             <a class="category-card" href="biscuits.html">
-                <img src="images/biscuits.jpg" alt="Homemade Biscuits">
+                <img src="images/biscuit.jpg" alt="Biscuits">
                 <h3>Homemade Biscuits</h3>
             </a>
 
+        </section>
+    </main>
+
+
+    <!-- ========== FOOTER (unchanged) ========== -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minums</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                    <a href="#"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                    <a href="#"><img src="images/icon-twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
         </div>
-    </section>
 
-</main>
-
-<footer class="main-footer">
-    <p>&copy; 2025 The Minums. All rights reserved.</p>
-</footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Minums. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
+
 </html>
