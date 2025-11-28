@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | The Minum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cart.css"> </head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html"><h1>The Minum <span>🥤</span></h1></a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html" class="active">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Locations</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link active" aria-label="View shopping cart">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">2</span>)
+            </a>
+            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="cart-section section-spacing">
+            <h2>Your Refreshments</h2>
+
+            <div class="cart-layout">
+                
+                <div class="cart-items-container">
+                    
+                    <article class="cart-item" data-id="cold-brew-lg" data-price="6.50">
+                        <div class="item-details">
+                            <figure class="item-image-wrap">
+                                <img src="images/minums-coffee.jpg" alt="Cold Brew">
+                            </figure>
+                            <div class="item-info">
+                                <h4>Signature Cold Brew</h4>
+                                <p class="item-options">Size: Large (20oz), Add-in: Oat Milk</p>
+                                <p class="item-price">RM6.50</p>
+                            </div>
+                        </div>
+
+                        <div class="item-controls">
+                            <div class="quantity-input-group">
+                                <label for="qty-1" class="sr-only">Quantity</label>
+                                <input type="number" id="qty-1" value="1" min="1" class="item-quantity-input">
+                                <button class="update-qty-btn button-secondary button-small">Update</button>
+                            </div>
+                            <button class="remove-item-btn button-secondary button-small">
+                                <span class="icon">🗑️</span> Remove
+                            </button>
+                        </div>
+
+                        <p class="item-subtotal-display">RM6.50</p>
+                    </article>
+
+                    <article class="cart-item" data-id="chamomile-sm" data-price="4.00">
+                        <div class="item-details">
+                            <figure class="item-image-wrap">
+                                <img src="images/minums-tea.jpg" alt="Chamomile Tea">
+                            </figure>
+                            <div class="item-info">
+                                <h4>Calming Chamomile Tea</h4>
+                                <p class="item-options">Size: Small (12oz), Serve: Hot</p>
+                                <p class="item-price">RM4.00</p>
+                            </div>
+                        </div>
+
+                        <div class="item-controls">
+                            <div class="quantity-input-group">
+                                <label for="qty-2" class="sr-only">Quantity</label>
+                                <input type="number" id="qty-2" value="2" min="1" class="item-quantity-input">
+                                <button class="update-qty-btn button-secondary button-small">Update</button>
+                            </div>
+                            <button class="remove-item-btn button-secondary button-small">
+                                <span class="icon">🗑️</span> Remove
+                            </button>
+                        </div>
+
+                        <p class="item-subtotal-display">RM8.00</p>
+                    </article>
+                    
+                    </div>
+
+                <aside class="order-summary-box">
+                    <h3>Order Summary</h3>
+                    <div class="summary-line">
+                        <span>Subtotal (2 items)</span>
+                        <span id="summary-subtotal">RM14.50</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Delivery Fee (Standard)</span>
+                        <span id="summary-delivery">RM3.00</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Taxes (7% Est.)</span>
+                        <span id="summary-tax">RM1.22</span>
+                    </div>
+                    
+                    <div class="summary-line summary-total">
+                        <strong>Grand Total</strong>
+                        <strong id="summary-total">RM18.72</strong>
+                    </div>
+
+                    <a href="checkout.html" class="cta-button button-primary proceed-to-checkout">
+                        Proceed to Checkout
+                    </a>
+                    
+                    <a href="listing.html" class="continue-shopping">
+                        ← Continue Shopping
+                    </a>
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minum</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                    <a href="#" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Minum. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
