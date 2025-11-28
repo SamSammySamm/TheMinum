@@ -1,0 +1,181 @@
+/* --- Checkout Page Specific Styles (checkout.css) --- */
+
+.checkout-section h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-dark);
+}
+
+.checkout-layout {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    align-items: flex-start; /* Align top items to the start */
+}
+
+/* 1. Form Container (Left Side) */
+.checkout-form-container {
+    flex: 2; /* Takes up 2/3 of the space */
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.checkout-form fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.checkout-form legend {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--primary-dark);
+    padding: 0 10px;
+    margin-left: -10px;
+}
+
+/* Payment Specific Styles */
+.payment-instruction {
+    margin-bottom: 20px;
+    font-style: italic;
+    color: var(--light-text-color);
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-method-card {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: block;
+}
+
+.payment-method-card:hover,
+.payment-method-card input:checked + span {
+    border-color: var(--primary-color);
+    background-color: var(--background-light);
+}
+
+.payment-method-card input[type="radio"] {
+    margin-right: 10px;
+    accent-color: var(--primary-color);
+}
+
+/* 2. Order Summary Box (Right Side) - Reusing cart.css styles but adapting */
+.final-summary {
+    flex: 1; /* Takes up 1/3 of the space */
+    padding: 30px;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.final-summary h3 {
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+}
+
+.item-list-preview {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.item-preview-line {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.edit-cart-link {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 1em;
+}
+
+.summary-total {
+    font-size: 1.3em;
+    color: var(--secondary-color);
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 15px;
+}
+
+.security-note {
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Checkout Action Buttons */
+.checkout-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.place-order-btn {
+    padding: 15px 30px;
+    font-size: 1.1em;
+}
+
+.back-to-cart {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .checkout-layout {
+        flex-direction: column;
+        padding: 0 15px;
+    }
+    
+    .checkout-form-container {
+        order: 2; /* Forms come after summary for better mobile flow */
+    }
+
+    .final-summary {
+        order: 1;
+        position: static;
+        margin-bottom: 30px;
+    }
+
+    .checkout-actions {
+        flex-direction: column-reverse; /* Put 'Back to Cart' below 'Place Order' */
+        gap: 15px;
+    }
+
+    .place-order-btn {
+        width: 100%;
+    }
+}
