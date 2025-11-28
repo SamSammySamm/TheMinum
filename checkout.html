@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout & Payment | The Minum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css"> </head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html"><h1>The Minum <span>🥤</span></h1></a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Locations</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link active" aria-label="View shopping cart">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">2</span>)
+            </a>
+            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="checkout-section section-spacing">
+            <h2>Secure Checkout</h2>
+
+            <div class="checkout-layout">
+                
+                <div class="checkout-form-container">
+                    
+                    <form action="confirmation.html" method="GET" class="checkout-form">
+                        
+                        <fieldset>
+                            <legend>1. Contact Details</legend>
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="012-345 6789">
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>2. Delivery Address</legend>
+                            <div class="form-group">
+                                <label for="address">Street Address</label>
+                                <input type="text" id="address" name="address" required placeholder="Lot 123, Jalan Minum">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City / Town</label>
+                                <input type="text" id="city" name="city" required placeholder="Kuala Lumpur">
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Postcode</label>
+                                <input type="text" id="zip" name="zip" required placeholder="50450">
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">Delivery Notes (Optional)</label>
+                                <textarea id="notes" name="notes" placeholder="Knock twice and leave on the porch."></textarea>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>3. Payment Method</legend>
+                            <p class="payment-instruction">Select your method. This is a dummy payment process for the project.</p>
+                            
+                            <div class="radio-group payment-options">
+                                <label class="radio-label payment-method-card">
+                                    <input type="radio" name="payment" value="card" checked> 
+                                    <span>Credit/Debit Card (Simulated)</span>
+                                </label>
+                                <label class="radio-label payment-method-card">
+                                    <input type="radio" name="payment" value="e-wallet"> 
+                                    <span>E-Wallet (Touch 'n Go, GrabPay, etc.)</span>
+                                </label>
+                                <label class="radio-label payment-method-card">
+                                    <input type="radio" name="payment" value="cod"> 
+                                    <span>Cash on Delivery (COD)</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                        
+                        <div class="checkout-actions">
+                            <a href="cart.html" class="button-secondary back-to-cart">← Back to Cart</a>
+                            <button type="submit" class="cta-button button-primary place-order-btn">
+                                Complete Order & Confirm Delivery
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <aside class="order-summary-box final-summary">
+                    <h3>Your Order Details</h3>
+                    
+                    <div class="item-list-preview">
+                        <p class="item-preview-line">2x Signature Cold Brew (Large)</p>
+                        <p class="item-preview-line">1x Calming Chamomile Tea (Small)</p>
+                        <a href="cart.html" class="edit-cart-link">Edit Cart</a>
+                    </div>
+
+                    <div class="summary-line">
+                        <span>Subtotal (3 items)</span>
+                        <span id="summary-subtotal">RM14.50</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Delivery Fee</span>
+                        <span id="summary-delivery">RM3.00</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Taxes (7% Est.)</span>
+                        <span id="summary-tax">RM1.22</span>
+                    </div>
+                    
+                    <div class="summary-line summary-total">
+                        <strong>Grand Total</strong>
+                        <strong id="summary-total">RM18.72</strong>
+                    </div>
+
+                    <p class="security-note">By clicking 'Complete Order', you agree to our terms and conditions. Payment processing is simulated.</p>
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minum</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                    <a href="#" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Minum. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
