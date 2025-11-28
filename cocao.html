@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matcha Series | The Minums</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .category-title {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .category-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .product-grid {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 140px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .product-card h4 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .price {
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .back-btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER (copied from your site) -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>The Minums <span>🥤</span></h1>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html" class="active">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Locations</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            </a>
+            <a href="admin.html" class="admin-link">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+    <!-- CATEGORY TITLE -->
+    <section class="category-title">
+        <h2>Cacao Series</h2>
+        <p>Sweet thick drink perfect for sweet tooth.</p>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section class="product-grid">
+
+        <div class="product-card">
+            <img src="images/bp-cocao.jpg" alt="Black Pearl Cocao">
+            <h4>Black Pearl Cocao</h4>
+            <p>Rich cacao blended with chewy black pearls for a chocolatey twist.</p>
+            <p class="price">RM7.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/cocoa-latte.jpg" alt="Cocoa Latte">
+            <h4>Cocao Latte</h4>
+            <p>Velvety cacao with steamed milk for a creamy, comforting sip.</p>
+            <p class="price">RM8.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/strawberry-matcha.jpg" alt="Strawberry Matcha">
+            <h4>Strawberry Matcha</h4>
+            <p>Fresh strawberry purée + creamy matcha.</p>
+            <p class="price">RM10.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/darkcocoa-matcha.jpg" alt="Dark Cocoa Matcha">
+            <h4>Dark Cocoa Matcha</h4>
+            <p>Rich chocolate base with matcha topping.</p>
+            <p class="price">RM9.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/cocoa-oreo.jpg" alt="Cocoa Oreo With Milk">
+            <h4>Cocoa Oreo With Milk</h4>
+            <p>Chocolatey cocoa mixed with Oreo crumbs and fresh milk.</p>
+            <p class="price">RM9.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/cocoa-dinasour.jpg" alt="Cocoa Dinasour">
+            <h4>Cocoa Dinasour</h4>
+            <p>Fun and frothy cocoa with a playful, chocolatey punch.</p>
+            <p class="price">RM8.00</p>
+        </div>
+
+        <div class="product-card">
+            <img src="images/choco-indulgence.jpg" alt="Chocolate Indulgence">
+            <h4>Chocolate Indulgence</h4>
+            <p>Decadent, rich chocolate for the ultimate treat.</p>
+            <p class="price">RM9.00</p>
+        </div>
+
+    </section>
+
+    <a href="listing.html" class="back-btn">⬅ Back to Categories</a>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Minums. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
