@@ -3,187 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Menu | The Minums</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Menu Categories | The Minums</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="listing.css"> </head>
+    <link rel="stylesheet" href="listing.css">
+</head>
 <body>
 
-    <header class="main-header">
-        <div class="logo">
-            <a href="index.html"><h1>The Minums <span>🥤</span></h1></a>
+<header class="main-header">
+    <div class="logo">
+        <a href="index.html"><h1>The Minums 🥤</h1></a>
+    </div>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="listing.html" class="active">Our Menu</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Locations</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="menu-header">
+        <div class="section-spacing">
+            <h2>Menu Categories</h2>
+            <p>Select a drink or food category to explore all available flavours.</p>
         </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="listing.html" class="active">Our Menu</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Locations</a></li>
-            </ul>
-        </nav>
-        <div class="user-actions">
-            <a href="cart.html" class="cart-link" aria-label="View shopping cart">
-                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+    </section>
+
+    <section class="product-listing section-spacing">
+        <div class="category-grid">
+
+            <a class="category-card" href="matcha.html">
+                <img src="images/matcha.jpg" alt="Matcha Series">
+                <h3>Matcha Series</h3>
             </a>
-            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
-                <span class="icon">⚙️</span> Admin
+
+            <a class="category-card" href="cocoa.html">
+                <img src="images/cocoa.jpg" alt="Cocoa Series">
+                <h3>Cocoa Series</h3>
             </a>
+
+            <a class="category-card" href="milktea.html">
+                <img src="images/milktea.jpg" alt="Milk Tea Series">
+                <h3>Milk Tea Series</h3>
+            </a>
+
+            <a class="category-card" href="thai.html">
+                <img src="images/thai-tea.jpg" alt="Thai Tea">
+                <h3>Thai Tea Series</h3>
+            </a>
+
+            <a class="category-card" href="popice.html">
+                <img src="images/popice.jpg" alt="Pop Ice">
+                <h3>Pop Ice / Blended Drinks</h3>
+            </a>
+
+            <a class="category-card" href="mojito.html">
+                <img src="images/mojito.jpg" alt="Mojito">
+                <h3>Mojito Series</h3>
+            </a>
+
+            <a class="category-card" href="softdrinks.html">
+                <img src="images/softdrinks.jpg" alt="Soft Drinks">
+                <h3>Soft Drinks</h3>
+            </a>
+
+            <a class="category-card" href="popia.html">
+                <img src="images/popia.jpg" alt="Popia">
+                <h3>Popia Carbonara</h3>
+            </a>
+
+            <a class="category-card" href="biscuits.html">
+                <img src="images/biscuits.jpg" alt="Homemade Biscuits">
+                <h3>Homemade Biscuits</h3>
+            </a>
+
         </div>
-    </header>
+    </section>
 
-    <main>
-        
-        <section class="menu-header">
-            <div class="section-spacing">
-                <h2>Our Complete Menu</h2>
-                <p>From invigorating coffees to refreshing smoothies, find your next favorite sip.</p>
-            </div>
-        </section>
+</main>
 
-        <section class="product-listing section-spacing">
-            <div class="listing-container">
-                
-                <aside class="filter-sidebar">
-                    <h4>Filter by Category</h4>
-                    <form>
-                        <label class="filter-option">
-                            <input type="checkbox" name="category" value="coffee" checked> 
-                            Coffee & Espresso
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="category" value="tea"> 
-                            Teas & Infusions
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="category" value="smoothie"> 
-                            Smoothies & Shakes
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="category" value="juice"> 
-                            Fresh Juices
-                        </label>
-                        <label class="filter-option">
-                            <input type="checkbox" name="category" value="seasonal"> 
-                            Seasonal Specials
-                        </label>
+<footer class="main-footer">
+    <p>&copy; 2025 The Minums. All rights reserved.</p>
+</footer>
 
-                        <h4 style="margin-top: 30px;">Price Range</h4>
-                        <div class="price-range">
-                            <input type="range" min="1" max="10" value="10" id="price-slider">
-                            <p>Max Price: $<span id="max-price-value">10</span></p>
-                        </div>
-
-                        <button type="submit" class="cta-button button-secondary filter-btn">Apply Filters</button>
-                    </form>
-                </aside>
-
-                <div class="full-product-grid">
-                    <article class="product-card">
-                        <figure><img src="images/minums-coffee.jpg" alt="Signature Cold Brew"></figure>
-                        <h4>Signature Cold Brew</h4>
-                        <p class="description">Strong, smooth, and perfectly chilled for your daily boost.</p>
-                        <p class="price">RM5.50</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-
-                    <article class="product-card">
-                        <figure><img src="images/minums-smoothie.jpg" alt="Tropical Sunset Smoothie"></figure>
-                        <h4>Tropical Sunset Smoothie</h4>
-                        <p class="description">A vibrant blend of exotic fruits, sunshine in a glass.</p>
-                        <p class="price">RM6.00</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-
-                    <article class="product-card">
-                        <figure><img src="images/minums-tea.jpg" alt="Calming Chamomile Tea"></figure>
-                        <h4>Calming Chamomile Tea</h4>
-                        <p class="description">Natural and soothing, perfect for winding down after a long day.</p>
-                        <p class="price">RM4.00</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-                    
-                    <article class="product-card">
-                        <figure><img src="images/minums-juice-green.jpg" alt="Detox Green Juice"></figure>
-                        <h4>Detox Green Juice</h4>
-                        <p class="description">Kale, spinach, cucumber, and apple. Pure wellness.</p>
-                        <p class="price">RM6.50</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-
-                    <article class="product-card">
-                        <figure><img src="images/minums-latte.jpg" alt="Vanilla Bean Latte"></figure>
-                        <h4>Vanilla Bean Latte</h4>
-                        <p class="description">Espresso and steamed milk with rich, natural vanilla.</p>
-                        <p class="price">RM5.00</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-
-                    <article class="product-card">
-                        <figure><img src="images/minums-boba.jpg" alt="Milk Tea with Boba"></figure>
-                        <h4>Classic Milk Tea with Boba</h4>
-                        <p class="description">Sweetened black tea and chewy tapioca pearls.</p>
-                        <p class="price">RM5.80</p>
-                        <a href="detail.html" class="view-details button-secondary">View Details</a>
-                        <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h3>The Minums</h3>
-                <p>Your Daily Refreshment, Delivered.</p>
-            </div>
-            <div class="footer-links-group">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="listing.html">Our Menu</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links-group">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Delivery Info</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h4>Connect With Us</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
-                    <a href="#" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
-                    <a href="#" aria-label="Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 The Minums. All rights reserved.</p>
-        </div>
-    </footer>
-    
-    <script>
-        // Simple JS for the price slider (for visual demonstration)
-        const slider = document.getElementById('price-slider');
-        const output = document.getElementById('max-price-value');
-        output.innerHTML = slider.value; 
-
-        slider.oninput = function() {
-            output.innerHTML = this.value;
-        }
-    </script>
 </body>
 </html>
