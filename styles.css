@@ -1,0 +1,615 @@
+/* --- Global Styles & Reset --- */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+/* Color Palette for The Minums (Refined) */
+:root {
+    --primary-color: #4CAF50; /* A fresh, appealing green */
+    --primary-dark: #388E3C;
+    --secondary-color: #2196F3; /* A bright blue */
+    --text-color: #333;
+    --light-text-color: #666;
+    --background-light: #F8FDF8; /* Very subtle light green background */
+    --card-background: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: var(--background-light);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    font-weight: 600;
+    margin-bottom: 0.8em;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+h4 { font-size: 1.3em; }
+
+p {
+    margin-bottom: 1em;
+    color: var(--light-text-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+.section-spacing {
+    padding: 60px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Buttons --- */
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px; /* Pill shape */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.05em;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.button-primary:hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 6px 12px var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 10px 25px; /* Adjust padding for border */
+    font-size: 0.95em;
+    box-shadow: none;
+}
+
+.button-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    transform: translateY(-2px);
+}
+
+/* --- Header --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: var(--card-background);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    font-size: 2.2em;
+    margin-bottom: 0;
+}
+
+.logo h1 a {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo h1 span {
+    font-size: 1.1em; /* Make emoji slightly larger */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav ul li a {
+    color: var(--text-color);
+    padding: 10px 18px;
+    display: block;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden; /* For underline effect */
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
+    transform: translateX(0%);
+}
+
+.main-nav ul li a.active {
+    color: var(--primary-color);
+}
+
+.user-actions a {
+    color: var(--text-color);
+    margin-left: 25px;
+    font-size: 1.1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.user-actions a .icon {
+    font-size: 1.3em;
+}
+
+/* --- Hero Section --- */
+.minums-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #8BC34A 100%); /* Greenish gradient */
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-bottom: 80px;
+    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    position: relative;
+    overflow: hidden;
+    /* Optional: Add a background image for more visual appeal */
+    background-image: url('../images/minums-hero-bg.jpg'); /* Make sure you have this image */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay; /* Blend the image with the gradient */
+}
+
+.minums-hero::before { /* Subtle overlay for text readability */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h2 {
+    font-size: 3.8em;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* --- Featured Products --- */
+.featured-products h3 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: var(--text-color);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.product-card {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px var(--shadow-light);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden; /* Ensures image border-radius works */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px var(--shadow-hover);
+}
+
+.product-card figure {
+    position: relative;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card figcaption {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(var(--primary-dark), 0.85);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.product-card h4 {
+    margin-bottom: 8px;
+    padding: 0 20px;
+    color: var(--text-color);
+    font-size: 1.4em;
+}
+
+.product-card .description {
+    font-size: 0.95em;
+    color: var(--light-text-color);
+    padding: 0 20px;
+    min-height: 50px; /* Consistent height for description */
+}
+
+.product-card .price {
+    color: var(--primary-dark); 
+    font-weight: 700;
+    font-size: 1.6em;
+    margin: 15px 0 20px;
+    padding: 0 20px;
+}
+
+.product-card .button-secondary {
+    margin: 0 20px 10px; /* Spacing */
+    width: calc(100% - 40px);
+    display: block; /* Make it block for full width */
+}
+
+.product-card .button-primary {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+    display: block;
+}
+
+/* --- Value Proposition (USP) --- */
+.minums-usp {
+    background-color: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-light);
+    padding: 60px 40px;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.minums-usp h3 {
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    font-size: 2.5em;
+}
+
+.usp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.usp-item {
+    padding: 25px;
+    background-color: var(--background-light);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.usp-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px var(--shadow-light);
+}
+
+.usp-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+.usp-item h4 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.usp-item p {
+    font-size: 0.95em;
+    color: var(--light-text-color);
+}
+
+/* --- Call to Action Banner --- */
+.call-to-action {
+    text-align: center;
+    margin-top: 80px;
+    padding: 0 20px;
+}
+
+.cta-banner {
+    background: linear-gradient(45deg, var(--secondary-color), #64B5F6); /* Blue gradient */
+    color: white;
+    padding: 60px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-banner h3 {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.cta-banner p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-banner .cta-button {
+    background-color: white;
+    color: var(--secondary-color);
+}
+
+.cta-banner .cta-button:hover {
+    background-color: #e0e0e0;
+    color: var(--secondary-color);
+}
+
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #212529; /* Darker footer */
+    color: white;
+    padding: 60px 5% 20px;
+    margin-top: 80px;
+    font-size: 0.95em;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+.footer-logo h3 {
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.footer-logo p {
+    color: #b0b0b0;
+    font-size: 0.9em;
+}
+
+.footer-links-group h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-links-group ul {
+    list-style: none;
+}
+
+.footer-links-group ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links-group ul li a {
+    color: #b0b0b0;
+    transition: color 0.3s ease;
+}
+
+.footer-links-group ul li a:hover {
+    color: white;
+}
+
+.footer-social h4 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: translateY(-3px);
+}
+
+.social-icons img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0) invert(1); /* Makes SVG icons white */
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    color: #b0b0b0;
+    font-size: 0.85em;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+    h4 { font-size: 1.2em; }
+
+    .main-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .logo, .user-actions {
+        order: 1; /* Keep them flexible */
+        width: auto;
+    }
+    .main-nav {
+        order: 2; /* Move navigation below logo and actions */
+        width: 100%;
+        margin-top: 10px;
+    }
+    .main-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .main-nav ul li a {
+        padding: 8px 12px;
+    }
+
+    .hero-content h2 {
+        font-size: 2.8em;
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .product-grid, .usp-grid {
+        grid-template-columns: 1fr; 
+        padding: 0 15px;
+    }
+
+    .product-card {
+        margin: 0 auto;
+        max-width: 400px; /* Constrain card width on small screens */
+    }
+
+    .minums-usp {
+        padding: 40px 20px;
+    }
+
+    .cta-banner h3 {
+        font-size: 2em;
+    }
+
+    .cta-banner p {
+        font-size: 1em;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-links-group ul {
+        padding-left: 0;
+    }
+
+    .footer-social .social-icons {
+        justify-content: center;
+        display: flex;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-header {
+        padding: 10px 3%;
+    }
+    .logo h1 {
+        font-size: 1.8em;
+    }
+    .user-actions {
+        margin-left: 10px;
+    }
+    .user-actions a {
+        margin-left: 10px;
+        font-size: 1em;
+    }
+    .hero-content h2 {
+        font-size: 2.2em;
+    }
+    .hero-content p {
+        font-size: 0.95em;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    .section-spacing {
+        padding: 40px 0;
+    }
+    h3 {
+        font-size: 1.8em;
+    }
+    .minums-usp h3 {
+        font-size: 1.8em;
+    }
+    .cta-banner h3 {
+        font-size: 1.6em;
+    }
+}
