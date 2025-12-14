@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart | The Minum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="cart.css"> </head>
+    <link rel="stylesheet" href="cart.css">
+</head>
+
 <body>
 
     <header class="main-header">
         <div class="logo">
-            <a href="index.html"><h1>The Minum <span>🥤</span></h1></a>
+            <a href="index.html">
+                <h1>The Minum <span>🥤</span></h1>
+            </a>
         </div>
         <nav class="main-nav">
             <ul>
@@ -32,14 +39,14 @@
     </header>
 
     <main>
-        
+
         <section class="cart-section section-spacing">
             <h2>Your Refreshments</h2>
 
             <div class="cart-layout">
-                
+
                 <div class="cart-items-container">
-                    
+
                     <article class="cart-item" data-id="cold-brew-lg" data-price="6.50">
                         <div class="item-details">
                             <figure class="item-image-wrap">
@@ -91,8 +98,8 @@
 
                         <p class="item-subtotal-display">RM8.00</p>
                     </article>
-                    
-                    </div>
+
+                </div>
 
                 <aside class="order-summary-box">
                     <h3>Order Summary</h3>
@@ -108,7 +115,7 @@
                         <span>Taxes (7% Est.)</span>
                         <span id="summary-tax">RM1.22</span>
                     </div>
-                    
+
                     <div class="summary-line summary-total">
                         <strong>Grand Total</strong>
                         <strong id="summary-total">RM18.72</strong>
@@ -117,7 +124,7 @@
                     <a href="checkout.html" class="cta-button button-primary proceed-to-checkout">
                         Proceed to Checkout
                     </a>
-                    
+
                     <a href="listing.html" class="continue-shopping">
                         ← Continue Shopping
                     </a>
@@ -166,6 +173,8 @@
             <p>&copy; 2025 The Minum. All rights reserved.</p>
         </div>
     </footer>
-    
+
+    <script src="cart.js"></script>
 </body>
+
 </html>

@@ -13,12 +13,14 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    align-items: flex-start; /* Align top items to the start */
+    align-items: flex-start;
+    /* Align top items to the start */
 }
 
 /* 1. Form Container (Left Side) */
 .checkout-form-container {
-    flex: 2; /* Takes up 2/3 of the space */
+    flex: 2;
+    /* Takes up 2/3 of the space */
     background-color: var(--card-background);
     padding: 30px;
     border-radius: 10px;
@@ -62,7 +64,7 @@
 }
 
 .payment-method-card:hover,
-.payment-method-card input:checked + span {
+.payment-method-card input:checked+span {
     border-color: var(--primary-color);
     background-color: var(--background-light);
 }
@@ -74,7 +76,8 @@
 
 /* 2. Order Summary Box (Right Side) - Reusing cart.css styles but adapting */
 .final-summary {
-    flex: 1; /* Takes up 1/3 of the space */
+    flex: 1;
+    /* Takes up 1/3 of the space */
     padding: 30px;
     background-color: var(--card-background);
     border-radius: 10px;
@@ -159,9 +162,10 @@
         flex-direction: column;
         padding: 0 15px;
     }
-    
+
     .checkout-form-container {
-        order: 2; /* Forms come after summary for better mobile flow */
+        order: 2;
+        /* Forms come after summary for better mobile flow */
     }
 
     .final-summary {
@@ -171,7 +175,8 @@
     }
 
     .checkout-actions {
-        flex-direction: column-reverse; /* Put 'Back to Cart' below 'Place Order' */
+        flex-direction: column-reverse;
+        /* Put 'Back to Cart' below 'Place Order' */
         gap: 15px;
     }
 

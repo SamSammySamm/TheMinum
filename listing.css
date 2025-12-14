@@ -20,7 +20,7 @@
 
 .product-listing {
     /* Override section-spacing default padding */
-    padding-top: 40px; 
+    padding-top: 40px;
 }
 
 .listing-container {
@@ -30,14 +30,17 @@
 }
 
 .filter-sidebar {
-    flex: 0 0 250px; /* Fixed width for the sidebar */
+    flex: 0 0 250px;
+    /* Fixed width for the sidebar */
     padding: 20px;
     background-color: var(--card-background);
     border-radius: 10px;
     box-shadow: 0 4px 15px var(--shadow-light);
-    height: fit-content; /* Only take up necessary height */
+    height: fit-content;
+    /* Only take up necessary height */
     position: sticky;
-    top: 100px; /* Stick below the header */
+    top: 100px;
+    /* Stick below the header */
 }
 
 .filter-sidebar h4 {
@@ -67,7 +70,8 @@
 }
 
 .full-product-grid {
-    flex-grow: 1; /* Take up remaining space */
+    flex-grow: 1;
+    /* Take up remaining space */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
@@ -76,14 +80,16 @@
 /* Media Queries for Listing Page Responsiveness */
 @media (max-width: 992px) {
     .listing-container {
-        flex-direction: column; /* Stack sidebar and grid vertically */
+        flex-direction: column;
+        /* Stack sidebar and grid vertically */
         padding: 0 15px;
     }
 
     .filter-sidebar {
         flex: 1 1 auto;
         width: 100%;
-        position: static; /* Remove sticky on mobile */
+        position: static;
+        /* Remove sticky on mobile */
         margin-bottom: 20px;
     }
 

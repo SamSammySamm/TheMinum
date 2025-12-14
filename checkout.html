@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout & Payment | The Minum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="checkout.css"> </head>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
 <body>
 
     <header class="main-header">
         <div class="logo">
-            <a href="index.html"><h1>The Minum <span>🥤</span></h1></a>
+            <a href="index.html">
+                <h1>The Minum <span>🥤</span></h1>
+            </a>
         </div>
         <nav class="main-nav">
             <ul>
@@ -32,16 +39,16 @@
     </header>
 
     <main>
-        
+
         <section class="checkout-section section-spacing">
             <h2>Secure Checkout</h2>
 
             <div class="checkout-layout">
-                
+
                 <div class="checkout-form-container">
-                    
+
                     <form action="confirmation.html" method="GET" class="checkout-form">
-                        
+
                         <fieldset>
                             <legend>1. Contact Details</legend>
                             <div class="form-group">
@@ -62,7 +69,8 @@
                             <legend>2. Delivery Address</legend>
                             <div class="form-group">
                                 <label for="address">Street Address</label>
-                                <input type="text" id="address" name="address" required placeholder="Lot 123, Jalan Minum">
+                                <input type="text" id="address" name="address" required
+                                    placeholder="Lot 123, Jalan Minum">
                             </div>
                             <div class="form-group">
                                 <label for="city">City / Town</label>
@@ -74,30 +82,32 @@
                             </div>
                             <div class="form-group">
                                 <label for="notes">Delivery Notes (Optional)</label>
-                                <textarea id="notes" name="notes" placeholder="Knock twice and leave on the porch."></textarea>
+                                <textarea id="notes" name="notes"
+                                    placeholder="Knock twice and leave on the porch."></textarea>
                             </div>
                         </fieldset>
 
                         <fieldset>
                             <legend>3. Payment Method</legend>
-                            <p class="payment-instruction">Select your method. This is a dummy payment process for the project.</p>
-                            
+                            <p class="payment-instruction">Select your method. This is a dummy payment process for the
+                                project.</p>
+
                             <div class="radio-group payment-options">
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="card" checked> 
+                                    <input type="radio" name="payment" value="card" checked>
                                     <span>Credit/Debit Card (Simulated)</span>
                                 </label>
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="e-wallet"> 
+                                    <input type="radio" name="payment" value="e-wallet">
                                     <span>E-Wallet (Touch 'n Go, GrabPay, etc.)</span>
                                 </label>
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="cod"> 
+                                    <input type="radio" name="payment" value="cod">
                                     <span>Cash on Delivery (COD)</span>
                                 </label>
                             </div>
                         </fieldset>
-                        
+
                         <div class="checkout-actions">
                             <a href="cart.html" class="button-secondary back-to-cart">← Back to Cart</a>
                             <button type="submit" class="cta-button button-primary place-order-btn">
@@ -110,7 +120,7 @@
 
                 <aside class="order-summary-box final-summary">
                     <h3>Your Order Details</h3>
-                    
+
                     <div class="item-list-preview">
                         <p class="item-preview-line">2x Signature Cold Brew (Large)</p>
                         <p class="item-preview-line">1x Calming Chamomile Tea (Small)</p>
@@ -129,13 +139,14 @@
                         <span>Taxes (7% Est.)</span>
                         <span id="summary-tax">RM1.22</span>
                     </div>
-                    
+
                     <div class="summary-line summary-total">
                         <strong>Grand Total</strong>
                         <strong id="summary-total">RM18.72</strong>
                     </div>
 
-                    <p class="security-note">By clicking 'Complete Order', you agree to our terms and conditions. Payment processing is simulated.</p>
+                    <p class="security-note">By clicking 'Complete Order', you agree to our terms and conditions.
+                        Payment processing is simulated.</p>
                 </aside>
 
             </div>
@@ -181,6 +192,8 @@
             <p>&copy; 2025 The Minum. All rights reserved.</p>
         </div>
     </footer>
-    
+
+    <script src="cart.js"></script>
 </body>
+
 </html>
