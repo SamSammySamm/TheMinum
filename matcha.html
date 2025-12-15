@@ -81,6 +81,22 @@
         .back-btn:hover {
             background: #555;
         }
+
+        .add-to-cart-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #ff5252;
+        }
     </style>
 </head>
 
@@ -120,75 +136,14 @@
     <!-- PRODUCT GRID -->
     <section class="product-grid">
 
-        <div class="product-card">
+        <article class="product-card" data-product-id="matcha-latte" data-product-name="Matcha Latte"
+            data-product-price="8.00" data-product-image="images/matcha-latte.jpg">
             <img src="images/matcha-latte.jpg" alt="Matcha Latte">
             <h4>Matcha Latte</h4>
             <p>Smooth Japanese matcha with fresh milk.</p>
             <p class="price">RM8.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/butterflypea-matcha.jpg" alt="Butterfly Pea Matcha">
-            <h4>Butterfly Pea Matcha</h4>
-            <p>Layered blue pea tea with rich matcha.</p>
-            <p class="price">RM8.50</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/strawberry-matcha.jpg" alt="Strawberry Matcha">
-            <h4>Strawberry Matcha</h4>
-            <p>Fresh strawberry purée + creamy matcha.</p>
-            <p class="price">RM10.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/darkcocoa-matcha.jpg" alt="Dark Cocoa Matcha">
-            <h4>Dark Cocoa Matcha</h4>
-            <p>Rich chocolate base with matcha topping.</p>
-            <p class="price">RM9.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/mango-matcha.jpg" alt="Golden Mango Matcha">
-            <h4>Golden Mango Matcha</h4>
-            <p>Sweet mango blend with matcha swirl.</p>
-            <p class="price">RM9.50</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/taro-matcha.jpg" alt="Matcha Taro">
-            <h4>Matcha Taro</h4>
-            <p>Signature matcha layered with creamy taro.</p>
-            <p class="price">RM9.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/matcha-oreo.jpg" alt="Matcha Oreo">
-            <h4>Matcha Oreo</h4>
-            <p>Oreo crumbs with rich matcha milk.</p>
-            <p class="price">RM9.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/bandung-matcha.jpg" alt="Bandung Matcha">
-            <h4>Bandung Matcha</h4>
-            <p>Rose syrup infused with matcha & milk.</p>
-            <p class="price">RM8.50</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/blueberry-matcha.jpg" alt="Blueberry Matcha">
-            <h4>Blueberry Matcha</h4>
-            <p>Fresh blueberry purée with matcha milk.</p>
-            <p class="price">RM9.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/strawcream-matcha.jpg" alt="Strawberry Cream Matcha">
-            <h4>Strawberry Cream Matcha</h4>
-            <p>Strawberry base topped with creamy matcha.</p>
-            <p class="price">RM10.00</p>
-        </div>
+            <button class="add-to-cart-btn">Add to Cart</button>
+        </article>
 
     </section>
 

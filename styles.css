@@ -555,20 +555,17 @@ a:hover {
 
     .main-header {
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 4%;
     }
 
-    .logo,
-    .user-actions {
-        order: 1;
-        /* Keep them flexible */
-        width: auto;
+    .logo h1 {
+        font-size: 1.8em;
     }
 
     .main-nav {
-        order: 2;
-        /* Move navigation below logo and actions */
+        order: 3;
         width: 100%;
         margin-top: 10px;
     }
@@ -576,21 +573,43 @@ a:hover {
     .main-nav ul {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 5px;
     }
 
     .main-nav ul li a {
         padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    .user-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .user-actions a {
+        margin-left: 0;
+        font-size: 0.95em;
+    }
+
+    .minums-hero {
+        padding: 80px 20px;
+        margin-bottom: 50px;
     }
 
     .hero-content h2 {
-        font-size: 2.8em;
+        font-size: 2.5em;
     }
 
     .hero-content p {
         font-size: 1.1em;
     }
 
-    .product-grid,
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 0 15px;
+    }
+
     .usp-grid {
         grid-template-columns: 1fr;
         padding: 0 15px;
@@ -598,12 +617,15 @@ a:hover {
 
     .product-card {
         margin: 0 auto;
-        max-width: 400px;
-        /* Constrain card width on small screens */
+        max-width: 100%;
     }
 
     .minums-usp {
         padding: 40px 20px;
+    }
+
+    .cta-banner {
+        padding: 40px 25px;
     }
 
     .cta-banner h3 {
@@ -611,6 +633,63 @@ a:hover {
     }
 
     .cta-banner p {
+        font-size: 1em;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .section-spacing {
+        padding: 40px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 3%;
+    }
+
+    .logo h1 {
+        font-size: 1.6em;
+    }
+
+    .user-actions a {
+        font-size: 0.85em;
+    }
+
+    .user-actions a .icon {
+        font-size: 1.2em;
+    }
+
+    .minums-hero {
+        padding: 60px 15px;
+    }
+
+    .hero-content h2 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product-card {
+        max-width: 500px;
+    }
+
+    .product-card img {
+        height: 220px;
+    }
+
+    .cta-button {
+        padding: 11px 24px;
         font-size: 1em;
     }
 
@@ -635,44 +714,215 @@ a:hover {
     }
 
     .logo h1 {
-        font-size: 1.8em;
+        font-size: 1.4em;
     }
 
     .user-actions {
-        margin-left: 10px;
+        gap: 8px;
     }
 
     .user-actions a {
-        margin-left: 10px;
-        font-size: 1em;
+        margin-left: 0;
+        font-size: 0.8em;
+        padding: 5px;
+    }
+
+    .user-actions a .icon {
+        font-size: 1.1em;
+    }
+
+    .main-nav ul {
+        gap: 3px;
+    }
+
+    .main-nav ul li a {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+
+    .minums-hero {
+        padding: 50px 15px;
+        margin-bottom: 40px;
     }
 
     .hero-content h2 {
-        font-size: 2.2em;
+        font-size: 1.8em;
+        line-height: 1.2;
     }
 
     .hero-content p {
         font-size: 0.95em;
+        margin-bottom: 30px;
     }
 
     .cta-button {
         padding: 10px 20px;
         font-size: 0.9em;
+        width: 100%;
+        max-width: 280px;
     }
 
     .section-spacing {
-        padding: 40px 0;
+        padding: 30px 0;
+    }
+
+    .featured-products h3 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .product-grid {
+        gap: 20px;
+        padding: 0 10px;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+
+    .product-card h4 {
+        font-size: 1.2em;
+    }
+
+    .product-card .description {
+        font-size: 0.9em;
+        min-height: auto;
+    }
+
+    .product-card .price {
+        font-size: 1.4em;
+        margin: 10px 0 15px;
+    }
+
+    .product-card .button-secondary,
+    .product-card .button-primary {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin: 0 15px 15px;
+        width: calc(100% - 30px);
     }
 
     h3 {
-        font-size: 1.8em;
+        font-size: 1.6em;
+    }
+
+    .minums-usp {
+        padding: 30px 15px;
     }
 
     .minums-usp h3 {
-        font-size: 1.8em;
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    .usp-item {
+        padding: 20px 15px;
+    }
+
+    .usp-icon {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .usp-item h4 {
+        font-size: 1.1em;
+    }
+
+    .usp-item p {
+        font-size: 0.9em;
+    }
+
+    .cta-banner {
+        padding: 30px 20px;
     }
 
     .cta-banner h3 {
-        font-size: 1.6em;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .cta-banner p {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+
+    .main-footer {
+        padding: 40px 4% 15px;
+        margin-top: 50px;
+    }
+
+    .footer-content {
+        margin-bottom: 25px;
+        gap: 20px;
+    }
+
+    .footer-logo h3 {
+        font-size: 1.5em;
+    }
+
+    .footer-links-group h4 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .footer-social h4 {
+        font-size: 1.1em;
+    }
+
+    .social-icons a {
+        width: 28px;
+        height: 28px;
+        margin-right: 12px;
+    }
+}
+
+/* Additional mobile-friendly enhancements */
+@media (max-width: 400px) {
+    .logo h1 {
+        font-size: 1.2em;
+    }
+
+    .main-nav ul li a {
+        padding: 5px 8px;
+        font-size: 0.8em;
+    }
+
+    .hero-content h2 {
+        font-size: 1.5em;
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+
+    .cta-banner h3 {
+        font-size: 1.3em;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Increase touch targets for mobile devices */
+    .main-nav ul li a {
+        padding: 12px 15px;
+    }
+
+    .user-actions a {
+        padding: 10px;
+    }
+
+    .cta-button {
+        min-height: 44px;
+        /* Minimum touch target size */
+    }
+
+    .product-card .button-secondary,
+    .product-card .button-primary {
+        min-height: 44px;
     }
 }
