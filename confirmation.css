@@ -163,3 +163,50 @@
         margin: 0;
     }
 }
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .main-header,
+    .main-footer,
+    .main-nav,
+    .user-actions,
+    .confirmation-actions,
+    .email-note {
+        display: none !important;
+    }
+
+    .confirmation-section,
+    .confirmation-box,
+    .confirmation-box * {
+        visibility: visible;
+    }
+
+    .confirmation-section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .confirmation-box {
+        box-shadow: none;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .success-header h2 {
+        font-size: 2em;
+        color: black;
+    }
+
+    .detail-block {
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+    }
+}

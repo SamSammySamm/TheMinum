@@ -175,9 +175,115 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname.includes('cart.html')) {
         renderCartPage();
     }
+
+    // If we're on the checkout page, render the checkout summary
+    if (window.location.pathname.includes('checkout.html')) {
+        renderCheckoutPage();
+    }
+
+    // If we're on the confirmation page, populate details
+    if (window.location.pathname.includes('confirmation.html')) {
+        renderConfirmationPage();
+    }
 });
 
 // ========== CART PAGE RENDERING ==========
+
+// Render checkout page summary
+function renderCheckoutPage() {
+    const cart = getCart();
+    const itemListPreview = document.querySelector('.item-list-preview');
+
+    if (!itemListPreview) return;
+
+    // Remove existing preview lines but keep the edit link
+    const editLink = itemListPreview.querySelector('.edit-cart-link');
+    itemListPreview.innerHTML = '';
+
+    if (cart.length === 0) {
+        const emptyMsg = document.createElement('p');
+        emptyMsg.className = 'item-preview-line';
+        emptyMsg.textContent = 'Your cart is empty';
+        itemListPreview.appendChild(emptyMsg);
+    } else {
+        cart.forEach(item => {
+            const p = document.createElement('p');
+            p.className = 'item-preview-line';
+            p.textContent = `${item.quantity}x ${item.name}`;
+            itemListPreview.appendChild(p);
+        });
+    }
+
+    if (editLink) {
+        itemListPreview.appendChild(editLink);
+    }
+
+    // Update totals
+    updateOrderSummary(cart);
+}
+
+// Render confirmation page with order details
+function renderConfirmationPage() {
+    const cart = getCart();
+
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const address = urlParams.get('address') || 'No address provided';
+
+    // Generate Order ID (Random for demo)
+    const orderId = '#TMR-' + Math.floor(Math.random() * 1000000);
+    document.querySelector('.order-id').textContent = orderId;
+
+    // Set Address
+    document.querySelector('.customer-address').textContent = address;
+
+    // Render Items
+    const itemList = document.querySelector('.item-list');
+    itemList.innerHTML = '';
+
+    if (cart.length > 0) {
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span class="item-name">${item.name} x${item.quantity}</span>
+                <span class="item-price">RM${(item.price * item.quantity).toFixed(2)}</span>
+            `;
+            itemList.appendChild(li);
+        });
+
+        // Calculate Totals
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryFee = 3.00;
+        const taxRate = 0.07;
+        const tax = subtotal * taxRate;
+        const total = subtotal + deliveryFee + tax;
+
+        // Add Breakdown Total Line
+        const breakdownLi = document.createElement('li');
+        breakdownLi.className = 'breakdown-total';
+        breakdownLi.innerHTML = `
+            <span class="item-name">Subtotal / Delivery / Tax</span>
+            <span class="item-price">RM${subtotal.toFixed(2)} / RM${deliveryFee.toFixed(2)} / RM${tax.toFixed(2)}</span>
+        `;
+        itemList.appendChild(breakdownLi);
+
+        // Update Final Total
+        document.querySelector('.final-total').textContent = `RM${total.toFixed(2)}`;
+
+        // Clear cart after a delay ( simulating order processing )
+        // Using a flag to prevent immediate clearing if user refreshes
+        if (!sessionStorage.getItem('orderProcessed_' + orderId)) {
+            localStorage.removeItem('minumsCart');
+            sessionStorage.setItem('orderProcessed_' + orderId, 'true');
+            updateCartCount(); // Update header count to 0
+        }
+
+    } else {
+        // Handle case where user navigates back or refreshes after cart is cleared
+        itemList.innerHTML = '<li>Order details have been processed.</li>';
+        document.querySelector('.final-total').textContent = '-';
+    }
+}
 
 // Render cart items on cart.html page
 function renderCartPage() {
