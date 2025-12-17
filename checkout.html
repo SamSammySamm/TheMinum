@@ -30,7 +30,7 @@
         </nav>
         <div class="user-actions">
             <a href="cart.html" class="cart-link active" aria-label="View shopping cart">
-                <span class="icon">🛒</span> Cart (<span id="cart-item-count">2</span>)
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
             </a>
             <a href="admin.html" class="admin-link" aria-label="Access admin panel">
                 <span class="icon">⚙️</span> Admin
@@ -43,11 +43,11 @@
         <section class="checkout-section section-spacing">
             <h2>Secure Checkout</h2>
 
-            <div class="checkout-layout">
+            <div class="checkout-layout" id="checkout-content">
 
                 <div class="checkout-form-container">
 
-                    <form action="confirmation.html" method="GET" class="checkout-form">
+                    <form class="checkout-form">
 
                         <fieldset>
                             <legend>1. Contact Details</legend>
@@ -81,17 +81,57 @@
 
                             <div class="radio-group payment-options">
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="card" checked>
+                                    <input type="radio" name="payment" value="card" checked
+                                        onchange="togglePaymentDetails()">
                                     <span>Credit/Debit Card (Simulated)</span>
                                 </label>
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="e-wallet">
+                                    <input type="radio" name="payment" value="e-wallet"
+                                        onchange="togglePaymentDetails()">
                                     <span>E-Wallet (Touch 'n Go, GrabPay, etc.)</span>
                                 </label>
                                 <label class="radio-label payment-method-card">
-                                    <input type="radio" name="payment" value="cod">
+                                    <input type="radio" name="payment" value="cod" onchange="togglePaymentDetails()">
                                     <span>Cash on Delivery (COD)</span>
                                 </label>
+                            </div>
+
+                            <!-- Dynamic Payment Details -->
+                            <div id="payment-details-container">
+                                <!-- Card Details -->
+                                <div id="payment-card-details" class="payment-details-box">
+                                    <div class="form-group">
+                                        <label>Card Number</label>
+                                        <input type="text" id="card-number" placeholder="0000 0000 0000 0000"
+                                            maxlength="19">
+                                    </div>
+                                    <div class="form-row" style="display: flex; gap: 15px;">
+                                        <div class="form-group" style="flex: 1;">
+                                            <label>Expiry Date</label>
+                                            <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                                        </div>
+                                        <div class="form-group" style="flex: 1;">
+                                            <label>CVV</label>
+                                            <input type="text" id="card-cvv" placeholder="123" maxlength="3">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- E-Wallet Details -->
+                                <div id="payment-ewallet-details" class="payment-details-box" style="display: none;">
+                                    <div class="form-group">
+                                        <label>Select Provider</label>
+                                        <select id="ewallet-provider" class="select-field">
+                                            <option value="tng">Touch 'n Go eWallet</option>
+                                            <option value="grab">GrabPay</option>
+                                            <option value="boost">Boost</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-Wallet Phone Number</label>
+                                        <input type="tel" id="ewallet-phone" placeholder="012-345 6789">
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
 
@@ -114,8 +154,8 @@
                     </div>
 
                     <div class="summary-line">
-                        <span>Subtotal (3 items)</span>
-                        <span id="summary-subtotal">RM14.50</span>
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">RM0.00</span>
                     </div>
                     <div class="summary-line">
                         <span>Delivery Fee</span>
@@ -123,12 +163,12 @@
                     </div>
                     <div class="summary-line">
                         <span>Taxes (7% Est.)</span>
-                        <span id="summary-tax">RM1.22</span>
+                        <span id="summary-tax">RM0.00</span>
                     </div>
 
                     <div class="summary-line summary-total">
                         <strong>Grand Total</strong>
-                        <strong id="summary-total">RM18.72</strong>
+                        <strong id="summary-total">RM0.00</strong>
                     </div>
 
                     <p class="security-note">By clicking 'Complete Order', you agree to our terms and conditions.
@@ -153,7 +193,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="listing.html">Our Menu</a></li>
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="contact.html">Locations</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">
@@ -200,66 +240,133 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // 1. Payment Toggle Logic
+        function togglePaymentDetails() {
+            const method = document.querySelector('input[name="payment"]:checked').value;
+            const container = document.getElementById('payment-details-container');
+            const cardBox = document.getElementById('payment-card-details');
+            const ewalletBox = document.getElementById('payment-ewallet-details');
+
+            // Reset displays
+            if (method === 'cod') {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+                if (method === 'card') {
+                    cardBox.style.display = 'block';
+                    ewalletBox.style.display = 'none';
+                } else if (method === 'e-wallet') {
+                    cardBox.style.display = 'none';
+                    ewalletBox.style.display = 'block';
+                }
+            }
+        }
+
+        // Initialize state on load
+        document.addEventListener('DOMContentLoaded', togglePaymentDetails);
+
+        // 2. Validate Payment Fields
+        function validatePaymentFields(method) {
+            if (method === 'cod') return true;
+
+            let isValid = true;
+            let errorMsg = '';
+
+            if (method === 'card') {
+                const num = document.getElementById('card-number').value.trim();
+                const expiry = document.getElementById('card-expiry').value.trim();
+                const cvv = document.getElementById('card-cvv').value.trim();
+                if (!num || !expiry || !cvv) {
+                    errorMsg = 'Please fill in all card details.';
+                    isValid = false;
+                }
+            } else if (method === 'e-wallet') {
+                const phone = document.getElementById('ewallet-phone').value.trim();
+                if (!phone) {
+                    errorMsg = 'Please enter your e-wallet phone number.';
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) alert(errorMsg);
+            return isValid;
+        }
+
         // Handle Form Submission
         const checkoutForm = document.querySelector('.checkout-form');
 
         if (checkoutForm) {
             checkoutForm.addEventListener('submit', function (e) {
-                e.preventDefault(); // Stop standard form submission
+                e.preventDefault();
+
+                const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+                // Validate Payment Details
+                if (!validatePaymentFields(paymentMethod)) return;
 
                 const submitBtn = document.querySelector('.place-order-btn');
                 const originalBtnText = submitBtn.innerText;
                 submitBtn.disabled = true;
-                submitBtn.innerText = 'Processing Order...';
+                submitBtn.innerText = 'Processing Payment...';
 
-                // 1. Gather Customer Info
-                const customerData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    address: document.getElementById('address').value,
-                    paymentMethod: document.querySelector('input[name="payment"]:checked').value
-                };
-
-                // 2. Gather Cart Data
-                const cart = getCart();
-
-                // Calculate Order Totals
-                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                const deliveryFee = 3.00;
-                const tax = subtotal * 0.07;
-                const total = subtotal + deliveryFee + tax;
-
-                // 3. Create Order Object
-                const orderData = {
-                    customer: customerData,
-                    items: cart,
-                    totals: {
-                        subtotal: subtotal,
-                        deliveryFee: deliveryFee,
-                        tax: tax,
-                        grandTotal: total
-                    },
-                    status: 'new', // new, preparing, delivering, completed
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                // 4. Save to Firestore
-                db.collection("orders").add(orderData)
-                    .then((docRef) => {
-                        console.log("Order written with ID: ", docRef.id);
-                        // Redirect to Confirmation Page with Order ID
-                        window.location.href = `confirmation.html?address=${encodeURIComponent(customerData.address)}&orderId=${docRef.id}`;
-                    })
-                    .catch((error) => {
-                        console.error("Error adding document: ", error);
-                        alert("There was an error processing your order. Please try again.");
-                        submitBtn.disabled = false;
-                        submitBtn.innerText = originalBtnText;
-                    });
+                // Simulate processing delay for "realism"
+                setTimeout(() => {
+                    processOrder(paymentMethod, submitBtn, originalBtnText);
+                }, 1500);
             });
+        }
+
+        function processOrder(paymentMethod, submitBtn, originalBtnText) {
+            // 1. Customer Info from Form
+            const customerData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                paymentMethod: paymentMethod,
+                paymentDetails: paymentMethod === 'card' ? 'Card Ending in ' + document.getElementById('card-number').value.slice(-4) : (paymentMethod === 'e-wallet' ? 'E-Wallet: ' + document.getElementById('ewallet-provider').value : 'COD')
+            };
+
+            // 2. Gather Cart Data
+            const cart = getCart();
+
+            // Calculate Order Totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = 3.00;
+            const tax = subtotal * 0.07;
+            const total = subtotal + deliveryFee + tax;
+
+            // 3. Create Order Object
+            const orderData = {
+                customer: customerData,
+                items: cart,
+                totals: {
+                    subtotal: subtotal,
+                    deliveryFee: deliveryFee,
+                    tax: tax,
+                    grandTotal: total
+                },
+                status: 'new',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            // 4. Save to Firestore
+            db.collection("orders").add(orderData)
+                .then((docRef) => {
+                    // Clear Cart
+                    localStorage.removeItem('cart');
+                    // Redirect
+                    window.location.href = `confirmation.html?address=${encodeURIComponent(customerData.address)}&orderId=${docRef.id}`;
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                    alert("Error: " + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                });
         }
     </script>
 </body>
 
 </html>
+```

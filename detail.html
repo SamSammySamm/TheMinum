@@ -55,46 +55,28 @@
 
                     <div class="product-description">
                         <h3>Description</h3>
-                        <p>Our Signature Cold Brew is steeped for over 18 hours, resulting in a super-smooth,
-                            low-acidity coffee concentrate. It's strong enough to kickstart your morning and perfectly
-                            balanced to enjoy all day. Sourced from single-origin, ethically farmed beans.</p>
-                        <ul>
-                            <li>Origin: Ethiopian Yirgacheffe</li>
-                            <li>Notes: Chocolate, Caramel, hint of Citrus</li>
-                            <li>Caffeine Level: High</li>
-                            <li>Best Served: Iced or over milk</li>
-                        </ul>
+                        <p id="desc-content">Loading description...</p>
                     </div>
 
                     <form class="product-customization-form">
-
                         <div class="form-group customization-option">
                             <label>1. Select Size</label>
                             <div class="radio-group">
                                 <label class="radio-label">
-                                    <input type="radio" name="size" value="small" data-price="0.00" checked> Small
-                                    (12oz)
+                                    <input type="radio" name="size" value="small" data-price="0.00" checked>
+                                    <span>Small (12oz)</span>
                                 </label>
                                 <label class="radio-label">
-                                    <input type="radio" name="size" value="medium" data-price="0.50"> Medium (16oz)
-                                    +RM0.50
+                                    <input type="radio" name="size" value="medium" data-price="0.50">
+                                    <span>Medium (16oz) +RM0.50</span>
                                 </label>
                                 <label class="radio-label">
-                                    <input type="radio" name="size" value="large" data-price="1.00"> Large (20oz)
-                                    +RM1.00
+                                    <input type="radio" name="size" value="large" data-price="1.00">
+                                    <span>Large (20oz) +RM1.00</span>
                                 </label>
                             </div>
                         </div>
-
-                        <div class="form-group customization-option">
-                            <label>2. Milk/Sweetener</label>
-                            <select name="milk_sweetener" class="select-field">
-                                <option value="none">Standard (Black)</option>
-                                <option value="oat">Oat Milk</option>
-                                <option value="almond">Almond Milk</option>
-                                <option value="sugar">Simple Syrup</option>
-                            </select>
-                        </div>
+                        <!-- Milk/Sweetener Removed -->
 
                         <div class="cart-actions-container">
                             <div class="quantity-selector">
@@ -114,31 +96,40 @@
         <section class="related-products section-spacing">
             <h3>You Might Also Like...</h3>
             <div class="product-grid">
-                <article class="product-card minimal" data-product-id="pop-ice-chocolate"
-                    data-product-name="Pop Ice Blended - Chocolate" data-product-price="4.00"
-                    data-product-image="images/popice-chocolate.jpg">
-                    <figure><img src="images/popice-chocolate.jpg" alt="Pop Ice Blended - Chocolate"></figure>
-                    <h4>Pop Ice Blended - Chocolate</h4>
+                <article class="product-card minimal">
+                    <a href="detail.html?id=pop-ice-chocolate&name=Pop%20Ice%20Blended%20-%20Chocolate&price=4.00&image=images/popice-chocolate.jpg&desc=Cool%20down%20with%20our%20chocolatey%20blended%20ice%20treat."
+                        style="text-decoration:none; color:inherit;">
+                        <figure><img src="images/popice-chocolate.jpg" alt="Pop Ice Blended - Chocolate"></figure>
+                        <h4>Pop Ice Blended - Chocolate</h4>
+                    </a>
                     <p class="price">RM4.00</p>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
+                    <button class="add-to-cart-btn button-primary"
+                        onclick="addToCartWrapper({id: 'pop-ice-chocolate', name: 'Pop Ice Blended - Chocolate', price: 4.00, image: 'images/popice-chocolate.jpg'})">Add
+                        to Cart</button>
                 </article>
 
-                <article class="product-card minimal" data-product-id="teh-tarik-cold"
-                    data-product-name="Teh Tarik (Cold)" data-product-price="4.00"
-                    data-product-image="images/teh-tarik-cold.jpg">
-                    <figure><img src="images/teh-tarik-cold.jpg" alt="Teh Tarik (Cold)"></figure>
-                    <h4>Teh Tarik (Cold)</h4>
+                <article class="product-card minimal">
+                    <a href="detail.html?id=teh-tarik-cold&name=Teh%20Tarik%20(Cold)&price=4.00&image=images/teh-tarik-cold.jpg&desc=Malaysian%20favorite%20pulled%20tea,%20served%20cold%20and%20frothy."
+                        style="text-decoration:none; color:inherit;">
+                        <figure><img src="images/teh-tarik-cold.jpg" alt="Teh Tarik (Cold)"></figure>
+                        <h4>Teh Tarik (Cold)</h4>
+                    </a>
                     <p class="price">RM4.00</p>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
+                    <button class="add-to-cart-btn button-primary"
+                        onclick="addToCartWrapper({id: 'teh-tarik-cold', name: 'Teh Tarik (Cold)', price: 4.00, image: 'images/teh-tarik-cold.jpg'})">Add
+                        to Cart</button>
                 </article>
 
-                <article class="product-card minimal" data-product-id="popia-carbonara"
-                    data-product-name="Popia Carbonara" data-product-price="1.00"
-                    data-product-image="images/popia-carbonara.jpg">
-                    <figure><img src="images/popia-carbonara.jpg" alt="Popia Carbonara"></figure>
-                    <h4>Popia Carbonara</h4>
+                <article class="product-card minimal">
+                    <a href="detail.html?id=popia-carbonara&name=Popia%20Carbonara&price=1.00&image=images/popia-carbonara.jpg&desc=Crispy%20spring%20rolls%20filled%20with%20creamy%20carbonara%20sauce."
+                        style="text-decoration:none; color:inherit;">
+                        <figure><img src="images/popia-carbonara.jpg" alt="Popia Carbonara"></figure>
+                        <h4>Popia Carbonara</h4>
+                    </a>
                     <p class="price">RM1.00</p>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
+                    <button class="add-to-cart-btn button-primary"
+                        onclick="addToCartWrapper({id: 'popia-carbonara', name: 'Popia Carbonara', price: 1.00, image: 'images/popia-carbonara.jpg'})">Add
+                        to Cart</button>
                 </article>
             </div>
         </section>

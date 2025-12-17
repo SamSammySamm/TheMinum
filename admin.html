@@ -19,7 +19,10 @@
         <div class="login-box">
             <h2>Admin Login</h2>
             <p>Enter password to access dashboard</p>
-            <input type="password" id="admin-password" placeholder="Password (Try: admin123)">
+            <div class="password-wrapper">
+                <input type="password" id="admin-password" placeholder="Password">
+                <span class="toggle-password-icon" onclick="togglePasswordVisibility()">👁️</span>
+            </div>
             <button class="cta-button button-primary" onclick="checkLogin()">Login</button>
             <p id="login-error" style="color: red; margin-top: 10px; display: none;">Incorrect Password</p>
         </div>
@@ -156,6 +159,19 @@
 
         let currentTab = 'orders';
         let allCategories = new Set(); // To track unique categories
+
+        // Password Toggle
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('admin-password');
+            const icon = document.querySelector('.toggle-password-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.textContent = '🙈'; // Change icon to 'hide'
+            } else {
+                passwordInput.type = 'password';
+                icon.textContent = '👁️'; // Change icon to 'show'
+            }
+        }
 
         // 1. Login Logic
         function checkLogin() {

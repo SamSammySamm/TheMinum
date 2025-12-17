@@ -184,3 +184,40 @@
         width: 100%;
     }
 }
+
+/* Payment Details Dynamic Styles */
+#payment-details-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.payment-details-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    animation: fadeIn 0.3s ease;
+}
+
+.payment-details-box .form-group:last-child {
+    margin-bottom: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.select-field {
+    /* Inherits global styles */
+    width: 100%;
+    /* padding, border, radius handled globally */
+}

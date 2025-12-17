@@ -25,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-light); 
+    background-color: var(--background-light);
 }
 
 .main-product-image {
@@ -121,13 +121,25 @@
 }
 
 .radio-label input[type="radio"] {
-    display: none; /* Hide default radio button */
+    display: none;
+    /* Hide default radio button */
 }
 
-.radio-label input[type="radio"]:checked + span,
+.radio-label.active,
 .radio-label:hover {
     border-color: var(--primary-color);
-    background-color: var(--background-light);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.radio-label.active span,
+.radio-label:hover span {
+    color: white;
+}
+
+/* Ensure text color change applies to span inside label */
+.radio-label span {
+    padding: 2px 5px;
 }
 
 /* Select Field */
@@ -136,7 +148,8 @@
     margin-top: 10px;
     padding: 12px;
     width: 100%;
-    appearance: none; /* Remove default styling */
+    appearance: none;
+    /* Remove default styling */
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23333333" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -160,12 +173,13 @@
 }
 
 .input-quantity {
-    width: 70px;
+    width: 80px;
     text-align: center;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    /* padding, border, radius specific overrides if needed, but inheriting is better */
     padding: 10px;
-    font-size: 1em;
+    /* Keeps it slightly smaller than full inputs if desired, or remove to match */
+    height: 50px;
+    /* Match height of button approximately */
 }
 
 .add-to-cart-lg {
@@ -226,29 +240,30 @@
         padding: 0;
         margin: 0 15px;
     }
+
     .product-image-area {
         max-height: 400px;
         border-radius: 15px 15px 0 0;
     }
+
     .product-info-area {
         padding: 30px 20px;
     }
+
     .product-title {
         font-size: 2.5em;
     }
+
     .cart-actions-container {
         flex-direction: column;
         align-items: stretch;
     }
+
     .add-to-cart-lg {
         width: 100%;
     }
+
     .quantity-selector {
         justify-content: center;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e3d3fbc (commit on master)
-

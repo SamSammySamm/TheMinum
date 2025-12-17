@@ -477,6 +477,36 @@ a:hover {
 }
 
 
+/* --- Global Form Styles (Standardized) --- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+    width: 100%;
+    padding: 15px 20px;
+    /* Bigger padding */
+    font-size: 1rem;
+    /* Bigger font */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    /* Requested 20px radius */
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
 /* --- Footer --- */
 .main-footer {
     background-color: #212529;

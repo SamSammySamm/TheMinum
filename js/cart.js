@@ -304,7 +304,7 @@ function renderCartPage() {
                 <span style="font-size: 80px;">🛒</span>
                 <h3 style="margin: 20px 0 10px; color: #333;">Your cart is empty</h3>
                 <p style="color: #666; margin-bottom: 30px;">Add some refreshing drinks to get started!</p>
-                <a href="../html/listing.html" class="cta-button button-primary">Browse Our Menu</a>
+                <a href="listing.html" class="cta-button button-primary">Browse Our Menu</a>
             </div>
         `;
 

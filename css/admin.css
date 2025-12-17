@@ -82,11 +82,36 @@ body {
 .form-group input,
 .form-group textarea,
 .form-group select {
+    /* Inherits global styles from styles.css */
+    /* width: 100%; - already in global */
+    /* padding: 15px 20px; - already in global */
+    /* border-radius: 20px; - already in global */
+}
+
+/* Password Toggle Styles */
+.password-wrapper {
+    position: relative;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-family: inherit;
+}
+
+.password-wrapper input {
+    padding-right: 50px;
+    /* Space for the eye icon */
+}
+
+.toggle-password-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666;
+    user-select: none;
+}
+
+.toggle-password-icon:hover {
+    color: var(--primary-color);
 }
 
 /* Navigation Tabs */

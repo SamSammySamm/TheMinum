@@ -56,35 +56,40 @@ function loadProductDetails() {
     // Update page title
     document.title = `${productName} | The Minum`;
 
-    // Update product image
-    const productImageElement = document.querySelector('.main-product-image');
-    if (productImageElement && productImage) {
-        productImageElement.src = productImage;
-        productImageElement.alt = productName;
+    // Select Elements
+    const imgEl = document.querySelector('.main-product-image');
+    const titleEl = document.querySelector('.product-title');
+    const priceEl = document.getElementById('current-price');
+    const tagLineEl = document.querySelector('.tag-line');
+    const descEl = document.getElementById('desc-content');
+
+    // Update Elements
+    if (imgEl && productImage) {
+        imgEl.src = productImage;
+        imgEl.alt = productName;
     }
 
-    // Update product title
-    const productTitleElement = document.querySelector('.product-title');
-    if (productTitleElement) {
-        productTitleElement.textContent = productName;
+    if (titleEl) titleEl.textContent = productName;
+
+    if (priceEl) priceEl.textContent = `RM${parseFloat(productPrice).toFixed(2)}`;
+
+    // Update Tag Line
+    if (tagLineEl) {
+        if (productDescriptions[productId]) {
+            tagLineEl.textContent = productDescriptions[productId].tagLine;
+        } else {
+            tagLineEl.style.display = 'none'; // Hide if no tagline
+        }
     }
 
-    // Update product price
-    const priceElement = document.getElementById('current-price');
-    if (priceElement) {
-        priceElement.textContent = `RM${parseFloat(productPrice).toFixed(2)}`;
-    }
-
-    // Update tag line
-    const tagLineElement = document.querySelector('.tag-line');
-    if (tagLineElement && productDescriptions[productId]) {
-        tagLineElement.textContent = productDescriptions[productId].tagLine;
-    }
-
-    // Update description
-    const descriptionElement = document.querySelector('.product-description p');
-    if (descriptionElement && productDescriptions[productId]) {
-        descriptionElement.textContent = productDescriptions[productId].description;
+    // Update Description
+    // Priority: URL Param > Dictionary > Default
+    if (descEl) {
+        let descText = getURLParameter('desc');
+        if (!descText && productDescriptions[productId]) {
+            descText = productDescriptions[productId].description;
+        }
+        descEl.textContent = descText || 'Delicious refreshment from The Minums.';
     }
 
     // Update details list
@@ -111,9 +116,23 @@ function loadProductDetails() {
 function handleSizeSelection() {
     const sizeRadios = document.querySelectorAll('input[name="size"]');
 
+    function updateVisuals() {
+        document.querySelectorAll('.radio-label').forEach(label => {
+            label.classList.remove('active');
+        });
+        const checked = document.querySelector('input[name="size"]:checked');
+        if (checked) {
+            checked.closest('.radio-label').classList.add('active');
+        }
+    }
+
+    // Initialize visuals on load
+    updateVisuals();
+
     sizeRadios.forEach(radio => {
         radio.addEventListener('change', function () {
             updatePrice();
+            updateVisuals();
         });
     });
 }
@@ -151,9 +170,6 @@ function handleDetailPageAddToCart() {
             const sizeValue = selectedSize ? selectedSize.value : 'small';
             const sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
 
-            const milkSweetener = document.querySelector('select[name="milk_sweetener"]');
-            const milkValue = milkSweetener ? milkSweetener.value : 'none';
-
             const quantity = parseInt(document.getElementById('quantity').value) || 1;
 
             // Calculate final price
@@ -161,13 +177,12 @@ function handleDetailPageAddToCart() {
 
             // Create product data for cart
             const productData = {
-                id: `${window.currentProduct.id}-${sizeValue}-${milkValue}`,
+                id: `${window.currentProduct.id}-${sizeValue}`,
                 name: window.currentProduct.name,
                 price: finalPrice,
                 image: window.currentProduct.image,
                 options: {
-                    size: sizeValue,
-                    milkSweetener: milkValue
+                    size: sizeValue
                 }
             };
 
