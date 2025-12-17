@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | The Minum</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- Login Modal -->
+    <div id="login-modal">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <p>Enter password to access dashboard</p>
+            <input type="password" id="admin-password" placeholder="Password (Try: admin123)">
+            <button class="cta-button button-primary" onclick="checkLogin()">Login</button>
+            <p id="login-error" style="color: red; margin-top: 10px; display: none;">Incorrect Password</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="admin-dashboard" class="admin-container" style="display: none;">
+        <header class="admin-header">
+            <div>
+                <h2>Admin Dashboard</h2>
+                <p>Manage your store</p>
+            </div>
+            <div>
+                <button class="refresh-btn" onclick="refreshCurrentView()">↻ Refresh</button>
+                <a href="index.html" class="button-secondary" style="margin-left: 10px;">Back to Site</a>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-nav">
+            <button class="nav-tab active" onclick="switchTab('orders')">Orders</button>
+            <button class="nav-tab" onclick="switchTab('products')">Products</button>
+        </div>
+
+        <!-- Orders View -->
+        <div id="view-orders" class="dashboard-view">
+            <div class="orders-card">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body">
+                            <!-- Orders will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products View -->
+        <div id="view-products" class="dashboard-view" style="display: none;">
+            <div class="action-bar" style="margin-bottom: 20px; text-align: right;">
+                <button class="cta-button button-primary" onclick="openProductModal()">+ Add New Product</button>
+            </div>
+            <div class="orders-card">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeProductModal()">&times;</span>
+            <h2 id="modal-title">Add Product</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="p-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="p-category-select" onchange="checkCategoryInput(this)">
+                        <option value="">Select Category...</option>
+                        <option value="new">+ Type New Category</option>
+                    </select>
+                    <input type="text" id="p-category-new" placeholder="Enter new category name"
+                        style="display: none; margin-top: 5px;">
+                </div>
+
+                <div class="form-group">
+                    <label>Price (RM)</label>
+                    <input type="number" id="p-price" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Image Path (URL or local path)</label>
+                    <input type="text" id="p-image" placeholder="images/matcha-latte.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="p-description" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="cta-button button-primary">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        let currentTab = 'orders';
+        let allCategories = new Set(); // To track unique categories
+
+        // 1. Login Logic
+        function checkLogin() {
+            const password = document.getElementById('admin-password').value;
+            if (password === 'admin123') {
+                document.getElementById('login-modal').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                fetchOrders();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        // 2. Navigation
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            document.querySelector(`button[onclick="switchTab('${tab}')"]`).classList.add('active');
+
+            document.querySelectorAll('.dashboard-view').forEach(v => v.style.display = 'none');
+            document.getElementById(`view-${tab}`).style.display = 'block';
+
+            refreshCurrentView();
+        }
+
+        function refreshCurrentView() {
+            if (currentTab === 'orders') fetchOrders();
+            if (currentTab === 'products') fetchProducts();
+        }
+
+        // 3. fetch Orders
+        function fetchOrders() {
+            const tbody = document.getElementById('orders-table-body');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Loading...</td></tr>';
+
+            db.collection("orders").orderBy("createdAt", "desc").get().then((snap) => {
+                tbody.innerHTML = '';
+                if (snap.empty) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No orders found.</td></tr>';
+                    return;
+                }
+                snap.forEach(doc => renderOrderRow(doc.id, doc.data(), tbody));
+            });
+        }
+
+        function renderOrderRow(id, order, container) {
+            let dateStr = order.createdAt && order.createdAt.toDate ? order.createdAt.toDate().toLocaleString() : 'N/A';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>#${id.slice(-6).toUpperCase()}</strong></td>
+                <td>${dateStr}</td>
+                <td>${order.customer.name}<br><span style="font-size:0.85rem;color:#777;">${order.customer.phone}</span></td>
+                <td>RM${order.totals.grandTotal.toFixed(2)}</td>
+                <td><span class="status-badge status-new">${order.status || 'New'}</span></td>
+                <td><button class="toggle-btn" onclick="toggleDetails('${id}')">Details</button></td>
+            `;
+            container.appendChild(tr);
+
+            // Details Row
+            const trD = document.createElement('tr');
+            trD.id = `details-${id}`;
+            trD.className = 'order-details-row';
+            trD.style.display = 'none';
+            let itemsHtml = order.items.map(i => `<li><span>${i.quantity}x ${i.name}</span><span>RM${(i.price * i.quantity).toFixed(2)}</span></li>`).join('');
+            trD.innerHTML = `
+                <td colspan="6" class="details-content">
+                    <div class="details-grid">
+                        <div class="detail-group"><h4>Address</h4><p>${order.customer.address}</p></div>
+                        <div class="detail-group"><h4>Items</h4><ul class="order-items-list">${itemsHtml}</ul></div>
+                    </div>
+                </td>`;
+            container.appendChild(trD);
+        }
+
+        function toggleDetails(id) {
+            const el = document.getElementById(`details-${id}`);
+            el.style.display = el.style.display === 'none' ? 'table-row' : 'none';
+        }
+
+        // 4. Product Management
+        function fetchProducts() {
+            const tbody = document.getElementById('products-table-body');
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading...</td></tr>';
+
+            db.collection("products").get().then((snap) => {
+                tbody.innerHTML = '';
+                allCategories.clear();
+
+                if (snap.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No products found. Add one!</td></tr>';
+                    updateCategoryDropdown();
+                    return;
+                }
+
+                snap.forEach(doc => {
+                    const p = doc.data();
+                    allCategories.add(p.category);
+                    renderProductRow(doc.id, p, tbody);
+                });
+                updateCategoryDropdown();
+            });
+        }
+
+        function renderProductRow(id, p, container) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><img src="${p.image}" style="width:50px;height:50px;object-fit:cover;border-radius:4px;"></td>
+                <td>${p.name}</td>
+                <td><span class="status-badge status-new" style="background:#f3e5f5;color:#4a148c;">${p.category || 'Uncategorized'}</span></td>
+                <td>RM${parseFloat(p.price).toFixed(2)}</td>
+                <td>
+                    <button class="toggle-btn" onclick="editProduct('${id}')">Edit</button>
+                    <button class="toggle-btn" style="color:red;border-color:red;" onclick="deleteProduct('${id}')">Delete</button>
+                </td>
+            `;
+            container.appendChild(tr);
+        }
+
+        // Product CRUD
+        function openProductModal(editMode = false, product = null) {
+            const modal = document.getElementById('product-modal');
+            const form = document.getElementById('product-form');
+            const title = document.getElementById('modal-title');
+
+            if (!editMode) {
+                title.textContent = 'Add New Product';
+                form.reset();
+                document.getElementById('product-id').value = '';
+            } else {
+                title.textContent = 'Edit Product';
+                document.getElementById('product-id').value = product.id;
+                document.getElementById('p-name').value = product.name;
+                document.getElementById('p-price').value = product.price;
+                document.getElementById('p-image').value = product.image;
+                document.getElementById('p-description').value = product.description;
+
+                // Handle Category
+                const catSelect = document.getElementById('p-category-select');
+                if ([...catSelect.options].some(o => o.value === product.category)) {
+                    catSelect.value = product.category;
+                    document.getElementById('p-category-new').style.display = 'none';
+                } else {
+                    catSelect.value = 'new';
+                    document.getElementById('p-category-new').style.display = 'block';
+                    document.getElementById('p-category-new').value = product.category;
+                }
+            }
+            modal.style.display = 'block';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function checkCategoryInput(select) {
+            const input = document.getElementById('p-category-new');
+            input.style.display = select.value === 'new' ? 'block' : 'none';
+            if (select.value !== 'new') input.value = '';
+        }
+
+        function updateCategoryDropdown() {
+            const select = document.getElementById('p-category-select');
+            // Keep first two options (Select... and New...)
+            select.innerHTML = '<option value="">Select Category...</option><option value="new">+ Type New Category</option>';
+            allCategories.forEach(cat => {
+                if (cat) {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        document.getElementById('product-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value;
+            const catSelect = document.getElementById('p-category-select');
+            const category = catSelect.value === 'new' ? document.getElementById('p-category-new').value : catSelect.value;
+
+            const data = {
+                name: document.getElementById('p-name').value,
+                price: parseFloat(document.getElementById('p-price').value),
+                category: category,
+                image: document.getElementById('p-image').value,
+                description: document.getElementById('p-description').value,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            const action = id ? db.collection("products").doc(id).update(data) : db.collection("products").add(data);
+
+            action.then(() => {
+                closeProductModal();
+                fetchProducts();
+            }).catch(err => alert("Error saving product: " + err.message));
+        });
+
+        function editProduct(id) {
+            db.collection("products").doc(id).get().then(doc => {
+                if (doc.exists) openProductModal(true, { id: doc.id, ...doc.data() });
+            });
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                db.collection("products").doc(id).delete().then(() => fetchProducts());
+            }
+        }
+    </script>
+</body>
+
+</html>

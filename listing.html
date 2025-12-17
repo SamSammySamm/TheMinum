@@ -176,9 +176,127 @@
         <div class="footer-bottom">
             <p>&copy; 2025 The Minums. All rights reserved.</p>
         </div>
-    </footer>
+        <!-- Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+        <script src="cart.js"></script>
 
-    <script src="cart.js"></script>
+        <script>
+            // Firebase Config
+            const firebaseConfig = {
+                apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+                authDomain: "theminums.firebaseapp.com",
+                projectId: "theminums",
+                storageBucket: "theminums.firebasestorage.app",
+                messagingSenderId: "130106351120",
+                appId: "1:130106351120:web:458a2576f99cef54b4b495"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+            let allProducts = [];
+
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchProducts();
+            });
+
+            function fetchProducts() {
+                const grid = document.querySelector('.product-grid');
+                grid.innerHTML = '<p class="loading-text">Loading fresh menu...</p>';
+
+                db.collection("products").get().then((snap) => {
+                    if (snap.empty) {
+                        grid.innerHTML = '<p>No products found. Please check back later!</p>';
+                        return;
+                    }
+
+                    allProducts = [];
+                    const categories = new Set(['All']);
+
+                    snap.forEach(doc => {
+                        const data = doc.data();
+                        data.id = doc.id; // Store ID
+                        allProducts.push(data);
+                        if (data.category) categories.add(data.category);
+                    });
+
+                    renderCategoryFilters(categories);
+                    renderProducts(allProducts);
+                }).catch(err => {
+                    console.error(err);
+                    grid.innerHTML = '<p>Error loading menu. Please try refreshing.</p>';
+                });
+            }
+
+            function renderCategoryFilters(categories) {
+                const container = document.querySelector('.category-filter');
+                if (!container) return;
+
+                container.innerHTML = '';
+                categories.forEach(cat => {
+                    const btn = document.createElement('button');
+                    btn.className = cat === 'All' ? 'filter-btn active' : 'filter-btn';
+                    btn.textContent = cat;
+                    btn.onclick = () => filterProducts(cat, btn);
+                    container.appendChild(btn);
+                });
+            }
+
+            function filterProducts(category, btnElement) {
+                // UI Update
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+
+                // Logic Update
+                if (category === 'All') {
+                    renderProducts(allProducts);
+                } else {
+                    const filtered = allProducts.filter(p => p.category === category);
+                    renderProducts(filtered);
+                }
+            }
+
+            function renderProducts(products) {
+                const grid = document.querySelector('.product-grid');
+                grid.innerHTML = '';
+
+                products.forEach(p => {
+                    const card = document.createElement('article');
+                    card.className = 'product-card';
+                    card.dataset.productId = p.id;
+
+                    // Construct details URL
+                    const detailsUrl = `detail.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}&image=${encodeURIComponent(p.image)}&desc=${encodeURIComponent(p.description || '')}`;
+
+                    card.innerHTML = `
+                    <figure>
+                        <img src="${p.image}" alt="${p.name}" onerror="this.src='images/default.jpg'">
+                        <figcaption>${p.category || 'Special'}</figcaption>
+                    </figure>
+                    <h4>${p.name}</h4>
+                    <p class="description">${p.description || 'Delicious refreshment.'}</p>
+                    <p class="price">RM${parseFloat(p.price).toFixed(2)}</p>
+                    <a href="${detailsUrl}" class="view-details button-secondary">View Details</a>
+                    <button class="add-to-cart-btn button-primary" onclick="addToCartWrapper('${p.id}')">Add to Cart</button>
+                `;
+                    grid.appendChild(card);
+                });
+            }
+
+            // Wrapper to handle add to cart since elements are dynamic
+            function addToCartWrapper(id) {
+                const product = allProducts.find(p => p.id === id);
+                if (product) {
+                    addToCart({
+                        id: product.id,
+                        name: product.name,
+                        price: parseFloat(product.price),
+                        image: product.image
+                    });
+                }
+            }
+        </script>
 </body>
 
 </html>

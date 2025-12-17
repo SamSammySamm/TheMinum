@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase Write Test</title>
+</head>
+
+<body>
+    <h1>Firebase Write Test</h1>
+    <div id="status">Testing Write Permission...</div>
+    <div id="details"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        db.collection("test_write").add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            test: "Hello World"
+        })
+            .then((docRef) => {
+                document.getElementById('status').innerText = 'Write Successful!';
+                document.getElementById('status').style.color = 'green';
+                document.getElementById('details').innerText = 'ID: ' + docRef.id;
+            })
+            .catch((error) => {
+                document.getElementById('status').innerText = 'Write Failed';
+                document.getElementById('status').style.color = 'red';
+                document.getElementById('details').innerText = 'Error: ' + error.code + ' - ' + error.message;
+            });
+    </script>
+</body>
+
+</html>

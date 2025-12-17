@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Connection Test</title>
+</head>
+
+<body>
+    <h1>Firebase Connection Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="details"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            document.getElementById('status').innerText = 'Firebase Initialized. Checking Firestore...';
+
+            // Attempt to access a collection (even if empty/permission denied, it tests connection)
+            db.collection("test_connection").get()
+                .then((querySnapshot) => {
+                    document.getElementById('status').innerText = 'Connection Successful!';
+                    document.getElementById('status').style.color = 'green';
+                    document.getElementById('details').innerText = 'Successfully connected to Firestore.';
+                    console.log("Connection successful");
+                })
+                .catch((error) => {
+                    document.getElementById('status').innerText = 'Connection Failed (Firestore Error)';
+                    document.getElementById('status').style.color = 'red';
+                    document.getElementById('details').innerText = 'Error: ' + error.message;
+                    console.error("Firestore error:", error);
+                });
+
+        } catch (error) {
+            document.getElementById('status').innerText = 'Initialization Failed';
+            document.getElementById('status').style.color = 'red';
+            document.getElementById('details').innerText = 'Error: ' + error.message;
+            console.error("Initialization error:", error);
+        }
+    </script>
+</body>
+
+</html>

@@ -230,8 +230,9 @@ function renderConfirmationPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const address = urlParams.get('address') || 'No address provided';
 
-    // Generate Order ID (Random for demo)
-    const orderId = '#TMR-' + Math.floor(Math.random() * 1000000);
+    // Generate Order ID (Use URL param if available, else random)
+    const urlOrderId = urlParams.get('orderId');
+    const orderId = urlOrderId ? '#' + urlOrderId.slice(-6).toUpperCase() : '#TMR-' + Math.floor(Math.random() * 1000000);
     document.querySelector('.order-id').textContent = orderId;
 
     // Set Address

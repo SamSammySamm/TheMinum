@@ -180,6 +180,86 @@
     </footer>
 
     <script src="cart.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Handle Form Submission
+        const checkoutForm = document.querySelector('.checkout-form');
+
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Stop standard form submission
+
+                const submitBtn = document.querySelector('.place-order-btn');
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'Processing Order...';
+
+                // 1. Gather Customer Info
+                const customerData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    paymentMethod: document.querySelector('input[name="payment"]:checked').value
+                };
+
+                // 2. Gather Cart Data
+                const cart = getCart();
+
+                // Calculate Order Totals
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const deliveryFee = 3.00;
+                const tax = subtotal * 0.07;
+                const total = subtotal + deliveryFee + tax;
+
+                // 3. Create Order Object
+                const orderData = {
+                    customer: customerData,
+                    items: cart,
+                    totals: {
+                        subtotal: subtotal,
+                        deliveryFee: deliveryFee,
+                        tax: tax,
+                        grandTotal: total
+                    },
+                    status: 'new', // new, preparing, delivering, completed
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                // 4. Save to Firestore
+                db.collection("orders").add(orderData)
+                    .then((docRef) => {
+                        console.log("Order written with ID: ", docRef.id);
+                        // Redirect to Confirmation Page with Order ID
+                        window.location.href = `confirmation.html?address=${encodeURIComponent(customerData.address)}&orderId=${docRef.id}`;
+                    })
+                    .catch((error) => {
+                        console.error("Error adding document: ", error);
+                        alert("There was an error processing your order. Please try again.");
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = originalBtnText;
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
