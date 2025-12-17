@@ -40,7 +40,7 @@ function addToCart(productData) {
             id: productData.id || `item-${Date.now()}`,
             name: productData.name,
             price: productData.price,
-            image: productData.image || 'images/default.jpg',
+            image: productData.image || '../images/default.jpg',
             quantity: 1
         });
     }
@@ -149,7 +149,7 @@ function initializeAddToCartButtons() {
                 const productName = productCard.querySelector('h4')?.textContent.trim() || 'Unknown Product';
                 const priceText = productCard.querySelector('.price')?.textContent.trim() || 'RM0.00';
                 const price = parseFloat(priceText.replace('RM', '').trim());
-                const image = productCard.querySelector('img')?.src || 'images/default.jpg';
+                const image = productCard.querySelector('img')?.src || '../images/default.jpg';
 
                 // Create product data object
                 const productData = {
@@ -304,7 +304,7 @@ function renderCartPage() {
                 <span style="font-size: 80px;">🛒</span>
                 <h3 style="margin: 20px 0 10px; color: #333;">Your cart is empty</h3>
                 <p style="color: #666; margin-bottom: 30px;">Add some refreshing drinks to get started!</p>
-                <a href="listing.html" class="cta-button button-primary">Browse Our Menu</a>
+                <a href="../html/listing.html" class="cta-button button-primary">Browse Our Menu</a>
             </div>
         `;
 
@@ -429,3 +429,4 @@ function updateOrderSummary(cart) {
         summaryLine.textContent = `Subtotal (${totalItems} item${totalItems !== 1 ? 's' : ''})`;
     }
 }
+

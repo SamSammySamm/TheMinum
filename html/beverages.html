@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milk Tea Series | The Minums</title>
+    <title>Beverages / Milk Tea / Other Drinks | The Minums</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
     <style>
         .category-title {
@@ -78,6 +78,7 @@
             transition: 0.3s;
         }
 
+
         .back-btn:hover {
             background: #555;
         }
@@ -86,7 +87,7 @@
 
 <body>
 
-    <!-- HEADER (copied from your site) -->
+    <!-- HEADER -->
     <header class="main-header">
         <div class="logo">
             <a href="index.html">
@@ -113,55 +114,23 @@
 
     <!-- CATEGORY TITLE -->
     <section class="category-title">
-        <h2>Milk Tea Series</h2>
-        <p>Sweet thick drink perfect for sweet tooth.</p>
+        <h2>Beverages / Milk Tea / Other Drinks</h2>
+        <p>Classic Malaysian and refreshing beverages.</p>
     </section>
 
     <!-- PRODUCT GRID -->
     <section class="product-grid">
 
-        <div class="product-card">
-            <img src="images/bp-mt.jpg" alt="Black Pearl Milk Tea">
-            <h4>Black Pearl Milk Tea</h4>
-            <p>Classic milk tea paired with soft, chewy pearls for a satisfying sip.</p>
-            <p class="price">RM7.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/mt-ori.jpg" alt="Milk Tea Original">
-            <h4>Milk Tea Original</h4>
-            <p>Smooth and creamy milk tea brewed to perfection for a timeless taste.</p>
-            <p class="price">RM6.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/oreo-mt.jpg" alt="Oreo Milk Tea">
-            <h4>Oreo Milk Tea</h4>
-            <p>Creamy milk tea blended with crunchy Oreo crumbs for a sweet, indulgent treat.</p>
-            <p class="price">RM9.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/bp-mt.jpg" alt="Butterfly Pea Milk Tea">
-            <h4>Butterfly Pea Milk Tea</h4>
-            <p>A fragrant milk tea infused with vibrant butterfly pea for a calming, floral flavour.</p>
-            <p class="price">RM8.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/dc-mt.jpg" alt="Dark Cocoa Milk Tea">
-            <h4>Dark Cocoa Milk Tea</h4>
-            <p>Bold dark cocoa mixed with creamy milk tea for a deep and rich chocolate experience.</p>
-            <p class="price">RM8.00</p>
-        </div>
-
-        <div class="product-card">
-            <img src="images/bs-mt.jpg" alt="Brown Sugar Milk Tea">
-            <h4>Brown Sugar Milk Tea</h4>
-            <p>Silky milk tea sweetened with caramelised brown sugar for a warm, toasty finish.</p>
-            <p class="price">RM7.00</p>
-        </div>
-
+        <article class="product-card" data-product-id="teh-tarik-cold" data-product-name="Teh Tarik (Cold)"
+            data-product-price="4.00" data-product-image="images/teh-tarik-cold.jpg">
+            <img src="../images/teh-tarik-cold.jpg" alt="Teh Tarik (Cold)">
+            <h4>Teh Tarik (Cold)</h4>
+            <p>Classic Malaysian pulled tea, served cold</p>
+            <p class="price">RM4.00</p>
+            <a href="detail.html?id=teh-tarik-cold&name=Teh%20Tarik%20(Cold)&price=4.00&image=images/teh-tarik-cold.jpg"
+                class="view-details button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary">Add to Cart</button>
+        </article>
 
     </section>
 
@@ -174,7 +143,7 @@
         </div>
     </footer>
 
-    <script src="cart.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 
 </html>
