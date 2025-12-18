@@ -86,22 +86,26 @@
     transform: scale(1.05);
 }
 
-position: absolute;
-top: 10px;
-left: 10px;
-background: rgba(255, 255, 255, 0.95);
-padding: 6px 12px;
-border-radius: 20px;
-/* Matching the new rounder theme */
-font-size: 0.75rem;
-font-weight: 700;
-color: #333;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-line-height: 1;
-white-space: nowrap;
-/* Prevents wrapping to keep clean height */
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.product-card figcaption {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    bottom: auto;
+    /* Reset global style from styles.css */
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 12px;
+    border-radius: 20px;
+    /* Matching the new rounder theme */
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    /* Prevents wrapping to keep clean height */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .product-card h4 {
