@@ -1,34 +1,211 @@
-<section id="about">
-    <h1>About The Minum’s Shop</h1>
-    <p>The Minum’s Shop is your go-to place for refreshing drinks, crafted with quality ingredients and a whole lot of
-        love. Founded in 2024, we aim to bring unique flavours and good vibes to every cup we serve.</p>
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2>Our Mission</h2>
-    <p>To create delicious and affordable beverages that brighten your day, while providing friendly service and a cozy
-        atmosphere.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | The Minums</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
 
-    <h2>Our Story</h2>
-    <p>The Minum’s Shop started with a simple idea — to offer drinks that are both creative and comforting. Inspired by
-        the love for local flavours, our team experiments with unique combinations to bring you something special in
-        every sip.</p>
+<body>
 
-    <h2>What Makes Us Different</h2>
-    <ul>
-        <li>Fresh and quality ingredients</li>
-        <li>Unique, signature beverages</li>
-        <li>Friendly and welcoming environment</li>
-        <li>Affordable prices for everyone</li>
-    </ul>
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>The Minums <span>🥤</span></h1>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html">Our Menu</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Locations</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link" aria-label="View shopping cart">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            </a>
+            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
 
-    <h2>Meet the Team</h2>
-    <p>Our passionate team works hard to craft the perfect drinks and provide the best experience for our customers.</p>
+    <main>
 
-    <h2>Visit Us</h2>
-    <p>
-        📍 Location: Your Address Here<br>
-        🕒 Operating Hours: 10am - 10pm daily<br>
-        📞 Contact: 012-3456789
-    </p>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <h1>Our Story, Your Refreshment</h1>
+            <p>Crafting moments of joy, one sip at a time. founded with passion and brewed with love.</p>
+        </section>
 
-    <p>Come and try our signature drinks today!</p>
-</section>
+        <!-- Mission & Story -->
+        <section class="about-section">
+            <div class="section-grid">
+                <div class="text-content">
+                    <h2>Our Mission</h2>
+                    <p>To create delicious and affordable beverages that brighten your day, while providing friendly
+                        service
+                        and a cozy atmosphere. We believe everyone deserves a moment of pure refreshment in their busy
+                        lives.</p>
+                    <p>At The Minums, we don't just serve drinks; we serve happiness in a cup, ensuring every customer
+                        leaves with a smile.</p>
+                </div>
+                <div class="image-content">
+                    <!-- Placeholder for a general shop image or generic vibe image -->
+                    <img src="images/minums-coffee.jpg" alt="Coffee vibes"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+
+            <div class="section-grid" style="direction: rtl;"> <!-- Reverse layout visually -->
+                <div class="text-content" style="direction: ltr;">
+                    <h2>Our Story</h2>
+                    <p>The Minum’s Shop started with a simple idea — to offer drinks that are both creative and
+                        comforting. Founded in 2024, our journey began in a small kitchen with big dreams.</p>
+                    <p>Inspired by the love for local flavours, our team experiments with unique combinations to bring
+                        you something special in every sip. From our signature matcha to our rich cocoas, every recipe
+                        tells a story of dedication.</p>
+                </div>
+                <div class="image-content" style="direction: ltr;">
+                    <img src="images/minums-tea.jpg" alt="Tea preparation"
+                        style="width: 100%; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder Section -->
+        <section class="about-section">
+            <div class="founder-card">
+                <div class="founder-image">
+                    <img src="images/Founder.jpeg" alt="Founder of The Minums">
+                </div>
+                <div class="founder-info">
+                    <h2>Meet the Team</h2>
+                    <h3>Sarah Minum</h3>
+                    <span class="founder-role">Founder & Head Brewer</span>
+                    <p>My passion for beverages started when I travelled the world tasting different teas and coffees. I
+                        wanted to bring those world-class flavours back home but with a local twist.</p>
+                    <p>"Quality is not just an act, it is a habit. We pour our heart into every cup so you can taste the
+                        difference."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values -->
+        <section class="values-section">
+            <div class="values-title">
+                <h2>What Makes Us Different</h2>
+                <p>We take pride in our standards.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">🌿</span>
+                    <h4>Fresh Ingredients</h4>
+                    <p>We source only the finest, natural ingredients for premium taste.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">✨</span>
+                    <h4>Unique Recipes</h4>
+                    <p>Signature beverages you won't find anywhere else.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">😊</span>
+                    <h4>Friendly Vibes</h4>
+                    <p>A welcoming atmosphere that feels like a second home.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">💲</span>
+                    <h4>Affordable</h4>
+                    <p>Premium quality drinks at prices that make sense.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visit Us -->
+        <section class="visit-us-container">
+            <h2>Visit Us Today</h2>
+            <p>Come and try our signature drinks!</p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span>📍</span>
+                    <strong>Location</strong>
+                    <p>123 Refreshment Lane,<br>Kuala Lumpur, Malaysia</p>
+                </div>
+                <div class="info-item">
+                    <span>🕒</span>
+                    <strong>Hours</strong>
+                    <p>10:00 AM - 10:00 PM<br>Daily</p>
+                </div>
+                <div class="info-item">
+                    <span>📞</span>
+                    <strong>Contact</strong>
+                    <p>012-345 6789<br>hello@theminums.com</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minums</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><img src="images/icon-facebook.svg" alt="Facebook"></a>
+                    <a href="#" aria-label="Instagram"><img src="images/icon-instagram.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Twitter"><img src="images/icon-twitter.svg" alt="Twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Minums. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</body>
+
+</html>

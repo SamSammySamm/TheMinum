@@ -243,7 +243,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     /* Optional: Add a background image for more visual appeal */
-    background-image: url('../images/minums-hero-bg.jpg');
+    background-image: url('../images/headerbg.png');
     /* Make sure you have this image */
     background-size: cover;
     background-position: center;

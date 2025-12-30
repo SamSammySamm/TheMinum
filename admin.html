@@ -37,6 +37,8 @@
             </div>
             <div>
                 <button class="refresh-btn" onclick="refreshCurrentView()">↻ Refresh</button>
+                <button class="cta-button" onclick="logout()"
+                    style="margin-left: 10px; background-color: #f44336; color: white;">Logout</button>
                 <a href="index.html" class="button-secondary" style="margin-left: 10px;">Back to Site</a>
             </div>
         </header>
@@ -126,7 +128,7 @@
 
                 <div class="form-group">
                     <label>Image Path (URL or local path)</label>
-                    <input type="text" id="p-image" placeholder="images/matcha-latte.jpg">
+                    <input type="text" id="p-image" placeholder="images/matchalatte.png">
                 </div>
 
                 <div class="form-group">
@@ -174,14 +176,34 @@
         }
 
         // 1. Login Logic
+        // 1. Login Logic & Session Handling
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                showDashboard();
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('admin-dashboard').style.display = 'block';
+            // Default load
+            if (typeof fetchOrders === 'function') fetchOrders();
+        }
+
         function checkLogin() {
             const password = document.getElementById('admin-password').value;
             if (password === 'admin123') {
-                document.getElementById('login-modal').style.display = 'none';
-                document.getElementById('admin-dashboard').style.display = 'block';
-                fetchOrders();
+                localStorage.setItem('adminLoggedIn', 'true');
+                showDashboard();
             } else {
                 document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.reload();
             }
         }
 
