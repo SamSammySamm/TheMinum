@@ -172,7 +172,7 @@ a:hover {
     color: var(--primary-color);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
 }
 
 .logo h1 span {
@@ -973,11 +973,30 @@ textarea:focus {
 
     .cta-button {
         min-height: 44px;
-        /* Minimum touch target size */
     }
 
     .product-card .button-secondary,
     .product-card .button-primary {
         min-height: 44px;
+    }
+}
+
+/* --- Logo Image Styles (Global) --- */
+/* This is now OUTSIDE the media query so it works on all screens */
+.header-logo-icon {
+    height: 50px;
+    /* Perfect size relative to text */
+    width: auto;
+    border-radius: 50%;
+    /* Makes it a circle */
+    object-fit: cover;
+    margin-left: 10px;
+    /* Adds space between text and logo */
+}
+
+@media (max-width: 576px) {
+    .header-logo-icon {
+        height: 35px;
+        /* Smaller for mobile phones */
     }
 }
