@@ -95,8 +95,8 @@
     padding: 50px;
 }
 
-.founder-info h3 {
-    font-size: 2rem;
+.founder-info h2 {
+    font-size: 4rem;
     color: var(--text-color);
     margin-bottom: 10px;
 }
@@ -159,7 +159,7 @@
 /* --- Visit Us Specifics --- */
 .visit-us-container {
     background: var(--text-color);
-    color: white;
+    color: rgb(252, 252, 252);
     padding: 60px;
     border-radius: 20px;
     text-align: center;
@@ -186,6 +186,10 @@
     margin-bottom: 30px;
 }
 
+.visit-us-container p {
+    color: #e1e1e1;
+}
+
 .info-grid {
     display: flex;
     justify-content: center;
@@ -206,6 +210,8 @@
     margin-bottom: 5px;
     color: var(--primary-color);
 }
+
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {

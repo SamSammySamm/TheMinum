@@ -579,8 +579,7 @@ textarea:focus {
 .social-icons img {
     width: 100%;
     height: 100%;
-    filter: brightness(0) invert(1);
-    /* Makes SVG icons white */
+    object-fit: contain;
 }
 
 .footer-bottom {
