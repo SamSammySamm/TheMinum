@@ -1147,3 +1147,64 @@ textarea:focus {
 .chat-button.pulse {
     animation: pulse2.5s infinite;
 }
+
+
+/* ============================= */
+/* HERO TEXT ANIMATION */
+/* ============================= */
+.hero h1 {
+    animation: fadeUp 1s ease-out;
+}
+
+.hero p {
+    animation: fadeUp 1.4s ease-out;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================= */
+/* CARD HOVER EFFECT */
+/* ============================= */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================= */
+/* SECTION DIVIDER */
+/* ============================= */
+.section-divider {
+    border: none;
+    height: 1px;
+    width: 60%;
+    margin: 60px auto;
+    background: linear-gradient(to right,
+            transparent,
+            #a3d9a5,
+            transparent);
+}
+
+/* ============================= */
+/* BUTTON HOVER EFFECT */
+/* ============================= */
+button {
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
