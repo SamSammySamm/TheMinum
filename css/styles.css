@@ -524,6 +524,13 @@ a:hover {
     color: var(--light-text-color);
 }
 
+.usp-subtitle {
+    text-align: center;
+    color: var(--light-text-color);
+    font-size: 1em;
+    margin-bottom: 40px;
+}
+
 
 /* --- Call to Action Banner (Refined) --- */
 .call-to-action {
