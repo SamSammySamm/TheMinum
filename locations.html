@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Minums | Locations & Contact</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>The Minums <img src="images/TheMinumsLogo.png" alt="The Minums Logo" class="header-logo-icon"
+                        style="height:100px; width: auto; border-radius:50%; vertical-align: middle; margin-left:10px;">
+                </h1>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="locations.html" class="active">Locations</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link" aria-label="View shopping cart">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            </a>
+            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-spacing contact-section">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> &nbsp; / &nbsp; <strong>Locations</strong>
+            </div>
+
+            <div class="contact-grid">
+
+                <!-- Only show locations now -->
+                <aside class="contact-right">
+                    <div class="contact-card offices-card">
+                        <h3>Our Locations</h3>
+
+                        <div class="office-list">
+                            <article class="office-card" style="margin-bottom:20px;">
+                                <h4>Lakeview Cafe, UNIMAS</h4>
+                                <p>Lakeview Cafe, UNIMAS,94300 Kota Samarahan, Sarawak</p>
+                                <div class="office-map" style="margin:10px0; border-radius:8px; overflow:hidden;">
+                                    <iframe class="interactive-map"
+                                        src="https://www.google.com/maps?q=Lakeview+Cafe,+UNIMAS,+94300+Kota+Samarahan,+Sarawak&z=17&output=embed"
+                                        width="100%" height="180" style="border:0;" allowfullscreen=""
+                                        loading="lazy"></iframe>
+                                </div>
+                                <a class="button-secondary" href="https://maps.app.goo.gl/dPKWPfcYpFYCWRUK8"
+                                    target="_blank" rel="noopener">Get Directions</a>
+                            </article>
+
+                            <article class="office-card" style="margin-bottom:20px;">
+                                <h4>Kafe Merah, Kolej Allamanda</h4>
+                                <p>Kafe Merah, Kolej Allamanda,94300 Kota Samarahan, Sarawak</p>
+                                <div class="office-map" style="margin:10px0; border-radius:8px; overflow:hidden;">
+                                    <iframe class="interactive-map"
+                                        src="https://www.google.com/maps?q=Kafe+Merah+Kolej+Allamanda,+94300+Kota+Samarahan,+Sarawak&z=17&output=embed"
+                                        width="100%" height="180" style="border:0;" allowfullscreen=""
+                                        loading="lazy"></iframe>
+                                </div>
+                                <a class="button-secondary" href="https://maps.app.goo.gl/kGepByAfxxzr7WC1A"
+                                    target="_blank" rel="noopener">Get Directions</a>
+                            </article>
+
+                        </div>
+                    </div>
+
+                    <div class="contact-card hours-card">
+                        <h3>Opening Hours</h3>
+                        <ul class="hours-list">
+                            <li><strong>Lakeview Cafe, UNIMAS:</strong> 9:00 AM - 3:00 PM</li>
+                            <li><strong>Kafe Merah, Kolej Allamanda:</strong> 7:00 PM - 10:00 PM</li>
+                        </ul>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minums</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Delivery Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" target="_blank" aria-label="Instagram"><img src="images/icon-instagram.png"
+                            alt="Instagram"></a>
+                    <a href="#" target="_blank" aria-label="TikTok"><img src="images/icon-tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2025 The Minums. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chat widget (button only) -->
+    <div class="chat-widget" aria-hidden="false">
+        <button class="chat-button" id="openChat" aria-label="Chat with us">💬</button>
+    </div>
+
+    <script>
+        // Open chat — placeholder, update link to real chat or messenger as needed
+        document.getElementById('openChat')?.addEventListener('click', function () {
+            // Example: open Whatsapp chat, replace number with yours
+            var whatsappNumber = '+60178064202';
+            var url = 'https://wa.me/' + whatsappNumber.replace(/[^0-9]/g, '');
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+
+</html>
+
+</html>
