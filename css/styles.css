@@ -194,8 +194,6 @@ a:hover {
     /* Make emoji slightly larger */
 }
 
-
-
 /* NAVIGATION CLEAN */
 
 .main-nav ul {
@@ -225,7 +223,6 @@ a:hover {
     color: var(--primary-dark);
     font-weight: 600;
 }
-
 
 
 .user-actions a {
@@ -489,44 +486,51 @@ a:hover {
     color: var(--light-text-color);
 }
 
-/* --- Call to Action Banner --- */
+
+/* --- Call to Action Banner (Refined) --- */
 .call-to-action {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 70px;
     padding: 0 20px;
 }
 
 .cta-banner {
-    background: linear-gradient(45deg, var(--secondary-color), #64B5F6);
-    /* Blue gradient */
+    background: linear-gradient(135deg, #4facfe, #5cb3ff);
     color: white;
-    padding: 60px 40px;
+    padding: 45px 35px;
+    /* less bulky */
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 .cta-banner h3 {
-    font-size: 2.8em;
-    margin-bottom: 15px;
+    font-size: 2.4em;
+    /* slightly smaller */
+    margin-bottom: 12px;
     color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
 }
 
 .cta-banner p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    margin-bottom: 28px;
+    color: rgba(255, 255, 255, 0.92);
 }
 
+/* CTA Button */
 .cta-banner .cta-button {
-    background-color: white;
-    color: var(--secondary-color);
+    background-color: #ffffff;
+    color: #1e88e5;
+    font-weight: 600;
+    padding: 12px 34px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 .cta-banner .cta-button:hover {
-    background-color: #e0e0e0;
-    color: var(--secondary-color);
+    background-color: #f2f2f2;
+    color: #1565c0;
 }
+
 
 
 /* --- Global Form Styles (Standardized) --- */
@@ -1201,9 +1205,8 @@ textarea:focus {
 }
 
 
-/* ============================= */
-/* HERO CTA BUTTON – FINAL */
-/* ============================= */
+
+/* HERO CTA BUTTON */
 .hero-content .primary-btn {
     background: rgba(255, 255, 255, 0.85);
     /* soft glass look */
