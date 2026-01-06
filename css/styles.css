@@ -320,6 +320,31 @@ a:hover {
     }
 }
 
+/* QUICK INFO */
+.quick-info {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin: 15px 0 35px;
+    font-size: 0.9em;
+    color: var(--light-text-color);
+}
+
+.quick-info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+    .quick-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 
 /* --- Featured Products  --- */
 .featured-products h3 {
