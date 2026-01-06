@@ -293,9 +293,9 @@ a:hover {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* ============================= */
+
 /* HERO TEXT DECORATION */
-/* ============================= */
+
 .hero-content h2 {
     animation: fadeUp 1s ease-out;
 }
@@ -339,12 +339,12 @@ a:hover {
 
 /* Card */
 .product-card {
+    position: relative;
+    /* REQUIRED for badge */
     background-color: #ffffff;
-    /* neutral background */
     border-radius: 14px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    /* softer shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -430,7 +430,19 @@ a:hover {
     display: block;
 }
 
-
+.badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background-color: #ffb300;
+    color: #333;
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    z-index: 5;
+    pointer-events: none;
+}
 
 
 
