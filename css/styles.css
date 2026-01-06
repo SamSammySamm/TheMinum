@@ -150,6 +150,20 @@ a:hover {
     transform: translateY(-2px);
 }
 
+/* ============================= */
+/* BUTTON DECORATION */
+/* ============================= */
+.primary-btn,
+.button-primary {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover,
+.button-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
 /* --- Header --- */
 .main-header {
     display: flex;
@@ -284,6 +298,34 @@ a:hover {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================= */
+/* HERO TEXT DECORATION */
+/* ============================= */
+.hero-content h2 {
+    animation: fadeUp 1s ease-out;
+}
+
+.hero-content p {
+    animation: fadeUp 1.3s ease-out;
+}
+
+.hero-content .cta-button {
+    animation: fadeUp 1.6s ease-out;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* --- Featured Products --- */
 .featured-products h3 {
     text-align: center;
@@ -384,6 +426,10 @@ a:hover {
     width: calc(100% - 40px);
     display: block;
 }
+
+
+
+
 
 /* --- Value Proposition (USP) --- */
 .minums-usp {
@@ -1150,61 +1196,27 @@ textarea:focus {
 
 
 /* ============================= */
-/* HERO TEXT ANIMATION */
+/* HERO CTA BUTTON – FINAL */
 /* ============================= */
-.hero h1 {
-    animation: fadeUp 1s ease-out;
+.hero-content .primary-btn {
+    background: rgba(255, 255, 255, 0.85);
+    /* soft glass look */
+    color: #1b5e20;
+    /* deep green */
+    padding: 15px 42px;
+    border-radius: 999px;
+    font-weight: 600;
+    border: 1.5px solid rgba(27, 94, 32, 0.35);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
 }
 
-.hero p {
-    animation: fadeUp 1.4s ease-out;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================= */
-/* CARD HOVER EFFECT */
-/* ============================= */
-.card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* ============================= */
-/* SECTION DIVIDER */
-/* ============================= */
-.section-divider {
-    border: none;
-    height: 1px;
-    width: 60%;
-    margin: 60px auto;
-    background: linear-gradient(to right,
-            transparent,
-            #a3d9a5,
-            transparent);
-}
-
-/* ============================= */
-/* BUTTON HOVER EFFECT */
-/* ============================= */
-button {
-    transition: transform 0.2s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
+/* Hover effect – smooth & premium */
+.hero-content .primary-btn:hover {
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
