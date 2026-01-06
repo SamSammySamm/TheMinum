@@ -239,6 +239,12 @@ a:hover {
     font-size: 1.3em;
 }
 
+.user-actions a .icon {
+    font-size: 1.3em;
+}
+
+
+
 /* --- Hero Section --- */
 .minums-hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, #8BC34A 100%);
@@ -1094,27 +1100,22 @@ textarea:focus {
 }
 
 /* Additional mobile-friendly enhancements */
-@media (max-width: 400px) {
-    .logo h1 {
-        font-size: 1.2em;
-    }
+.main-nav ul li a {
+    padding: 5px 8px;
+    font-size: 0.8em;
+}
 
-    .main-nav ul li a {
-        padding: 5px 8px;
-        font-size: 0.8em;
-    }
+.hero-content h2 {
+    font-size: 1.5em;
+}
 
-    .hero-content h2 {
-        font-size: 1.5em;
-    }
+.product-card img {
+    height: 180px;
+}
 
-    .product-card img {
-        height: 180px;
-    }
-
-    .cta-banner h3 {
-        font-size: 1.3em;
-    }
+.cta-banner h3 {
+    font-size: 1.3em;
+}
 }
 
 /* Touch-friendly improvements */

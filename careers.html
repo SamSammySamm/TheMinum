@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Minums | Careers</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/careers.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>The Minums <img src="images/TheMinumsLogo.png" alt="The Minums Logo" class="header-logo-icon"
+                        style="height:100px; width: auto; border-radius:50%; vertical-align: middle; margin-left:10px;">
+                </h1>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listing.html">Our Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+
+                <li><a href="locations.html">Locations</a></li>
+                <li><a href="careers.html" class="active">Careers</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="cart.html" class="cart-link" aria-label="View shopping cart">
+                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            </a>
+            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
+                <span class="icon">⚙️</span> Admin
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="careers-hero">
+            <h2>Join Our Team</h2>
+            <p>Looking for a part-time job? We connect students with opportunities.</p>
+        </div>
+
+        <div class="careers-grid">
+            <!-- Left: Vacancies -->
+            <section>
+                <h3 class="section-title">Current Openings</h3>
+                <div id="vacancy-list" class="vacancy-list">
+                    <p style="text-align:center; color:#666;">Loading vacancies...</p>
+                </div>
+            </section>
+
+            <!-- Right: Application Form -->
+            <section>
+                <div class="application-form-card">
+                    <h3>Apply Now</h3>
+                    <p style="margin-bottom:20px; color:#666;">Fill out the form below to apply for a position.</p>
+
+                    <form id="application-form">
+                        <div class="form-group">
+                            <label for="apply-position">Position interested in</label>
+                            <select id="apply-position" required>
+                                <option value="">Select a vacancy...</option>
+                                <!-- Populated by JS -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apply-name">Full Name</label>
+                            <input type="text" id="apply-name" required placeholder="e.g. Ali Bin Abu">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apply-phone">Contact Number</label>
+                            <input type="tel" id="apply-phone" required placeholder="e.g. 012-3456789">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Do you have your own transport?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="transport" value="Yes" required> Yes
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="transport" value="No"> No
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apply-college">College (Residence)</label>
+                            <select id="apply-college" onchange="checkCollege(this)" required>
+                                <option value="">Select College...</option>
+                                <option value="Kolej Allamanda">Kolej Allamanda</option>
+                                <option value="Kolej Sakura">Kolej Sakura</option>
+                                <option value="Kolej Cempaka">Kolej Cempaka</option>
+                                <option value="Kolej Bunga Raya">Kolej Bunga Raya</option>
+                                <option value="Kolej Taz">Kolej Taz</option>
+                                <option value="Kolej Dahlia">Kolej Dahlia</option>
+                                <option value="Kolej Seroja">Kolej Seroja</option>
+                                <option value="Kolej Roffo">Kolej Roffo</option>
+                                <option value="Other">Other (Please specify)</option>
+                            </select>
+                            <input type="text" id="apply-college-other" style="display:none; margin-top:10px;"
+                                placeholder="Specify your college/location">
+                        </div>
+
+                        <button type="submit" class="cta-button">Submit Application</button>
+                    </form>
+
+                    <div id="success-msg" class="success-message">
+                        <h4>Application Received!</h4>
+                        <p>Thank you for applying. We will contact you if you are shortlisted.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>The Minums</h3>
+                <p>Your Daily Refreshment, Delivered.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="listing.html">Our Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="delivery.html">Delivery Info</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" target="_blank" aria-label="Instagram"><img src="images/icon-instagram.png"
+                            alt="Instagram"></a>
+                    <a href="#" target="_blank" aria-label="TikTok"><img src="images/icon-tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2025 The Minums. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="js/cart.js"></script> <!-- To keep cart count working -->
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+            authDomain: "theminums.firebaseapp.com",
+            projectId: "theminums",
+            storageBucket: "theminums.firebasestorage.app",
+            messagingSenderId: "130106351120",
+            appId: "1:130106351120:web:458a2576f99cef54b4b495"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Load Vacancies
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchVacancies();
+        });
+
+        function fetchVacancies() {
+            const list = document.getElementById('vacancy-list');
+            const select = document.getElementById('apply-position');
+
+            db.collection('vacancies').orderBy('createdAt', 'desc').get().then(snap => {
+                list.innerHTML = '';
+                // Keep default option
+                select.innerHTML = '<option value="">Select a vacancy...</option>';
+
+                if (snap.empty) {
+                    list.innerHTML = '<div class="no-vacancies-message">Currently have no vacancies but look forward to it</div>';
+                } else {
+                    snap.forEach(doc => {
+                        const v = doc.data();
+
+                        // Render Card
+                        const card = document.createElement('div');
+                        card.className = 'vacancy-card';
+                        card.innerHTML = `
+                            <span class="vacancy-type">${v.type || 'Part Time'}</span>
+                            <h3>${v.title}</h3>
+                            <p>${v.description}</p>
+                        `;
+                        list.appendChild(card);
+
+                        // Add to Dropdown
+                        const opt = document.createElement('option');
+                        opt.value = doc.id;
+                        opt.textContent = v.title;
+                        select.appendChild(opt);
+                    });
+                    // Add generic option if they want to apply generally
+                    const optGen = document.createElement('option');
+                    optGen.value = 'general';
+                    optGen.textContent = 'General Application / Any Position';
+                    select.appendChild(optGen);
+                }
+            });
+        }
+
+        function checkCollege(select) {
+            const otherInput = document.getElementById('apply-college-other');
+            otherInput.style.display = select.value === 'Other' ? 'block' : 'none';
+            if (select.value !== 'Other') otherInput.value = '';
+        }
+
+        document.getElementById('application-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const positionId = document.getElementById('apply-position').value;
+            const positionText = document.getElementById('apply-position').options[document.getElementById('apply-position').selectedIndex].text;
+            const collegeVal = document.getElementById('apply-college').value;
+            const collegeFinal = collegeVal === 'Other' ? document.getElementById('apply-college-other').value : collegeVal;
+
+            if (!collegeFinal) {
+                alert('Please specify your college.');
+                return;
+            }
+
+            const data = {
+                positionId: positionId,
+                positionName: positionText,
+                name: document.getElementById('apply-name').value,
+                phone: document.getElementById('apply-phone').value,
+                transport: document.querySelector('input[name="transport"]:checked').value,
+                college: collegeFinal,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            db.collection('applications').add(data)
+                .then(() => {
+                    document.getElementById('application-form').reset();
+                    document.getElementById('application-form').style.display = 'none';
+                    document.getElementById('success-msg').style.display = 'block';
+                })
+                .catch(err => {
+                    console.error("Error submitting application: ", err);
+                    alert("Error submitting application. Please try again.");
+                });
+        });
+    </script>
+</body>
+
+</html>
