@@ -1,0 +1,96 @@
+/* FAQ-only Hero (no image) */
+.faq-page .about-hero {
+    background: none;
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 0;
+    margin-bottom: 40px;
+}
+
+.faq-page .about-hero h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-shadow: none;
+}
+
+.faq-page .about-hero p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* FAQ Category Title */
+.faq-section h2 {
+    font-size: 2.3rem;
+    color: var(--primary-color);
+    margin: 60px 0 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.faq-section h2::after {
+    content: '';
+    display: block;
+    width: 20%;
+    height: 4px;
+    background: var(--secondary-color);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* FAQ Card */
+.faq-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 35px;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.faq-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Question */
+.faq-question {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+/* Answer */
+.faq-answer {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Divider Line */
+.faq-divider {
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .faq-card {
+        padding: 25px;
+    }
+
+    .faq-question {
+        font-size: 1.15rem;
+    }
+}

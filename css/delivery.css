@@ -1,0 +1,96 @@
+/* Delivery Page */
+body.delivery-page {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* HERO */
+body.delivery-page .about-hero {
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+    background: none;
+}
+
+body.delivery-page .about-hero h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+body.delivery-page .about-hero p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Delivery Section */
+.delivery-card-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* distributes 3 cards evenly */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Delivery Card */
+.delivery-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    flex: 0 0 25%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.delivery-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Icon */
+.delivery-card .delivery-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Card Title */
+.delivery-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+/* Card Description */
+.delivery-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .delivery-card {
+        flex: 0 0 45%;
+        /* 2 per row on tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .delivery-card {
+        flex: 0 0 100%;
+        /* 1 per row on mobile */
+        padding: 25px 20px;
+    }
+
+    .delivery-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .delivery-card p {
+        font-size: 0.95rem;
+    }
+}
