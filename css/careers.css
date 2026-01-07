@@ -3,11 +3,10 @@
 /* Hero Section */
 .careers-hero {
     text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #2196F3 100%), url('../images/headerbg.png');
-    /* Green to Blue gradient with Image */
+    padding: 250px 20px;
+    background: linear-gradient(rgba(76, 76, 76, 0.6), rgba(116, 116, 116, 0.6)), url('../images/BaristaTeam.png');
     background-size: cover;
-    background-position: center;
+    background-position: center 30%;
     background-blend-mode: overlay;
     color: white;
     border-radius: 20px;
@@ -123,6 +122,11 @@
     margin-bottom: 0;
 }
 
+.vacancy-desc {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 /* Application Form */
 .application-form-card {
     background: white;
@@ -175,32 +179,42 @@
     outline: none;
 }
 
-/* Radio Group Styled */
-.radio-group {
+/* Yes-No button Styled */
+.button-group {
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 
-.radio-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 500;
-    cursor: pointer;
-    background: #FAFAFA;
-    padding: 10px 20px;
-    border-radius: 10px;
+.btn-option {
+    flex: 1;
+    padding: 14px 0;
+    border-radius: 12px;
     border: 2px solid #EEE;
-    transition: all 0.2s;
+    background: #FAFAFA;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
 }
 
-.radio-label:hover {
-    background: #F0F0F0;
+.btn-option:hover {
+    border-color: var(--primary-color);
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(76, 175, 80, 0.15);
 }
 
-.radio-label input:checked+span {
-    color: var(--primary-color);
+.btn-option.active {
+    background: linear-gradient(135deg, var(--primary-color), #43A047);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.35);
+    transform: translateY(-2px);
 }
+
+
 
 /* Submit Button */
 .cta-button {

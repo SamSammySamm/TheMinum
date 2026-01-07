@@ -171,6 +171,37 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCartCount();
     initializeAddToCartButtons();
 
+    // Hamburger Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.main-nav');
+
+    // Create overlay if it doesn't exist
+    let overlay = document.querySelector('.nav-overlay');
+    if (!overlay && hamburger && nav) {
+        overlay = document.createElement('div');
+        overlay.className = 'nav-overlay';
+        document.body.appendChild(overlay);
+    }
+
+    if (hamburger && nav && overlay) {
+        function toggleMenu() {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a nav link (important for single-page apps or internal links)
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) toggleMenu();
+            });
+        });
+    }
+
     // If we're on the cart page, render the cart items
     if (window.location.pathname.includes('cart.html')) {
         renderCartPage();

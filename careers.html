@@ -21,6 +21,13 @@
                 </h1>
             </a>
         </div>
+
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -83,15 +90,13 @@
 
                         <div class="form-group">
                             <label>Do you have your own transport?</label>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="transport" value="Yes" required> Yes
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="transport" value="No"> No
-                                </label>
+                            <div class="button-group">
+                                <button type="button" class="btn-option" data-value="Yes">Yes</button>
+                                <button type="button" class="btn-option" data-value="No">No</button>
+                                <input type="hidden" name="transport" id="transport" required>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <label for="apply-college">College (Residence)</label>
@@ -183,46 +188,63 @@
         // Load Vacancies
         document.addEventListener('DOMContentLoaded', () => {
             fetchVacancies();
+
+            // Handle Yes/No buttons
+            const optionButtons = document.querySelectorAll('.btn-option');
+            const transportInput = document.getElementById('transport');
+
+            optionButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons in the same group
+                    optionButtons.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    // Update hidden input value
+                    transportInput.value = btn.getAttribute('data-value');
+                });
+            });
         });
 
         function fetchVacancies() {
             const list = document.getElementById('vacancy-list');
             const select = document.getElementById('apply-position');
 
-            db.collection('vacancies').orderBy('createdAt', 'desc').get().then(snap => {
-                list.innerHTML = '';
-                // Keep default option
-                select.innerHTML = '<option value="">Select a vacancy...</option>';
+            db.collection('vacancies')
+                .where('status', '!=', 'Closed')
+                .get().then(snap => {
+                    list.innerHTML = '';
+                    // Keep default option
+                    select.innerHTML = '<option value="">Select a vacancy...</option>';
 
-                if (snap.empty) {
-                    list.innerHTML = '<div class="no-vacancies-message">Currently have no vacancies but look forward to it</div>';
-                } else {
-                    snap.forEach(doc => {
-                        const v = doc.data();
+                    if (snap.empty) {
+                        list.innerHTML = '<div class="no-vacancies-message">Currently have no vacancies but look forward to it</div>';
+                    } else {
+                        snap.forEach(doc => {
+                            const v = doc.data();
 
-                        // Render Card
-                        const card = document.createElement('div');
-                        card.className = 'vacancy-card';
-                        card.innerHTML = `
+                            // Render Card
+                            const card = document.createElement('div');
+                            card.className = 'vacancy-card';
+                            card.innerHTML = `
                             <span class="vacancy-type">${v.type || 'Part Time'}</span>
                             <h3>${v.title}</h3>
-                            <p>${v.description}</p>
+                            <p class="vacancy-desc">${v.description}</p>
                         `;
-                        list.appendChild(card);
+                            list.appendChild(card);
 
-                        // Add to Dropdown
-                        const opt = document.createElement('option');
-                        opt.value = doc.id;
-                        opt.textContent = v.title;
-                        select.appendChild(opt);
-                    });
-                    // Add generic option if they want to apply generally
-                    const optGen = document.createElement('option');
-                    optGen.value = 'general';
-                    optGen.textContent = 'General Application / Any Position';
-                    select.appendChild(optGen);
-                }
-            });
+                            // Add to Dropdown
+                            const opt = document.createElement('option');
+                            opt.value = doc.id;
+                            opt.textContent = v.title;
+                            select.appendChild(opt);
+                        });
+                        // Add generic option if they want to apply generally
+                        const optGen = document.createElement('option');
+                        optGen.value = 'general';
+                        optGen.textContent = 'General Application / Any Position';
+                        select.appendChild(optGen);
+                    }
+                });
         }
 
         function checkCollege(select) {
@@ -244,12 +266,19 @@
                 return;
             }
 
+            const transportVal = document.getElementById('transport').value;
+
+            if (!transportVal) {
+                alert('Please select whether you have your own transport.');
+                return;
+            }
+
             const data = {
                 positionId: positionId,
                 positionName: positionText,
                 name: document.getElementById('apply-name').value,
                 phone: document.getElementById('apply-phone').value,
-                transport: document.querySelector('input[name="transport"]:checked').value,
+                transport: transportVal,
                 college: collegeFinal,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             };
