@@ -228,3 +228,41 @@
         min-height: 300px;
     }
 }
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.info-item svg {
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.info-item strong {
+    display: block;
+    /* ⬅ key fix */
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #4CAF50;
+}
+
+.info-item p {
+    margin: 4px 0;
+    line-height: 1.6;
+}
+
+.info-item::after {
+    content: "";
+    height: 1.6em;
+    display: block;
+}
