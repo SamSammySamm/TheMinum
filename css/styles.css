@@ -1274,3 +1274,54 @@ textarea:focus {
     transform: translateY(-4px) scale(1.03);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
+
+
+
+/* ===== OUTLINED ICON STYLE ===== */
+
+.outline-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1.5px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+/* SVG icon */
+.icon-svg {
+    width: 22px;
+    height: 22px;
+    stroke: #1b5e20;
+    /* deep green */
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Hover effect (Pinterest-like) */
+.outline-icon:hover {
+    background-color: #f1f8e9;
+    border-color: #c5e1a5;
+    transform: translateY(-1px);
+}
+
+/* Cart count badge */
+.icon-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #fbc02d;
+    /* yellow accent */
+    color: #333;
+    font-size: 0.7em;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 999px;
+    min-width: 18px;
+    text-align: center;
+}
