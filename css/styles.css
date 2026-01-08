@@ -334,6 +334,11 @@ a:hover {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+.hero-section .hero-content h2 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
 
 /* HERO TEXT DECORATION */
 
@@ -1369,7 +1374,6 @@ textarea:focus {
 
 
 /* ===== OUTLINED ICON STYLE ===== */
-
 .outline-icon {
     width: 44px;
     height: 44px;
@@ -1419,15 +1423,12 @@ textarea:focus {
 
 
 /* USP ICONS – CLEAN & MODERN */
-
-
 /* Hover polish */
 .usp-item:hover .usp-icon-svg {
     color: var(--primary-dark);
     transform: translateY(-4px);
 }
 
-/* USP card already exists, but ensure alignment */
 .usp-item {
     text-align: center;
 }
