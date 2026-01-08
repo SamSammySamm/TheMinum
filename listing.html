@@ -260,6 +260,10 @@
                     // Construct details URL
                     const detailsUrl = `detail.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}&image=${encodeURIComponent(p.image)}&desc=${encodeURIComponent(p.description || '')}`;
 
+                    const hasAddons = p.allowAddons === true;
+                    const buttonText = hasAddons ? 'Select Options' : 'Add to Cart';
+                    const buttonOnClick = hasAddons ? `window.location.href='${detailsUrl}'` : `addToCartWrapper('${p.id}')`;
+
                     card.innerHTML = `
                     <figure>
                         <img src="${p.image}" alt="${p.name}" onerror="this.src='images/default.jpg'">
@@ -269,7 +273,7 @@
                     <p class="description">${p.description || 'Delicious refreshment.'}</p>
                     <p class="price">RM${parseFloat(p.price).toFixed(2)}</p>
                     <a href="${detailsUrl}" class="view-details button-secondary">View Details</a>
-                    <button class="add-to-cart-btn button-primary" onclick="addToCartWrapper('${p.id}')">Add to Cart</button>
+                    <button class="add-to-cart-btn button-primary" onclick="${buttonOnClick}">${buttonText}</button>
                 `;
                     grid.appendChild(card);
                 });

@@ -6,7 +6,22 @@ function getURLParameter(name) {
     return urlParams.get(name);
 }
 
-// Product descriptions database
+// Firebase Config
+const firebaseConfig = {
+    apiKey: "AIzaSyA03gmfkZFjWauZR9uza-TkTrTuAPWsUFg",
+    authDomain: "theminums.firebaseapp.com",
+    projectId: "theminums",
+    storageBucket: "theminums.firebasestorage.app",
+    messagingSenderId: "130106351120",
+    appId: "1:130106351120:web:458a2576f99cef54b4b495"
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
+
+// Product descriptions database (Fallback)
 const productDescriptions = {
     'signature-cold-brew': {
         description: 'Our Signature Cold Brew is steeped for over 18 hours, resulting in a super-smooth, low-acidity coffee concentrate. It\'s strong enough to kickstart your morning and perfectly balanced to enjoy all day. Sourced from single-origin, ethically farmed beans.',
@@ -110,6 +125,64 @@ function loadProductDetails() {
         basePrice: parseFloat(productPrice),
         image: productImage
     };
+
+    // Fetch Full Product Data from Firestore for Add-ons
+    db.collection("products").doc(productId).get().then(doc => {
+        if (doc.exists) {
+            const data = doc.data();
+            window.currentProduct.addons = data.addons || [];
+            window.currentProduct.addonsLimit = data.addonsLimit || 0;
+            window.currentProduct.allowAddons = data.allowAddons || false;
+            window.currentProduct.allowSizes = data.allowSizes !== false; // Default true
+
+            // Hide sizes if not allowed
+            const sizeGroup = document.querySelector('.customization-option');
+            if (sizeGroup && !window.currentProduct.allowSizes) {
+                sizeGroup.style.display = 'none';
+            } else if (sizeGroup) {
+                sizeGroup.style.display = 'block';
+            }
+
+            if (window.currentProduct.allowAddons && window.currentProduct.addons.length > 0) {
+                renderAddons(window.currentProduct.addons, window.currentProduct.addonsLimit);
+            }
+        }
+    });
+}
+
+function renderAddons(addons, limit) {
+    const container = document.getElementById('dynamic-addons-container');
+    if (!container) return;
+
+    let limitText = limit > 0 ? `(Select up to ${limit})` : '(Optional)';
+    container.innerHTML = `
+        <label style="display: block; font-weight: 600; margin-bottom: 10px;">2. Add-ons / Flavors ${limitText}</label>
+        <div class="addons-grid" style="display: grid; grid-template-columns: 1fr; gap: 10px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+            ${addons.map((a, index) => `
+                <label class="addon-checkbox-label" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 5px 0;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" name="addon" value="${a.name}" data-price="${a.price}" onchange="validateAddonLimit(this, ${limit})">
+                        <span>${a.name}</span>
+                    </div>
+                    <span style="color: #666; font-size: 0.9rem;">+RM${parseFloat(a.price).toFixed(2)}</span>
+                </label>
+            `).join('')}
+        </div>
+    `;
+}
+
+function validateAddonLimit(checkbox, limit) {
+    if (limit <= 0) {
+        updatePrice();
+        return;
+    }
+
+    const checkedCount = document.querySelectorAll('input[name="addon"]:checked').length;
+    if (checkedCount > limit) {
+        checkbox.checked = false;
+        alert(`You can only select up to ${limit} options.`);
+    }
+    updatePrice();
 }
 
 // Handle size selection and update price
@@ -137,14 +210,24 @@ function handleSizeSelection() {
     });
 }
 
-// Update price based on selected size
+// Update price based on selected size and add-ons
 function updatePrice() {
     if (!window.currentProduct) return;
 
-    const selectedSize = document.querySelector('input[name="size"]:checked');
-    const sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
+    let sizePrice = 0;
+    if (window.currentProduct.allowSizes) {
+        const selectedSize = document.querySelector('input[name="size"]:checked');
+        sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
+    }
 
-    const totalPrice = window.currentProduct.basePrice + sizePrice;
+    // Calculate add-ons price
+    let addonsPrice = 0;
+    const checkedAddons = document.querySelectorAll('input[name="addon"]:checked');
+    checkedAddons.forEach(addon => {
+        addonsPrice += parseFloat(addon.dataset.price) || 0;
+    });
+
+    const totalPrice = window.currentProduct.basePrice + sizePrice + addonsPrice;
 
     const priceElement = document.getElementById('current-price');
     if (priceElement) {
@@ -166,31 +249,53 @@ function handleDetailPageAddToCart() {
             }
 
             // Get selected options
-            const selectedSize = document.querySelector('input[name="size"]:checked');
-            const sizeValue = selectedSize ? selectedSize.value : 'small';
-            const sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
+            let sizeValue = 'standard';
+            let sizePrice = 0;
+
+            if (window.currentProduct.allowSizes) {
+                const selectedSize = document.querySelector('input[name="size"]:checked');
+                sizeValue = selectedSize ? selectedSize.value : 'small';
+                sizePrice = selectedSize ? parseFloat(selectedSize.dataset.price) : 0;
+            }
+
+            // Get selected add-ons
+            const selectedAddons = [];
+            let totalAddonsPrice = 0;
+            document.querySelectorAll('input[name="addon"]:checked').forEach(cb => {
+                const name = cb.value;
+                const price = parseFloat(cb.dataset.price) || 0;
+                selectedAddons.push({ name, price });
+                totalAddonsPrice += price;
+            });
+
+            // Get enquiry
+            const enquiry = document.getElementById('p-enquiry')?.value || '';
 
             const quantity = parseInt(document.getElementById('quantity').value) || 1;
 
-            // Calculate final price
-            const finalPrice = window.currentProduct.basePrice + sizePrice;
+            // Calculate final price per unit
+            const finalPrice = window.currentProduct.basePrice + sizePrice + totalAddonsPrice;
 
             // Create product data for cart
+            // We append a hash of options to the ID so that different customizations are different items in cart
+            const optionsHash = btoa(JSON.stringify({ size: sizeValue, addons: selectedAddons, enquiry: enquiry })).slice(0, 8);
+
             const productData = {
-                id: `${window.currentProduct.id}-${sizeValue}`,
+                id: `${window.currentProduct.id}-${optionsHash}`,
                 name: window.currentProduct.name,
                 price: finalPrice,
                 image: window.currentProduct.image,
+                quantity: quantity,
                 options: {
-                    size: sizeValue
+                    size: sizeValue,
+                    selectedAddons: selectedAddons,
+                    enquiry: enquiry
                 }
             };
 
             // Add to cart (using the function from cart.js)
             if (typeof addToCart === 'function') {
-                for (let i = 0; i < quantity; i++) {
-                    addToCart(productData);
-                }
+                addToCart(productData);
             } else {
                 console.error('addToCart function not found');
             }

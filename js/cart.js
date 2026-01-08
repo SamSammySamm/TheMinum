@@ -33,7 +33,7 @@ function addToCart(productData) {
 
     if (existingItemIndex > -1) {
         // Item exists, increase quantity
-        cart[existingItemIndex].quantity += 1;
+        cart[existingItemIndex].quantity += (productData.quantity || 1);
     } else {
         // New item, add to cart
         cart.push({
@@ -41,7 +41,8 @@ function addToCart(productData) {
             name: productData.name,
             price: productData.price,
             image: productData.image || '../images/default.jpg',
-            quantity: 1
+            quantity: productData.quantity || 1,
+            options: productData.options || {}
         });
     }
 
@@ -240,7 +241,16 @@ function renderCheckoutPage() {
         cart.forEach(item => {
             const p = document.createElement('p');
             p.className = 'item-preview-line';
-            p.textContent = `${item.quantity}x ${item.name}`;
+
+            let optionsText = '';
+            if (item.options) {
+                if (item.options.size) optionsText += ` (${item.options.size.toUpperCase()})`;
+                if (item.options.selectedAddons && item.options.selectedAddons.length > 0) {
+                    optionsText += ` + ${item.options.selectedAddons.map(a => a.name).join(', ')}`;
+                }
+            }
+
+            p.textContent = `${item.quantity}x ${item.name}${optionsText}`;
             itemListPreview.appendChild(p);
         });
     }
@@ -276,9 +286,30 @@ function renderConfirmationPage() {
     if (cart.length > 0) {
         cart.forEach(item => {
             const li = document.createElement('li');
+            li.style.display = 'block';
+            li.style.marginBottom = '15px';
+
+            let addonsHtml = '';
+            if (item.options && item.options.selectedAddons && item.options.selectedAddons.length > 0) {
+                addonsHtml = `<div style="font-size: 0.85rem; color: #666; margin-left: 10px;">
+                    Add-ons: ${item.options.selectedAddons.map(a => a.name).join(', ')}
+                </div>`;
+            }
+
+            let enquiryHtml = '';
+            if (item.options && item.options.enquiry) {
+                enquiryHtml = `<div style="font-size: 0.85rem; color: #d32f2f; margin-left: 10px; font-style: italic;">
+                    Note: "${item.options.enquiry}"
+                </div>`;
+            }
+
             li.innerHTML = `
-                <span class="item-name">${item.name} x${item.quantity}</span>
-                <span class="item-price">RM${(item.price * item.quantity).toFixed(2)}</span>
+                <div style="display: flex; justify-content: space-between;">
+                    <span class="item-name"><strong>${item.name}</strong> x${item.quantity}</span>
+                    <span class="item-price">RM${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+                ${addonsHtml}
+                ${enquiryHtml}
             `;
             itemList.appendChild(li);
         });
@@ -378,6 +409,11 @@ function createCartItemElement(item, index) {
             <div class="item-info">
                 <h4>${item.name}</h4>
                 <p class="item-price">RM${item.price.toFixed(2)}</p>
+                ${item.options && item.options.size ? `<p style="font-size: 0.8rem; color: #666; margin: 2px 0;">Size: ${item.options.size.toUpperCase()}</p>` : ''}
+                ${item.options && item.options.selectedAddons && item.options.selectedAddons.length > 0 ?
+            `<p style="font-size: 0.8rem; color: #666; margin: 2px 0;">Add-ons: ${item.options.selectedAddons.map(a => a.name).join(', ')}</p>` : ''}
+                ${item.options && item.options.enquiry ?
+            `<p style="font-size: 0.8rem; color: #d32f2f; margin: 2px 0; font-style: italic;">Note: ${item.options.enquiry}</p>` : ''}
             </div>
         </div>
         

@@ -48,6 +48,8 @@ body {
     position: relative;
     /* Reset margins that might interfere with flex centering */
     margin: auto;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .login-box {
