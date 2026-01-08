@@ -1416,3 +1416,33 @@ textarea:focus {
     min-width: 18px;
     text-align: center;
 }
+
+
+/* USP ICONS – CLEAN & MODERN */
+
+
+/* Hover polish */
+.usp-item:hover .usp-icon-svg {
+    color: var(--primary-dark);
+    transform: translateY(-4px);
+}
+
+/* USP card already exists, but ensure alignment */
+.usp-item {
+    text-align: center;
+}
+
+.usp-icon-svg {
+    width: 56px;
+    height: 56px;
+    color: #4CAF50;
+    /* green outline */
+    margin-bottom: 16px;
+}
+
+
+.usp-item:hover .usp-icon-svg {
+    color: var(--primary-dark);
+    transform: scale(1.08);
+    transition: all 0.25s ease;
+}
