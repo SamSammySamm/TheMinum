@@ -17,6 +17,7 @@
     <!-- Login Modal -->
     <div id="login-modal">
         <div class="login-box">
+            <a href="index.html" class="close-modal" style="text-decoration: none;">&times;</a>
             <h2>Admin Login</h2>
             <p>Enter password to access dashboard</p>
             <div class="password-wrapper">
@@ -47,6 +48,9 @@
         <div class="admin-nav">
             <button class="nav-tab active" onclick="switchTab('orders')">Orders</button>
             <button class="nav-tab" onclick="switchTab('products')">Products</button>
+            <button class="nav-tab" onclick="switchTab('vacancies')">Vacancies</button>
+            <button class="nav-tab" onclick="switchTab('applicants')">Applicants</button>
+            <button class="nav-tab" onclick="switchTab('staff')">Staff</button>
         </div>
 
         <!-- Orders View -->
@@ -74,14 +78,60 @@
 
         <!-- Products View -->
         <div id="view-products" class="dashboard-view" style="display: none;">
-            <div class="action-bar" style="margin-bottom: 20px; text-align: right;">
+            <!-- Product Stats & Action Bar -->
+            <div class="action-bar"
+                style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div class="product-stats">
+                    <span id="product-count-badge"
+                        style="background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">Total
+                        Products: 0</span>
+                </div>
                 <button class="cta-button button-primary" onclick="openProductModal()">+ Add New Product</button>
             </div>
+
+            <!-- Enhanced Search & Filter Bar -->
+            <div class="filter-bar"
+                style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+                <div class="filter-group" style="flex: 1; min-width: 200px;">
+                    <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Search</label>
+                    <input type="text" id="admin-product-search" placeholder="Search" onkeyup="filterProductsAdmin()"
+                        style="padding: 10px 15px;">
+                </div>
+                <div class="filter-group" style="min-width: 150px;">
+                    <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Category</label>
+                    <select id="admin-category-filter" onchange="filterProductsAdmin()" style="padding: 10px 15px;">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="min-width: 150px;">
+                    <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Price
+                        Range</label>
+                    <select id="admin-price-filter" onchange="filterProductsAdmin()" style="padding: 10px 15px;">
+                        <option value="all">All Prices</option>
+                        <option value="0-5">Under RM5</option>
+                        <option value="5-10">RM5 - RM10</option>
+                        <option value="10-20">RM10 - RM20</option>
+                        <option value="20">Above RM20</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="min-width: 150px;">
+                    <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Sort By</label>
+                    <select id="admin-product-sort" onchange="filterProductsAdmin()" style="padding: 10px 15px;">
+                        <option value="default">Default (Newest)</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-asc">Name: A-Z</option>
+                    </select>
+                </div>
+                <button class="refresh-btn" onclick="clearProductFilters()" style="margin-bottom: 2px;">Reset</button>
+            </div>
+
             <div class="orders-card">
                 <div class="table-responsive">
-                    <table>
+                    <table id="admin-products-table">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Category</th>
@@ -94,6 +144,198 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Vacancies View -->
+    <div id="view-vacancies" class="dashboard-view" style="display: none;">
+        <div class="action-bar"
+            style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div class="product-stats">
+                <span id="vacancy-count-badge"
+                    style="background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">Total
+                    Vacancies: 0</span>
+            </div>
+            <button class="cta-button button-primary" onclick="openVacancyModal()">+ Add New Vacancy</button>
+        </div>
+
+        <!-- Vacancy Filter Bar -->
+        <div class="filter-bar"
+            style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+            <div class="filter-group" style="flex: 1; min-width: 200px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Search</label>
+                <input type="text" id="admin-vacancy-search" placeholder="Search" onkeyup="filterVacanciesAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Type</label>
+                <select id="admin-vacancy-type-filter" onchange="filterVacanciesAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All Types</option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                </select>
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Sort By</label>
+                <select id="admin-vacancy-sort" onchange="filterVacanciesAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="default">Default (Newest)</option>
+                    <option value="name-asc">Title: A-Z</option>
+                    <option value="name-desc">Title: Z-A</option>
+                </select>
+            </div>
+            <button class="refresh-btn" onclick="clearVacancyFilters()" style="margin-bottom: 2px;">Reset</button>
+        </div>
+
+        <div class="orders-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Applicants</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vacancies-table-body">
+                        <!-- Vacancies will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applicants View -->
+    <div id="view-applicants" class="dashboard-view" style="display: none;">
+        <!-- Applicant Filter Bar -->
+        <div class="filter-bar"
+            style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+            <div class="filter-group" style="flex: 1; min-width: 200px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Search</label>
+                <input type="text" id="admin-applicant-search" placeholder="Search" onkeyup="filterApplicantsAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">College
+                    (Kolej)</label>
+                <select id="admin-applicant-college-filter" onchange="filterApplicantsAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All Colleges</option>
+                </select>
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Job Position</label>
+                <select id="admin-applicant-job-filter" onchange="filterApplicantsAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All Positions</option>
+                </select>
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Sort By</label>
+                <select id="admin-applicant-sort" onchange="filterApplicantsAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="default">Default (Newest)</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+            <button class="refresh-btn" onclick="clearApplicantFilters()" style="margin-bottom: 2px;">Reset</button>
+        </div>
+
+        <div class="orders-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Contact</th>
+                            <th>College</th>
+                            <th>Transport</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicants-table-body">
+                        <!-- Applicants will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff View -->
+    <div id="view-staff" class="dashboard-view" style="display: none;">
+        <div class="action-bar"
+            style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div class="product-stats">
+                <span id="staff-count-badge"
+                    style="background: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">Total
+                    Staff: 0</span>
+            </div>
+        </div>
+
+        <!-- Staff Filter Bar -->
+        <div class="filter-bar"
+            style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+            <div class="filter-group" style="flex: 1; min-width: 200px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Search</label>
+                <input type="text" id="admin-staff-search" placeholder="Search" onkeyup="filterStaffAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">College
+                    (Kolej)</label>
+                <select id="admin-staff-college-filter" onchange="filterStaffAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All Colleges</option>
+                </select>
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Job Position</label>
+                <select id="admin-staff-job-filter" onchange="filterStaffAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All Positions</option>
+                </select>
+            </div>
+            <div class="filter-group" style="min-width: 150px;">
+                <label style="display: block; font-size: 0.85em; color: #666; margin-bottom: 5px;">Sort By</label>
+                <select id="admin-staff-sort" onchange="filterStaffAdmin()"
+                    style="padding: 10px 15px; width: 100%; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="default">Default (Newest)</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+            <button class="refresh-btn" onclick="clearStaffFilters()" style="margin-bottom: 2px;">Reset</button>
+        </div>
+
+        <div class="orders-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Transport</th>
+                            <th>Resident</th>
+                            <th>Position</th>
+                            <th>Working since</th>
+                            <th>Ended work</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staff-table-body">
+                        <!-- Staff will be loaded here -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -136,7 +378,73 @@
                     <textarea id="p-description" rows="3"></textarea>
                 </div>
 
-                <button type="submit" class="cta-button button-primary">Save Product</button>
+                <!-- Customization Settings -->
+                <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div style="padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+                            <input type="checkbox" id="p-allow-addons" onchange="toggleAddonsSection()"> Enable Add-ons
+                        </label>
+                        <p style="font-size: 0.75rem; color: #666; margin: 5px 0 0 25px;">Flavors, toppings, etc.</p>
+                    </div>
+                    <div style="padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+                            <input type="checkbox" id="p-allow-sizes"> Enable Sizes
+                        </label>
+                        <p style="font-size: 0.75rem; color: #666; margin: 5px 0 0 25px;">S, M, L options</p>
+                    </div>
+                </div>
+
+                <div id="addons-controls"
+                    style="display: none; margin-top: 15px; padding: 15px; background: #fff; border-radius: 8px; border: 1px solid #eee;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 1.1rem;">Add-ons / Variants</h3>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>Selection Limit (e.g., max 2 flavors)</label>
+                        <input type="number" id="p-addons-limit" value="0" min="0" style="width: 80px;">
+                        <small style="color: #666; display: block;">Set to 0 for unlimited</small>
+                    </div>
+
+                    <div id="addons-list">
+                        <!-- Add-on rows will be added here -->
+                    </div>
+                    <button type="button" class="toggle-btn" onclick="addAddonRow()"
+                        style="margin-top: 10px; width: 100%; border-style: dashed;">+ Add Option</button>
+                </div>
+
+                <button type="submit" class="cta-button button-primary" style="margin-top: 20px;">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vacancy Modal -->
+    <div id="vacancy-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVacancyModal()">&times;</span>
+            <h2 id="vacancy-modal-title">Add Vacancy</h2>
+            <form id="vacancy-form">
+                <input type="hidden" id="vacancy-id">
+                <div class="form-group">
+                    <label>Job Title</label>
+                    <input type="text" id="v-title" required placeholder="e.g. Barista">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="v-type">
+                        <option value="Part Time">Part Time</option>
+                        <option value="Full Time">Full Time</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description (Job Details)</label>
+                    <textarea id="v-description" rows="10" required placeholder="Job Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="v-status">
+                        <option value="Active">Active (Visible)</option>
+                        <option value="Closed">Closed (Hidden)</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button button-primary">Save Vacancy</button>
             </form>
         </div>
     </div>
@@ -161,6 +469,13 @@
 
         let currentTab = 'orders';
         let allCategories = new Set(); // To track unique categories
+        let allColleges = new Set(); // To track unique colleges for applicants
+        let allJobPositions = new Set(); // To track unique job positions for applicants
+        let allStaffColleges = new Set(); // To track unique colleges for staff
+        let allStaffPositions = new Set(); // To track unique job positions for staff
+        let adminVacancies = [];
+        let adminApplicants = [];
+        let adminStaff = [];
 
         // Password Toggle
         function togglePasswordVisibility() {
@@ -222,6 +537,9 @@
         function refreshCurrentView() {
             if (currentTab === 'orders') fetchOrders();
             if (currentTab === 'products') fetchProducts();
+            if (currentTab === 'vacancies') fetchVacancies();
+            if (currentTab === 'applicants') fetchApplicants();
+            if (currentTab === 'staff') fetchStaff();
         }
 
         // 3. fetch Orders
@@ -257,12 +575,37 @@
             trD.id = `details-${id}`;
             trD.className = 'order-details-row';
             trD.style.display = 'none';
-            let itemsHtml = order.items.map(i => `<li><span>${i.quantity}x ${i.name}</span><span>RM${(i.price * i.quantity).toFixed(2)}</span></li>`).join('');
+
+            let itemsHtml = order.items.map(i => {
+                let addonsHtml = '';
+                if (i.selectedAddons && i.selectedAddons.length > 0) {
+                    addonsHtml = `<div style="font-size: 0.8rem; color: #666; margin-left: 15px;">
+                        Add-ons: ${i.selectedAddons.map(a => `${a.name} (+RM${a.price.toFixed(2)})`).join(', ')}
+                    </div>`;
+                }
+
+                let enquiryHtml = '';
+                if (i.enquiry) {
+                    enquiryHtml = `<div style="font-size: 0.8rem; color: #d32f2f; margin-left: 15px; font-style: italic;">
+                        Note: "${i.enquiry}"
+                    </div>`;
+                }
+
+                return `<li style="display: block; border-bottom: 1px solid #eee; padding: 8px 0;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>${i.quantity}x <strong>${i.name}</strong></span>
+                        <span>RM${(i.price * i.quantity).toFixed(2)}</span>
+                    </div>
+                    ${addonsHtml}
+                    ${enquiryHtml}
+                </li>`;
+            }).join('');
+
             trD.innerHTML = `
                 <td colspan="6" class="details-content">
                     <div class="details-grid">
                         <div class="detail-group"><h4>Address</h4><p>${order.customer.address}</p></div>
-                        <div class="detail-group"><h4>Items</h4><ul class="order-items-list">${itemsHtml}</ul></div>
+                        <div class="detail-group"><h4>Items</h4><ul class="order-items-list" style="list-style: none; padding: 0;">${itemsHtml}</ul></div>
                     </div>
                 </td>`;
             container.appendChild(trD);
@@ -274,35 +617,55 @@
         }
 
         // 4. Product Management
+        let adminProducts = []; // Local cache for filtering
+
         function fetchProducts() {
             const tbody = document.getElementById('products-table-body');
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Loading...</td></tr>';
 
             db.collection("products").get().then((snap) => {
-                tbody.innerHTML = '';
+                adminProducts = [];
                 allCategories.clear();
 
-                if (snap.empty) {
-                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No products found. Add one!</td></tr>';
-                    updateCategoryDropdown();
-                    return;
-                }
-
                 snap.forEach(doc => {
-                    const p = doc.data();
-                    allCategories.add(p.category);
-                    renderProductRow(doc.id, p, tbody);
+                    const data = doc.data();
+                    data.id = doc.id;
+                    adminProducts.push(data);
+                    if (data.category) allCategories.add(data.category);
                 });
+
                 updateCategoryDropdown();
+                updateAdminCategoryFilter();
+                displayProductsAdmin(adminProducts);
+            }).catch(err => {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: red;">Error loading products.</td></tr>';
             });
         }
 
-        function renderProductRow(id, p, container) {
+        function displayProductsAdmin(products) {
+            const tbody = document.getElementById('products-table-body');
+            tbody.innerHTML = '';
+
+            // Update the count badge
+            document.getElementById('product-count-badge').textContent = `Total Products: ${products.length}`;
+
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No matching products found.</td></tr>';
+                return;
+            }
+
+            products.forEach((p, index) => {
+                renderProductRow(p.id, p, tbody, index + 1);
+            });
+        }
+
+        function renderProductRow(id, p, container, rowNum) {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><img src="${p.image}" style="width:50px;height:50px;object-fit:cover;border-radius:4px;"></td>
+                <td><strong>${rowNum}</strong></td>
+                <td><img src="${p.image}" style="width:50px;height:50px;object-fit:cover;border-radius:4px;" onerror="this.src='images/default.jpg'"></td>
                 <td>${p.name}</td>
-                <td><span class="status-badge status-new" style="background:#f3e5f5;color:#4a148c;">${p.category || 'Uncategorized'}</span></td>
+                <td><span class="status-badge" style="background:#f3e5f5;color:#4a148c;border:none;">${p.category || 'General'}</span></td>
                 <td>RM${parseFloat(p.price).toFixed(2)}</td>
                 <td>
                     <button class="toggle-btn" onclick="editProduct('${id}')">Edit</button>
@@ -310,6 +673,61 @@
                 </td>
             `;
             container.appendChild(tr);
+        }
+
+        function filterProductsAdmin() {
+            const searchTerm = document.getElementById('admin-product-search').value.toLowerCase();
+            const categoryFilter = document.getElementById('admin-category-filter').value;
+            const priceFilter = document.getElementById('admin-price-filter').value;
+            const sortOrder = document.getElementById('admin-product-sort').value;
+
+            let filtered = adminProducts.filter(p => {
+                const matchesName = p.name.toLowerCase().includes(searchTerm);
+                const matchesCategory = categoryFilter === 'all' || p.category === categoryFilter;
+
+                let matchesPrice = true;
+                const price = parseFloat(p.price);
+                if (priceFilter === '0-5') matchesPrice = price < 5;
+                else if (priceFilter === '5-10') matchesPrice = price >= 5 && price <= 10;
+                else if (priceFilter === '10-20') matchesPrice = price > 10 && price <= 20;
+                else if (priceFilter === '20') matchesPrice = price > 20;
+
+                return matchesName && matchesCategory && matchesPrice;
+            });
+
+            // Apply Sorting
+            if (sortOrder === 'price-low') {
+                filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            } else if (sortOrder === 'price-high') {
+                filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            } else if (sortOrder === 'name-asc') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            displayProductsAdmin(filtered);
+        }
+
+        function updateAdminCategoryFilter() {
+            const filter = document.getElementById('admin-category-filter');
+            const currentValue = filter.value;
+            filter.innerHTML = '<option value="all">All Categories</option>';
+            [...allCategories].sort().forEach(cat => {
+                if (cat) {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    filter.appendChild(opt);
+                }
+            });
+            filter.value = currentValue; // Preserve selection if possible
+        }
+
+        function clearProductFilters() {
+            document.getElementById('admin-product-search').value = '';
+            document.getElementById('admin-category-filter').value = 'all';
+            document.getElementById('admin-price-filter').value = 'all';
+            document.getElementById('admin-product-sort').value = 'default';
+            displayProductsAdmin(adminProducts);
         }
 
         // Product CRUD
@@ -329,6 +747,19 @@
                 document.getElementById('p-price').value = product.price;
                 document.getElementById('p-image').value = product.image;
                 document.getElementById('p-description').value = product.description;
+
+                // Handle Add-ons & Sizes
+                const allowAddons = product.allowAddons || false;
+                document.getElementById('p-allow-addons').checked = allowAddons;
+                document.getElementById('p-allow-sizes').checked = product.allowSizes !== false; // Default true for existing
+                document.getElementById('p-addons-limit').value = product.addonsLimit || 0;
+
+                const addonsList = document.getElementById('addons-list');
+                addonsList.innerHTML = '';
+                if (product.addons && product.addons.length > 0) {
+                    product.addons.forEach(addon => addAddonRow(addon.name, addon.price));
+                }
+                toggleAddonsSection();
 
                 // Handle Category
                 const catSelect = document.getElementById('p-category-select');
@@ -368,11 +799,44 @@
             });
         }
 
+        function toggleAddonsSection() {
+            const enabled = document.getElementById('p-allow-addons').checked;
+            document.getElementById('addons-controls').style.display = enabled ? 'block' : 'none';
+        }
+
+        function addAddonRow(name = '', price = 0) {
+            const container = document.getElementById('addons-list');
+            const row = document.createElement('div');
+            row.className = 'addon-row';
+            row.style.display = 'flex';
+            row.style.gap = '10px';
+            row.style.marginBottom = '8px';
+            row.innerHTML = `
+                <input type="text" placeholder="Flavor/Add-on Name" class="addon-name" value="${name}" style="flex: 2; padding: 8px;">
+                <input type="number" placeholder="Price" class="addon-price" value="${price}" step="0.01" style="flex: 1; padding: 8px;">
+                <button type="button" onclick="this.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-size:1.2rem;">&times;</button>
+            `;
+            container.appendChild(row);
+        }
+
         document.getElementById('product-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
             const catSelect = document.getElementById('p-category-select');
             const category = catSelect.value === 'new' ? document.getElementById('p-category-new').value : catSelect.value;
+
+            // Collect Add-ons
+            const addons = [];
+            if (document.getElementById('p-allow-addons').checked) {
+                const rows = document.querySelectorAll('.addon-row');
+                rows.forEach(row => {
+                    const name = row.querySelector('.addon-name').value;
+                    const price = parseFloat(row.querySelector('.addon-price').value) || 0;
+                    if (name.trim()) {
+                        addons.push({ name, price });
+                    }
+                });
+            }
 
             const data = {
                 name: document.getElementById('p-name').value,
@@ -380,6 +844,10 @@
                 category: category,
                 image: document.getElementById('p-image').value,
                 description: document.getElementById('p-description').value,
+                allowAddons: document.getElementById('p-allow-addons').checked,
+                allowSizes: document.getElementById('p-allow-sizes').checked,
+                addonsLimit: parseInt(document.getElementById('p-addons-limit').value) || 0,
+                addons: addons,
                 updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
@@ -400,6 +868,482 @@
         function deleteProduct(id) {
             if (confirm('Are you sure you want to delete this product?')) {
                 db.collection("products").doc(id).delete().then(() => fetchProducts());
+            }
+        }
+
+        // 5. Vacancy Management
+        function fetchVacancies() {
+            const tbody = document.getElementById('vacancies-table-body');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Loading...</td></tr>';
+
+            // Get counts from applications first
+            db.collection("applications").get().then((appsSnap) => {
+                const counts = {};
+                appsSnap.forEach(doc => {
+                    const data = doc.data();
+                    const pId = data.positionId;
+                    if (pId) counts[pId] = (counts[pId] || 0) + 1;
+                });
+
+                db.collection("vacancies").orderBy("createdAt", "desc").get().then((snap) => {
+                    adminVacancies = [];
+                    snap.forEach(doc => {
+                        const v = doc.data();
+                        v.id = doc.id;
+                        v.applicantCount = counts[doc.id] || 0;
+                        adminVacancies.push(v);
+                    });
+                    displayVacanciesAdmin(adminVacancies);
+                });
+            }).catch(err => {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color:red;">Error loading vacancies.</td></tr>';
+            });
+        }
+
+        function displayVacanciesAdmin(vacancies) {
+            const tbody = document.getElementById('vacancies-table-body');
+            tbody.innerHTML = '';
+            document.getElementById('vacancy-count-badge').textContent = `Total Vacancies: ${vacancies.length}`;
+
+            if (vacancies.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No matching vacancies found.</td></tr>';
+                return;
+            }
+            vacancies.forEach(v => renderVacancyRow(v.id, v, tbody, v.applicantCount));
+        }
+
+        function filterVacanciesAdmin() {
+            const searchTerm = document.getElementById('admin-vacancy-search').value.toLowerCase();
+            const typeFilter = document.getElementById('admin-vacancy-type-filter').value;
+            const sortOrder = document.getElementById('admin-vacancy-sort').value;
+
+            let filtered = adminVacancies.filter(v => {
+                const matchesTitle = v.title.toLowerCase().includes(searchTerm);
+                const matchesType = typeFilter === 'all' || v.type === typeFilter;
+                return matchesTitle && matchesType;
+            });
+
+            if (sortOrder === 'name-asc') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortOrder === 'name-desc') {
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            }
+
+            displayVacanciesAdmin(filtered);
+        }
+
+        function clearVacancyFilters() {
+            document.getElementById('admin-vacancy-search').value = '';
+            document.getElementById('admin-vacancy-type-filter').value = 'all';
+            document.getElementById('admin-vacancy-sort').value = 'default';
+            displayVacanciesAdmin(adminVacancies);
+        }
+
+        function renderVacancyRow(id, v, container, count) {
+            const tr = document.createElement('tr');
+            const isActive = v.status !== 'Closed';
+            tr.innerHTML = `
+                <td><strong>${v.title}</strong></td>
+                <td>${v.type}</td>
+                <td><div style="max-width:200px; max-height:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${v.description}</div></td>
+                <td><span class="status-badge" style="background:#e8eaf6; color:#3f51b5;">${count} applied</span></td>
+                <td><span class="status-badge ${isActive ? 'status-completed' : 'status-new'}" style="${!isActive ? 'background-color:#ffebee; color:#c62828;' : ''}">${isActive ? 'Active' : 'Closed'}</span></td>
+                <td>
+                    <button class="toggle-btn" onclick="editVacancy('${id}')">Edit</button>
+                    <button class="toggle-btn" style="color:red;border-color:red;" onclick="deleteVacancy('${id}')">Delete</button>
+                </td>
+            `;
+            container.appendChild(tr);
+        }
+
+        function openVacancyModal(editMode = false, vacancy = null) {
+            const modal = document.getElementById('vacancy-modal');
+            const form = document.getElementById('vacancy-form');
+            const title = document.getElementById('vacancy-modal-title');
+
+            if (!editMode) {
+                title.textContent = 'Add New Vacancy';
+                form.reset();
+                document.getElementById('vacancy-id').value = '';
+            } else {
+                title.textContent = 'Edit Vacancy';
+                document.getElementById('vacancy-id').value = vacancy.id;
+                document.getElementById('v-title').value = vacancy.title;
+                document.getElementById('v-type').value = vacancy.type;
+                document.getElementById('v-description').value = vacancy.description;
+                document.getElementById('v-status').value = vacancy.status || 'Active';
+            }
+            modal.style.display = 'block';
+        }
+
+        function closeVacancyModal() {
+            document.getElementById('vacancy-modal').style.display = 'none';
+        }
+
+        document.getElementById('vacancy-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const id = document.getElementById('vacancy-id').value;
+            const data = {
+                title: document.getElementById('v-title').value,
+                type: document.getElementById('v-type').value,
+                description: document.getElementById('v-description').value,
+                status: document.getElementById('v-status').value,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!id) {
+                data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+            }
+
+            const action = id ? db.collection("vacancies").doc(id).update(data) : db.collection("vacancies").add(data);
+
+            action.then(() => {
+                closeVacancyModal();
+                document.getElementById('vacancy-form').reset();
+                fetchVacancies();
+            }).catch(err => alert("Error saving vacancy: " + err.message));
+        });
+
+        function editVacancy(id) {
+            db.collection("vacancies").doc(id).get().then(doc => {
+                if (doc.exists) openVacancyModal(true, { id: doc.id, ...doc.data() });
+            });
+        }
+
+        function deleteVacancy(id) {
+            if (confirm("Delete this vacancy?")) {
+                db.collection("vacancies").doc(id).delete().then(() => fetchVacancies());
+            }
+        }
+
+        // 6. Applicants View
+        function fetchApplicants() {
+            const tbody = document.getElementById('applicants-table-body');
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Loading...</td></tr>';
+
+            db.collection("applications").orderBy("createdAt", "desc").get().then((snap) => {
+                adminApplicants = [];
+                allColleges.clear();
+                allJobPositions.clear();
+
+                snap.forEach(doc => {
+                    const a = doc.data();
+                    a.id = doc.id;
+                    adminApplicants.push(a);
+                    if (a.college) allColleges.add(a.college);
+                    if (a.positionName) allJobPositions.add(a.positionName);
+                });
+
+                updateApplicantFiltersUI();
+                displayApplicantsAdmin(adminApplicants);
+            });
+        }
+
+        function updateApplicantFiltersUI() {
+            const collegeSelect = document.getElementById('admin-applicant-college-filter');
+            const jobSelect = document.getElementById('admin-applicant-job-filter');
+
+            const currentCollege = collegeSelect.value;
+            const currentJob = jobSelect.value;
+
+            collegeSelect.innerHTML = '<option value="all">All Colleges</option>';
+            [...allColleges].sort().forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = c;
+                collegeSelect.appendChild(opt);
+            });
+            collegeSelect.value = allColleges.has(currentCollege) ? currentCollege : 'all';
+
+            jobSelect.innerHTML = '<option value="all">All Positions</option>';
+            [...allJobPositions].sort().forEach(j => {
+                const opt = document.createElement('option');
+                opt.value = j;
+                opt.textContent = j;
+                jobSelect.appendChild(opt);
+            });
+            jobSelect.value = allJobPositions.has(currentJob) ? currentJob : 'all';
+        }
+
+        function displayApplicantsAdmin(applicants) {
+            const tbody = document.getElementById('applicants-table-body');
+            tbody.innerHTML = '';
+
+            if (applicants.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No matching applications found.</td></tr>';
+                return;
+            }
+
+            // Custom sort: New applicants first, then by the selected sort order
+            const sortOrder = document.getElementById('admin-applicant-sort').value;
+
+            applicants.sort((a, b) => {
+                const statusA = a.status || 'New';
+                const statusB = b.status || 'New';
+
+                const isProcessedA = statusA === 'Accepted' || statusA === 'Rejected';
+                const isProcessedB = statusB === 'Accepted' || statusB === 'Rejected';
+
+                // Rule 1: New first, Processed last
+                if (!isProcessedA && isProcessedB) return -1;
+                if (isProcessedA && !isProcessedB) return 1;
+
+                // Rule 2: Alphabetical sort within their groups (if selected)
+                if (sortOrder === 'name-asc') {
+                    return a.name.localeCompare(b.name);
+                } else if (sortOrder === 'name-desc') {
+                    return b.name.localeCompare(a.name);
+                } else {
+                    // Default: Date desc
+                    return (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0);
+                }
+            });
+
+            applicants.forEach(a => renderApplicantRow(a.id, a, tbody));
+        }
+
+        function filterApplicantsAdmin() {
+            const searchTerm = document.getElementById('admin-applicant-search').value.toLowerCase();
+            const collegeFilter = document.getElementById('admin-applicant-college-filter').value;
+            const jobFilter = document.getElementById('admin-applicant-job-filter').value;
+
+            let filtered = adminApplicants.filter(a => {
+                const matchesName = a.name.toLowerCase().includes(searchTerm);
+                const matchesCollege = collegeFilter === 'all' || a.college === collegeFilter;
+                const matchesJob = jobFilter === 'all' || a.positionName === jobFilter;
+                return matchesName && matchesCollege && matchesJob;
+            });
+
+            displayApplicantsAdmin(filtered);
+        }
+
+        function clearApplicantFilters() {
+            document.getElementById('admin-applicant-search').value = '';
+            document.getElementById('admin-applicant-college-filter').value = 'all';
+            document.getElementById('admin-applicant-job-filter').value = 'all';
+            document.getElementById('admin-applicant-sort').value = 'default';
+            displayApplicantsAdmin(adminApplicants);
+        }
+
+        function renderApplicantRow(id, a, container) {
+            let dateStr = a.createdAt && a.createdAt.toDate ? a.createdAt.toDate().toLocaleString() : 'N/A';
+            const status = a.status || 'New';
+            const isProcessed = status === 'Accepted' || status === 'Rejected';
+
+            let statusStyle = 'background-color: #e3f2fd; color: #0d47a1;'; // Default New
+            if (status === 'Accepted') statusStyle = 'background-color: #e8f5e9; color: #1b5e20; font-weight: bold;';
+            if (status === 'Rejected') statusStyle = 'background-color: #ffebee; color: #c62828; font-weight: bold;';
+
+            const tr = document.createElement('tr');
+            if (isProcessed) tr.style.opacity = '0.5';
+
+            tr.innerHTML = `
+                <td>${dateStr}</td>
+                <td>${a.name}</td>
+                <td><strong>${a.positionName || 'General'}</strong></td>
+                <td>${a.phone}</td>
+                <td>${a.college}</td>
+                <td>${a.transport}</td>
+                <td><span class="status-badge" style="${statusStyle}">${status.toUpperCase()}</span></td>
+                <td>
+                    ${!isProcessed ? `
+                        <button class="toggle-btn" style="color:green; border-color:green;" onclick="updateApplicantStatus('${id}', 'Accepted')">Accept</button>
+                        <button class="toggle-btn" style="color:red; border-color:red;" onclick="updateApplicantStatus('${id}', 'Rejected')">Reject</button>
+                    ` : `
+                        <button class="toggle-btn" style="color:#666; border-color:#999;" onclick="deleteApplicant('${id}')">Delete</button>
+                    `}
+                </td>
+            `;
+            container.appendChild(tr);
+        }
+
+        function deleteApplicant(id) {
+            if (confirm("Delete this application record?")) {
+                db.collection("applications").doc(id).delete().then(() => fetchApplicants());
+            }
+        }
+
+        function updateApplicantStatus(id, newStatus) {
+            if (confirm(`Set applicant status to ${newStatus}?`)) {
+                db.collection("applications").doc(id).get().then(doc => {
+                    const data = doc.data();
+
+                    db.collection("applications").doc(id).update({
+                        status: newStatus
+                    }).then(() => {
+                        if (newStatus === 'Accepted') {
+                            // Automatically add to staff
+                            const staffData = {
+                                applicantId: id,
+                                name: data.name,
+                                phone: data.phone,
+                                transport: data.transport,
+                                college: data.college,
+                                position: data.positionName || 'General',
+                                joinedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                status: 'Active'
+                            };
+                            db.collection("staff").add(staffData).then(() => {
+                                fetchApplicants();
+                            });
+                        } else {
+                            fetchApplicants();
+                        }
+                    });
+                });
+            }
+        }
+
+        // 7. Staff Management
+        function fetchStaff() {
+            const tbody = document.getElementById('staff-table-body');
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Loading...</td></tr>';
+
+            db.collection("staff").orderBy("joinedAt", "desc").get().then((snap) => {
+                adminStaff = [];
+                allStaffColleges.clear();
+                allStaffPositions.clear();
+
+                snap.forEach(doc => {
+                    const s = doc.data();
+                    s.id = doc.id;
+                    adminStaff.push(s);
+                    if (s.college) allStaffColleges.add(s.college);
+                    if (s.position) allStaffPositions.add(s.position);
+                });
+
+                updateStaffFiltersUI();
+                displayStaffAdmin(adminStaff);
+            });
+        }
+
+        function updateStaffFiltersUI() {
+            const collegeSelect = document.getElementById('admin-staff-college-filter');
+            const jobSelect = document.getElementById('admin-staff-job-filter');
+
+            const currentCollege = collegeSelect.value;
+            const currentJob = jobSelect.value;
+
+            collegeSelect.innerHTML = '<option value="all">All Colleges</option>';
+            [...allStaffColleges].sort().forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = c;
+                collegeSelect.appendChild(opt);
+            });
+            collegeSelect.value = allStaffColleges.has(currentCollege) ? currentCollege : 'all';
+
+            jobSelect.innerHTML = '<option value="all">All Positions</option>';
+            [...allStaffPositions].sort().forEach(j => {
+                const opt = document.createElement('option');
+                opt.value = j;
+                opt.textContent = j;
+                jobSelect.appendChild(opt);
+            });
+            jobSelect.value = allStaffPositions.has(currentJob) ? currentJob : 'all';
+        }
+
+        function displayStaffAdmin(staff) {
+            const tbody = document.getElementById('staff-table-body');
+            tbody.innerHTML = '';
+
+            // Update badge with full count if no filters, or filtered count
+            const searchTerm = document.getElementById('admin-staff-search').value;
+            const collegeFilter = document.getElementById('admin-staff-college-filter').value;
+            const jobFilter = document.getElementById('admin-staff-job-filter').value;
+            const isFiltered = searchTerm || collegeFilter !== 'all' || jobFilter !== 'all';
+
+            document.getElementById('staff-count-badge').textContent = isFiltered ? `Showing: ${staff.length} / Total: ${adminStaff.length}` : `Total Staff: ${adminStaff.length}`;
+
+            if (staff.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No matching staff found.</td></tr>';
+                return;
+            }
+
+            const sortOrder = document.getElementById('admin-staff-sort').value;
+            staff.sort((a, b) => {
+                const isActiveA = a.status === 'Active';
+                const isActiveB = b.status === 'Active';
+
+                // Rule 1: Active first, Dismissed last
+                if (isActiveA && !isActiveB) return -1;
+                if (!isActiveA && isActiveB) return 1;
+
+                // Rule 2: Apply selected sort within groups
+                if (sortOrder === 'name-asc') {
+                    return a.name.localeCompare(b.name);
+                } else if (sortOrder === 'name-desc') {
+                    return b.name.localeCompare(a.name);
+                } else {
+                    // Default: Joined Date desc
+                    return (b.joinedAt?.toMillis() || 0) - (a.joinedAt?.toMillis() || 0);
+                }
+            });
+
+            staff.forEach(s => renderStaffRow(s.id, s, tbody));
+        }
+
+        function filterStaffAdmin() {
+            const searchTerm = document.getElementById('admin-staff-search').value.toLowerCase();
+            const collegeFilter = document.getElementById('admin-staff-college-filter').value;
+            const jobFilter = document.getElementById('admin-staff-job-filter').value;
+
+            let filtered = adminStaff.filter(s => {
+                const matchesName = s.name.toLowerCase().includes(searchTerm);
+                const matchesCollege = collegeFilter === 'all' || s.college === collegeFilter;
+                const matchesJob = jobFilter === 'all' || s.position === jobFilter;
+                return matchesName && matchesCollege && matchesJob;
+            });
+
+            displayStaffAdmin(filtered);
+        }
+
+        function clearStaffFilters() {
+            document.getElementById('admin-staff-search').value = '';
+            document.getElementById('admin-staff-college-filter').value = 'all';
+            document.getElementById('admin-staff-job-filter').value = 'all';
+            document.getElementById('admin-staff-sort').value = 'default';
+            displayStaffAdmin(adminStaff);
+        }
+
+        function renderStaffRow(id, s, container) {
+            let joinedStr = s.joinedAt && s.joinedAt.toDate ? s.joinedAt.toDate().toLocaleDateString() : 'N/A';
+            let dismissedStr = s.dismissedAt && s.dismissedAt.toDate ? s.dismissedAt.toDate().toLocaleDateString() : '-';
+            const isActive = s.status === 'Active';
+
+            const tr = document.createElement('tr');
+            if (!isActive) tr.style.opacity = '0.4';
+
+            tr.innerHTML = `
+                <td><strong>${s.name}</strong></td>
+                <td>${s.phone}</td>
+                <td>${s.transport}</td>
+                <td>${s.college}</td>
+                <td>${s.position}</td>
+                <td>${joinedStr}</td>
+                <td>${isActive ? '-' : `<div>${dismissedStr}</div><small style="color:#666;">Reason: ${s.dismissalReason || 'N/A'}</small>`}</td>
+                <td>
+                    ${isActive ? `<button class="toggle-btn" style="color:red; border-color:red;" onclick="dismissStaff('${id}')">Dismiss</button>` : '<span style="color:#666;">Inactive</span>'}
+                </td>
+            `;
+            container.appendChild(tr);
+        }
+
+        function dismissStaff(id) {
+            const reason = prompt("Enter dismissal reason:");
+            if (reason === null) return; // Cancelled
+            if (!reason.trim()) {
+                alert("Reason is required.");
+                return;
+            }
+
+            if (confirm("Are you sure you want to dismiss this staff?")) {
+                db.collection("staff").doc(id).update({
+                    status: 'Dismissed',
+                    dismissalReason: reason,
+                    dismissedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => fetchStaff());
             }
         }
     </script>

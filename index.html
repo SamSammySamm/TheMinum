@@ -21,12 +21,23 @@
                 </h1>
             </a>
         </div>
+
+
+
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="listing.html">Our Menu</a></li>
                 <li><a href="about.html">About Us</a></li>
+
                 <li><a href="locations.html">Locations</a></li>
+                <li><a href="careers.html">Careers</a></li>
             </ul>
         </nav>
 
@@ -79,62 +90,67 @@
                 <span>💳 Cashless payment</span>
             </div>
 
-            <div class="product-grid">
-                <article class="product-card" data-product-id="matcha-latte" data-product-name="Matcha Latte"
-                    data-product-price="8.00" data-product-image="images/matchalatte.png">
-
-
-
-                    <!-- BADGE -->
-                    <span class="badge">Best Seller</span>
-
-                    <figure>
-                        <img src="images/matchalatte.png" alt="Matcha Latte">
-                        <figcaption>Premium & Fresh</figcaption>
-                    </figure>
-                    <h4>Matcha Latte</h4>
-                    <p class="description">Smooth Japanese matcha with fresh milk - a premium drink from our Matcha
-                        Series.</p>
-                    <p class="price">RM8.00</p>
-                    <a href="detail.html?id=matcha-latte&name=Matcha%20Latte&price=8.00&image=images/matchalatte.png&desc=Smooth%20Japanese%20matcha%20with%20fresh%20milk%20-%20a%20premium%20drink%20from%20our%20Matcha%20Series."
-                        class="view-details button-secondary">View Details</a>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                </article>
-
-
-
-
-
-                <article class="product-card" data-product-id="black-pearl-cocoa" data-product-name="Black Pearl Cocoa"
-                    data-product-price="7.00" data-product-image="images/BPCocoa.png">
-                    <figure>
-                        <img src="images/BPCocoa.png" alt="Black Pearl Cocoa">
-                        <figcaption>Rich & Indulgent</figcaption>
-                    </figure>
-                    <h4>Black Pearl Cocoa</h4>
-                    <p class="description">Rich drink from the Cocoa Series with chewy black pearls for a chocolatey
-                        twist.</p>
-                    <p class="price">RM7.00</p>
-                    <a href="detail.html?id=black-pearl-cocoa&name=Black%20Pearl%20Cocoa&price=7.00&image=images/BPCocoa.png&desc=Rich%20drink%20from%20the%20Cocoa%20Series%20with%20chewy%20black%20pearls%20for%20a%20chocolatey%20twist."
-                        class="view-details button-secondary">View Details</a>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                </article>
-
-                <article class="product-card" data-product-id="golden-glow-mojito"
-                    data-product-name="Golden Glow Mojito" data-product-price="6.00"
-                    data-product-image="images/OceanBlueMojito.png">
-                    <figure>
-                        <img src="images/OceanBlueMojito.png" alt="Golden Glow Mojito">
-                        <figcaption>Refreshing & Bright</figcaption>
-                    </figure>
-                    <h4>Golden Glow Mojito</h4>
-                    <p class="description">Refreshing drink from the Mojito Series to brighten your day.</p>
-                    <p class="price">RM6.00</p>
-                    <a href="detail.html?id=golden-glow-mojito&name=Golden%20Glow%20Mojito&price=6.00&image=images/OceanBlueMojito.png&desc=Refreshing%20drink%20from%20the%20Mojito%20Series%20to%20brighten%20your%20day."
-                        class="view-details button-secondary">View Details</a>
-                    <button class="add-to-cart-btn button-primary">Add to Cart</button>
-                </article>
+            <div class="product-grid" id="featured-grid">
+                <p class="loading-text">Loading signatures...</p>
+                <!-- Dynamic products will be loaded here -->
             </div>
+        </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const grid = document.getElementById('featured-grid');
+                if (!grid || typeof db === 'undefined') return;
+
+                db.collection("products").limit(3).get().then((snap) => {
+                    grid.innerHTML = '';
+                    if (snap.empty) {
+                        grid.innerHTML = '<p>Check back later for our signatures!</p>';
+                        return;
+                    }
+
+                    snap.forEach(doc => {
+                        const p = doc.data();
+                        p.id = doc.id;
+                        const detailsUrl = `detail.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}&image=${encodeURIComponent(p.image)}&desc=${encodeURIComponent(p.description || '')}`;
+                        const hasAddons = p.allowAddons === true;
+                        const buttonText = hasAddons ? 'Select Options' : 'Add to Cart';
+                        const buttonOnClick = hasAddons ? `window.location.href='${detailsUrl}'` : `addToCartWrapper('${p.id}')`;
+
+                        const article = document.createElement('article');
+                        article.className = 'product-card';
+                        article.innerHTML = `
+                            <figure>
+                                <img src="${p.image}" alt="${p.name}" onerror="this.src='images/default.jpg'">
+                                <figcaption>${p.category || 'Premium'}</figcaption>
+                            </figure>
+                            <h4>${p.name}</h4>
+                            <p class="description">${p.description || 'Delicious refreshment.'}</p>
+                            <p class="price">RM${parseFloat(p.price).toFixed(2)}</p>
+                            <a href="${detailsUrl}" class="view-details button-secondary">View Details</a>
+                            <button class="add-to-cart-btn button-primary" onclick="${buttonOnClick}">${buttonText}</button>
+                        `;
+                        grid.appendChild(article);
+                    });
+                }).catch(err => {
+                    console.error("Error loading featured products:", err);
+                    grid.innerHTML = '<p>Error loading signatures.</p>';
+                });
+            });
+
+            function addToCartWrapper(id) {
+                db.collection("products").doc(id).get().then(doc => {
+                    if (doc.exists) {
+                        const p = doc.data();
+                        addToCart({
+                            id: doc.id,
+                            name: p.name,
+                            price: parseFloat(p.price),
+                            image: p.image
+                        });
+                    }
+                });
+            }
+        </script>
         </section>
 
         <section class="value-proposition minums-usp section-spacing">
@@ -185,16 +201,18 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="listing.html">Our Menu</a></li>
                     <li><a href="about.html">About Us</a></li>
+
                     <li><a href="locations.html">Locations</a></li>
+                    <li><a href="careers.html">Careers</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Delivery Info</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="delivery.html">Delivery Info</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="footer-social">
@@ -213,6 +231,7 @@
     </footer>
 
     <script src="js/cart.js"></script>
+
 
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>

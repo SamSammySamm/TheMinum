@@ -16,6 +16,7 @@ body {
 
 /* Login Modal & General Modals */
 .modal,
+.modal-overlay,
 #login-modal {
     position: fixed;
     top: 0;
@@ -47,6 +48,8 @@ body {
     position: relative;
     /* Reset margins that might interfere with flex centering */
     margin: auto;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .login-box {
@@ -61,6 +64,10 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     color: #999;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
 }
 
 .close-modal:hover {
@@ -82,10 +89,12 @@ body {
 .form-group input,
 .form-group textarea,
 .form-group select {
-    /* Inherits global styles from styles.css */
-    /* width: 100%; - already in global */
-    /* padding: 15px 20px; - already in global */
-    /* border-radius: 20px; - already in global */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    /* data-box-sizing: border-box */
 }
 
 /* Password Toggle Styles */
@@ -121,6 +130,9 @@ body {
     margin-bottom: 20px;
     border-bottom: 2px solid #ddd;
     padding-bottom: 0;
+    overflow-x: auto;
+    /* Allow scrolling on small screens */
+    white-space: nowrap;
 }
 
 .nav-tab {
@@ -192,6 +204,8 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
+    /* Force minimum width to trigger scroll on small screens */
 }
 
 th,
@@ -281,4 +295,75 @@ tr:hover {
 
 .toggle-btn:hover {
     background: #f0f0f0;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .admin-container {
+        margin: 1rem auto;
+        padding: 0 10px;
+    }
+
+    /* Stack Header */
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 1rem;
+    }
+
+    .admin-header>div {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .admin-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Adjust buttons in header */
+    .admin-header .refresh-btn,
+    .admin-header .cta-button,
+    .admin-header .button-secondary {
+        flex: 1;
+        text-align: center;
+        margin: 0 !important;
+        /* Reset inline styles */
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Modal adjustments */
+    .modal-content,
+    .login-box {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    /* Hide less important columns on mobile orders table if desired, 
+       otherwise the overflow-x will handle it. 
+       Let's keep scrolling for data integrity, but ensure rows aren't too tall.
+    */
+    th,
+    td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Details Grid Stacking */
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Action Bar adjustments (Add Product button) */
+    .action-bar {
+        text-align: center !important;
+    }
+
+    .action-bar button {
+        width: 100%;
+    }
 }

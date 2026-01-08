@@ -74,12 +74,21 @@
                 </h1>
             </a>
         </div>
+
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="listing.html" class="active">Our Menu</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Locations</a></li>
+
+                <li><a href="locations.html">Locations</a></li>
+                <li><a href="careers.html">Careers</a></li>
             </ul>
         </nav>
 
@@ -127,17 +136,19 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="listing.html">Our Menu</a></li>
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="careers.html">Careers</a></li>
                 </ul>
             </div>
 
             <div class="footer-links-group">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Delivery Info</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                    <li><a href="delivery.html">Delivery Info</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
                 </ul>
             </div>
 
@@ -159,6 +170,7 @@
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
         <script src="js/cart.js"></script>
+
 
         <script>
             // Firebase Config
@@ -248,6 +260,10 @@
                     // Construct details URL
                     const detailsUrl = `detail.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}&image=${encodeURIComponent(p.image)}&desc=${encodeURIComponent(p.description || '')}`;
 
+                    const hasAddons = p.allowAddons === true;
+                    const buttonText = hasAddons ? 'Select Options' : 'Add to Cart';
+                    const buttonOnClick = hasAddons ? `window.location.href='${detailsUrl}'` : `addToCartWrapper('${p.id}')`;
+
                     card.innerHTML = `
                     <figure>
                         <img src="${p.image}" alt="${p.name}" onerror="this.src='images/default.jpg'">
@@ -257,7 +273,7 @@
                     <p class="description">${p.description || 'Delicious refreshment.'}</p>
                     <p class="price">RM${parseFloat(p.price).toFixed(2)}</p>
                     <a href="${detailsUrl}" class="view-details button-secondary">View Details</a>
-                    <button class="add-to-cart-btn button-primary" onclick="addToCartWrapper('${p.id}')">Add to Cart</button>
+                    <button class="add-to-cart-btn button-primary" onclick="${buttonOnClick}">${buttonText}</button>
                 `;
                     grid.appendChild(card);
                 });
