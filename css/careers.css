@@ -38,7 +38,6 @@
     gap: 60px;
     margin-bottom: 20px;
     /* Space between form grid and footer if stacked */
-    align-items: start;
 }
 
 .no-vacancies-message {
