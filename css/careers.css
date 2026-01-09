@@ -4,10 +4,10 @@
 .careers-hero {
     text-align: center;
     padding: 250px 20px;
-    background: linear-gradient(rgba(76, 76, 76, 0.6), rgba(116, 116, 116, 0.6)), url('../images/BaristaTeam.png');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/BaristaTeam.png');
     background-size: cover;
     background-position: center 30%;
-    background-blend-mode: overlay;
+    background-blend-mode: multiply;
     color: white;
     border-radius: 20px;
     margin-bottom: 60px;
