@@ -151,6 +151,10 @@
     font-size: 1.1em;
 }
 
+.proceed-to-checkout:hover {
+    color: #ffffff;
+}
+
 .continue-shopping {
     display: block;
     text-align: center;
@@ -158,6 +162,18 @@
     color: var(--primary-dark);
     text-decoration: none;
     font-weight: 600;
+}
+
+.remove-item-btn svg {
+    fill: #4CAF50;
+}
+
+.remove-item-btn:hover svg {
+    fill: #ffffff;
+}
+
+.cta-button.button-primary:hover {
+    color: #ffffff;
 }
 
 /* Responsive Design */

@@ -33,11 +33,20 @@
             </ul>
         </nav>
         <div class="user-actions">
-            <a href="cart.html" class="cart-link" aria-label="View shopping cart">
-                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            <a href="cart.html" class="nav-icon outline-icon cart-icon" title="Cart">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M3 3h2l2.5 13h10.5l2-8H7" fill="none" stroke-width="1.8" />
+                    <circle cx="10" cy="20" r="1.5" />
+                    <circle cx="18" cy="20" r="1.5" />
+                </svg>
+                <span class="icon-badge" id="cart-item-count">0</span>
             </a>
-            <a href="admin.html" class="admin-link" aria-label="Access admin panel">
-                <span class="icon">⚙️</span> Admin
+
+            <a href="admin.html" class="nav-icon outline-icon admin-icon" title="Admin">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <circle cx="12" cy="8" r="3" />
+                    <path d="M4 20c1.5-4 14.5-4 16 0" fill="none" stroke-width="1.8" />
+                </svg>
             </a>
         </div>
     </header>
@@ -98,7 +107,7 @@
                                     class="input-quantity">
                             </div>
                             <button type="submit" class="cta-button button-primary add-to-cart-lg">
-                                <span class="icon">🛒</span> Add to Cart
+                                <span class="icon"></span> Add to Cart
                             </button>
                         </div>
                     </form>

@@ -32,18 +32,27 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="listing.html">Our Menu</a></li>
                 <li><a href="about.html">About Us</a></li>
-                
+
                 <li><a href="locations.html">Locations</a></li>
                 <li><a href="careers.html">Careers</a></li>
             </ul>
         </nav>
 
         <div class="user-actions">
-            <a href="cart.html" class="cart-link">
-                <span class="icon">🛒</span> Cart (<span id="cart-item-count">0</span>)
+            <a href="cart.html" class="nav-icon outline-icon cart-icon" title="Cart">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <path d="M3 3h2l2.5 13h10.5l2-8H7" fill="none" stroke-width="1.8" />
+                    <circle cx="10" cy="20" r="1.5" />
+                    <circle cx="18" cy="20" r="1.5" />
+                </svg>
+                <span class="icon-badge" id="cart-item-count">0</span>
             </a>
-            <a href="admin.html" class="admin-link">
-                <span class="icon">⚙️</span> Admin
+
+            <a href="admin.html" class="nav-icon outline-icon admin-icon" title="Admin">
+                <svg viewBox="0 0 24 24" class="icon-svg">
+                    <circle cx="12" cy="8" r="3" />
+                    <path d="M4 20c1.5-4 14.5-4 16 0" fill="none" stroke-width="1.8" />
+                </svg>
             </a>
         </div>
     </header>
@@ -60,7 +69,11 @@
 
             <!-- 1. Self-Pickup -->
             <div class="delivery-card">
-                <span class="delivery-icon">🏪</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path
+                        d="M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z" />
+                </svg>
                 <h3>Self-Pickup</h3>
                 <p>Customers may choose to pick up their orders directly from our store during operating hours. Please
                     ensure you arrive on time to enjoy your drinks at their best.</p>
@@ -68,7 +81,16 @@
 
             <!-- 2. Delivery Options -->
             <div class="delivery-card">
-                <span class="delivery-icon">🚚</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path d="M270-160q-50 0-82-36t-27-85H61l13-60h112q15-18 36.5-28.5T270-380q26 0 47.5 10.5T354-341h198l92-399H186l3-13q5-21 
+                                21-34t37-13h472l-39 170h125l114 152-39 197h-80q5 49-27.5 85T690-160q-50 0-82-36t-27-85H380q5 49-27.5 
+                                85T270-160Zm364-270h215l6-33-80-107H666l-32 
+                                140Zm1-273 9-37-92 399 8-36 34-146 41-180ZM22-437l15-60h220l-15 60H22Zm80-146 15-60h260l-15 
+                                60H102Zm168 363q21 0 35.5-15t14.5-35q0-21-14.5-35.5T270-320q-20 
+                                0-35 14.5T220-270q0 20 15 35t35 15Zm420 0q21 0 35.5-15t14.5-35q0-21-14.5-35.5T690-320q-20 0-35 
+                                14.5T640-270q0 20 15 35t35 15Z" />
+                </svg>
                 <h3>Delivery Options</h3>
                 <p>We offer convenient delivery options to suit your needs. Orders are prepared fresh upon confirmation
                     to ensure the best taste and quality when they reach you.</p>
@@ -76,7 +98,12 @@
 
             <!-- 3. Delivery Areas -->
             <div class="delivery-card">
-                <span class="delivery-icon">📍</span>
+
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path
+                        d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
+                </svg>
                 <h3>Delivery Areas</h3>
                 <p>Delivery is currently available for selected areas near our store locations. Availability may vary
                     depending on distance and order volume.</p>
@@ -84,7 +111,14 @@
 
             <!-- 4. Delivery Time -->
             <div class="delivery-card">
-                <span class="delivery-icon">⏰</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q
+                        -49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 
+                        20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5
+                         77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 
+                         116 82 198t198 82Zm0-280Z" />
+                </svg>
                 <h3>Delivery Time</h3>
                 <p>Estimated delivery time is between <strong>30–60 minutes</strong>. Delivery times may be longer
                     during peak hours, bad weather, or high demand periods.</p>
@@ -92,7 +126,11 @@
 
             <!-- 5. Delivery Fees -->
             <div class="delivery-card">
-                <span class="delivery-icon">💰</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path
+                        d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" />
+                </svg>
                 <h3>Delivery Fees</h3>
                 <p>Delivery fees may vary depending on location and distance. Any applicable delivery charges will be
                     shown before checkout.</p>
@@ -100,7 +138,12 @@
 
             <!-- 6. Important Notes -->
             <div class="delivery-card">
-                <span class="delivery-icon">⚠️</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
+                    fill="#4CAF50">
+                    <path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 
+                        28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 
+                        11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z" />
+                </svg>
                 <h3>Important Notes</h3>
                 <p>Please ensure that your delivery address and contact number are correct before placing an order. The
                     Minums is not responsible for delays caused by traffic, weather, or third-party delivery services.
@@ -124,9 +167,9 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="listing.html">Our Menu</a></li>
                     <li><a href="about.html">About Us</a></li>
-                    
-                <li><a href="locations.html">Locations</a></li>
-                <li><a href="careers.html">Careers</a></li>
+
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="careers.html">Careers</a></li>
                 </ul>
             </div>
             <div class="footer-links-group">

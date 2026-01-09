@@ -434,9 +434,14 @@ function createCartItemElement(item, index) {
                 <input type="number" id="qty-${index}" value="${item.quantity}" min="1" class="item-quantity-input" data-item-id="${item.id}">
                 <button class="update-qty-btn button-secondary button-small" data-item-id="${item.id}">Update</button>
             </div>
-            <button class="remove-item-btn button-secondary button-small" data-item-id="${item.id}">
-                <span class="icon">🗑️</span> Remove
-            </button>
+            <button class="remove-item-btn button-secondary button-small">
+                                <span style="display:inline-block; vertical-align:middle; margin-right:6px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960"
+                                        width="20px" fill="#4CAF50">
+                                        <path d="M200-440v-80h560v80H200Z" />
+                                    </svg>
+                                </span>Remove
+                            </button>
         </div>
         
         <p class="item-subtotal-display">RM${subtotal}</p>
