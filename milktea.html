@@ -20,21 +20,24 @@
         }
 
         .product-grid {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 50px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .product-card {
             background: #fff;
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
+            border-radius: 12px;
+            padding: 0;
+            text-align: left;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             transition: 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -44,26 +47,54 @@
 
         .product-card img {
             width: 100%;
-            height: 140px;
-            border-radius: 12px;
+            height: 200px;
             object-fit: cover;
-            margin-bottom: 15px;
         }
 
         .product-card h4 {
-            margin: 10px 0 5px;
-            font-size: 18px;
+            margin: 15px 15px 5px;
+            font-size: 1.1rem;
         }
 
         .product-card p {
-            font-size: 14px;
+            margin: 0 15px;
+            font-size: 0.9rem;
             color: #555;
+            flex-grow: 1;
         }
 
         .price {
-            margin-top: 8px;
+            margin: 15px 15px 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color, #667eea);
+        }
+
+        .product-card .button-secondary,
+        .product-card .add-to-cart-btn {
+            margin: 10px 15px;
+            display: block;
+            text-align: center;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .product-card .button-secondary {
+            background: #f0f0f0;
+            color: #333;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .product-card .add-to-cart-btn {
+            background: var(--primary-color, #667eea);
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
         }
 
         .back-btn {
@@ -129,6 +160,11 @@
             <h4>Black Pearl Milk Tea</h4>
             <p>Classic milk tea paired with soft, chewy pearls for a satisfying sip.</p>
             <p class="price">RM7.00</p>
+            <a href="detail.html?id=black-pearl-milk-tea&name=Black%20Pearl%20Milk%20Tea&price=7.00&image=images/BPCocoa.png"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'black-pearl-milk-tea', name: 'Black Pearl Milk Tea', price: 7.00, image: 'images/BPCocoa.png'})">Add
+                to Cart</button>
         </div>
 
         <div class="product-card">
@@ -136,6 +172,11 @@
             <h4>Milk Tea Original</h4>
             <p>Smooth and creamy milk tea brewed to perfection for a timeless taste.</p>
             <p class="price">RM6.00</p>
+            <a href="detail.html?id=milk-tea-original&name=Milk%20Tea%20Original&price=6.00&image=images/minums-tea.jpg"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'milk-tea-original', name: 'Milk Tea Original', price: 6.00, image: 'images/minums-tea.jpg'})">Add
+                to Cart</button>
         </div>
 
         <div class="product-card">
@@ -143,6 +184,11 @@
             <h4>Oreo Milk Tea</h4>
             <p>Creamy milk tea blended with crunchy Oreo crumbs for a sweet, indulgent treat.</p>
             <p class="price">RM9.00</p>
+            <a href="detail.html?id=oreo-milk-tea&name=Oreo%20Milk%20Tea&price=9.00&image=images/CocoaOreo.png"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'oreo-milk-tea', name: 'Oreo Milk Tea', price: 9.00, image: 'images/CocoaOreo.png'})">Add
+                to Cart</button>
         </div>
 
         <div class="product-card">
@@ -150,6 +196,11 @@
             <h4>Butterfly Pea Milk Tea</h4>
             <p>A fragrant milk tea infused with vibrant butterfly pea for a calming, floral flavour.</p>
             <p class="price">RM8.00</p>
+            <a href="detail.html?id=butterfly-pea-milk-tea&name=Butterfly%20Pea%20Milk%20Tea&price=8.00&image=images/minums-tea.jpg"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'butterfly-pea-milk-tea', name: 'Butterfly Pea Milk Tea', price: 8.00, image: 'images/minums-tea.jpg'})">Add
+                to Cart</button>
         </div>
 
         <div class="product-card">
@@ -157,6 +208,11 @@
             <h4>Dark Cocoa Milk Tea</h4>
             <p>Bold dark cocoa mixed with creamy milk tea for a deep and rich chocolate experience.</p>
             <p class="price">RM8.00</p>
+            <a href="detail.html?id=dark-cocoa-milk-tea&name=Dark%20Cocoa%20Milk%20Tea&price=8.00&image=images/minums-tea.jpg"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'dark-cocoa-milk-tea', name: 'Dark Cocoa Milk Tea', price: 8.00, image: 'images/minums-tea.jpg'})">Add
+                to Cart</button>
         </div>
 
         <div class="product-card">
@@ -164,6 +220,11 @@
             <h4>Brown Sugar Milk Tea</h4>
             <p>Silky milk tea sweetened with caramelised brown sugar for a warm, toasty finish.</p>
             <p class="price">RM7.00</p>
+            <a href="detail.html?id=brown-sugar-milk-tea&name=Brown%20Sugar%20Milk%20Tea&price=7.00&image=images/minums-tea.jpg"
+                class="button-secondary">View Details</a>
+            <button class="add-to-cart-btn button-primary"
+                onclick="addToCart({id: 'brown-sugar-milk-tea', name: 'Brown Sugar Milk Tea', price: 7.00, image: 'images/minums-tea.jpg'})">Add
+                to Cart</button>
         </div>
 
 

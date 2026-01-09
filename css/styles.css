@@ -442,6 +442,11 @@ a:hover {
     overflow: hidden;
 }
 
+#featured-grid .product-card img {
+    height: 312px;
+    /* Increased by 30% from 240px */
+}
+
 .product-card img {
     width: 100%;
     height: 240px;
